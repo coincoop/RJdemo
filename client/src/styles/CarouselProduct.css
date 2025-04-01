@@ -1,0 +1,56 @@
+
+.embla {
+  max-width: 80%;
+  max-height: 400px;
+  margin: auto;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  
+}
+
+.carousel-prod {
+  width: 300px;
+  margin-right: 2em;
+}
+.carousel-prod-image{
+  width: 100%;
+  height: auto;
+  object-fit: contain ;
+}
+
+.carousel-title{
+  justify-self: center;
+}
+
+.carousel-prod-name {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.carousel-prod-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-prod-btn button{
+  width: 80%;
+  height: 3em;
+  background-color: black;
+  transition: all 0.3s ease;
+  border: 0;
+}
+
+.carousel-prod-btn button:hover{
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  transform: scale(1.1);
+}

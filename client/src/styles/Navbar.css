@@ -1,0 +1,178 @@
+.navbar {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar__left,
+.navbar__right {
+    width: 25%;
+}
+
+.navbar__right{
+    justify-content: end;
+    display: flex;
+    align-items: center;
+    gap: 2em
+}
+
+.navbar__logo {
+    max-height: 50px;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar__menu li {
+    margin: 0 15px;
+    position: relative;
+}
+
+.navbar__menu a,
+.navbar__menu span {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navbar__menu a {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.navbar__right {
+    justify-items: end;
+}
+
+.navbar__cart img,
+.navbar__login img {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+}
+
+
+
+.navbar__dropdown:hover .navbar__submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.navbar__dropdown.active .navbar__submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.navbar__submenu {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    background-color: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    z-index: 1000;
+}
+
+/* chưa giải quyết đc dropdown effect*/
+
+.navbar__submenu li {
+    margin: 0;
+}
+
+.navbar__submenu a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar__submenu a:hover {
+    background-color: #555;
+}
+
+/* mobile */
+
+.navbar__mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+.navbar__mobile-toggle img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* Styles cho màn hình mobile */
+@media (max-width: 768px) {
+
+    /* Ẩn menu chính trên mobile */
+    .navbar__center {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .navbar__center.active {
+        max-height: 500px;
+    }
+
+    .navbar__menu {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .navbar__menu li {
+        margin: 10px 0;
+    }
+
+    .navbar__dropdown .navbar__submenu {
+        position: static;
+        background-color: #555;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, opacity 0.5s ease;
+        opacity: 0;
+        visibility: visible;
+        transform: none;
+    }
+
+    .navbar__mobile-toggle {
+        display: block;
+    }
+
+    .navbar__dropdown.active .navbar__submenu {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    .navbar__right {
+        display: flex;
+        align-items: center;
+    }
+
+   
+}

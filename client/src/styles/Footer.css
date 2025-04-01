@@ -1,0 +1,25 @@
+.footer-container {
+    background-color: #333; /* Màu nền */
+    color: white; /* Màu chữ */
+    padding: 20px; /* Padding cho footer */
+    text-align: center; /* Căn giữa nội dung */
+  }
+  
+  .footer-content {
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa */
+  }
+  
+  .social-links {
+    margin-top: 10px; /* Khoảng cách giữa bản quyền và liên kết */
+  }
+  
+  .social-links a {
+    color: white; /* Màu chữ cho liên kết */
+    margin: 0 10px; /* Khoảng cách giữa các liên kết */
+    text-decoration: none; /* Bỏ gạch chân */
+  }
+  
+  .social-links a:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+  }
