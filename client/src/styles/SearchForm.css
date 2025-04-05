@@ -1,0 +1,41 @@
+.search-form-container {
+
+    position: sticky;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form {
+    position: sticky;
+    position: -webkit-sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    top: 0;
+}
+
+.search-input {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: white;
+    color: #2c2c2e;
+}
+
+.search-btn button {
+    background-color: #2c2c2e;
+    /* Green */
+    border: none;
+    width: 40px;
+    height: 40px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}

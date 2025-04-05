@@ -28,9 +28,7 @@ const CarouselProdcut = ({ title, products }: CarouselProductProps) => {
                             <p className=" carousel-prod-price">{product.price} vnđ</p>
                             <Space height='1em'/>
                             <div  className="carousel-prod-btn">
-
                                 <button>Mua ngay</button>
-
                             </div>
                         </div>
                     ))}

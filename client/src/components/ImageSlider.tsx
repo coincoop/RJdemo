@@ -1,11 +1,12 @@
-"use client";
+'use client'
 
 import { useState } from "react"
 import React from 'react'
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react"
+import { ArrowBigLeft, ArrowBigRight, Search } from "lucide-react"
 import "@/styles/ImageSlider.css"
+import SearchForm from "./SearchForm"
 
-const ImageSlider = ({ imgUrls }:ImageSliderProps) => {
+const ImageSlider = ({ imgUrls, query }: ImageSliderProps) => {
 
   const [imgIndex, setImgIndex] = useState(0)
 
@@ -15,15 +16,15 @@ const ImageSlider = ({ imgUrls }:ImageSliderProps) => {
       return index + 1
     })
   }
-  const showPrevImage = ()=>{
-    setImgIndex(index=>{
-      if(index===0) return imgUrls.length-1 
-      return index -1 
+  const showPrevImage = () => {
+    setImgIndex(index => {
+      if (index === 0) return imgUrls.length - 1
+      return index - 1
     })
   }
   return (
     <div className="img-slider-container">
-      <div style={{width: "100%", height:"100%", display: "flex", overflow: "hidden"}}>
+      <div style={{ width: "100%", height: "100%", display: "flex", overflow: "hidden" }}>
         {imgUrls.map((url, index) => (
           <img key={index} src={url} className="img-slider-img" style={{
             translate: `${-100 * imgIndex}%`

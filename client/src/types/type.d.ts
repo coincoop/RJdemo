@@ -4,6 +4,7 @@ declare interface SpaceProps {
 
 declare interface ImageSliderProps{
     imgUrls: string[];
+    query?: string;
 }
 
 interface Product {
