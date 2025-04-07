@@ -47,12 +47,10 @@ const register = asyncHandle(async (req, res) => {
   await newUser.save();
   res.status(200).json({
     mess: "Register tạo mới thành công user!",
-    data: {
-      name: newUser.name,
-      id: newUser.id,
-      email: newUser.email,
-      accessToken: await getJWT(email, newUser.id),
-    },
+    name: newUser.name,
+    id: newUser.id,
+    email: newUser.email,
+    accessToken: await getJWT(email, newUser.id),
   });
 });
 
@@ -73,28 +71,26 @@ const login = asyncHandle(async (req, res) => {
 
   res.status(200).json({
     message: "Đăng nhập thành công",
-    data: {
-      name: existingUser.name,
-      id: existingUser.id,
-      email: existingUser.email,
-      accessToken: await getJWT(email, existingUser.id),
-    },
+
+    name: existingUser.name,
+    id: existingUser.id,
+    email: existingUser.email,
+    accessToken: await getJWT(email, existingUser.id),
   });
 });
 
 const handleSendMail = async (val, email) => {
- 
   try {
-      await transporter.sendMail({
+    await transporter.sendMail({
       from: `Support RNdemo <${process.env.EMAIL}>`,
       to: email,
       subject: "Verification Email",
       text: "Your code verification email",
       html: `<b>${val}</b>`,
     });
-    return 'OK'
+    return "OK";
   } catch (error) {
-    return error
+    return error;
   }
 };
 
@@ -107,10 +103,10 @@ const verification = asyncHandle(async (req, res) => {
 
   if (existingUser) {
     res.status(401).json({
-      message: 'Email đã tồn tại',
+      message: "Email đã tồn tại",
       data: {
-        error: 'Email đã tồn tại'
-      }
+        error: "Email đã tồn tại",
+      },
     });
     throw new Error(`User đã tồn tại!`);
   }
@@ -118,14 +114,14 @@ const verification = asyncHandle(async (req, res) => {
     await handleSendMail(verificationCode, email);
 
     res.status(200).json({
-      message: 'Gửi mã xác nhận thành công',
+      message: "Gửi mã xác nhận thành công",
       data: {
-        code: verificationCode
-      }
-    })
+        code: verificationCode,
+      },
+    });
   } catch (error) {
-    res.status(401)
-    throw new Error('Không thể gửi mã xác nhận')
+    res.status(401);
+    throw new Error("Không thể gửi mã xác nhận");
   }
 });
 

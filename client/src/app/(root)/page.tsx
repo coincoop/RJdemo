@@ -15,13 +15,7 @@ export  default async function Home({searchParams}: {searchParams:Promise< {quer
     const query = (await searchParams).query 
     const img_slider = [images.img_silder_1, images.img_silder_2, images.img_silder_3].map(image => image.src)
     // const all_product = useContext(shopContext)
-    const handleHello = async () => {
-        const res = await authenticationAPI.handleAuthentitation('/hello', {
-          },
-            'get',
-          )
-        console.log(res.data)
-    }
+
     return(
         <section >
             <SearchForm query={query}/>

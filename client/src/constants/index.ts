@@ -9,6 +9,7 @@ import logo from '@/assets/images/aarke_logo_black.webp'
 import menu from '@/assets/icons/menu.png'
 import user from '@/assets/icons/user.png'
 import cart from '@/assets/icons/shopping-cart.png'    
+import login_img from '@/assets/images/983fc7edbf43017f78e7b1766cd4208020250130211339164.jpg'
 
 export const images ={
     img_silder_1,
@@ -19,6 +20,7 @@ export const images ={
     img_silder_6,
     img_silder_7,
     logo,
+    login_img,
 }
 
 export const icons={

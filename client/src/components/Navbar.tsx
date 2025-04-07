@@ -4,10 +4,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import "@/styles/Navbar.css";
 import { images, icons } from '@/constants'
 import Link from 'next/link';
+import { authSelector } from '@/redux/reducers/authReducer';
+import { useSelector } from 'react-redux';
 
-export default function Navbar() {
+export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const auth = useSelector(authSelector)
 
     const toggleSubmenu = (menuName: string, event: React.MouseEvent) => {
         event.stopPropagation();
@@ -49,7 +52,7 @@ export default function Navbar() {
                 </Link>
             </div>
             <div className={`navbar__center ${mobileMenuOpen ? 'active' : ''}`}>
-                <nav style={{display: 'flex'}}>
+                <nav style={{ display: 'flex' }}>
                     <ul className="navbar__menu">
                         <li><Link href="/">Home</Link></li>
                         <li className={`navbar__dropdown ${activeSubmenu === 'products' ? 'active' : ''}`}>
@@ -69,9 +72,24 @@ export default function Navbar() {
                 <Link href="/cart" className="navbar__cart">
                     <img src={icons.cart.src} alt="Cart" />
                 </Link>
-                <Link href="/login" className="navbar__login">
-                    <img src={icons.user.src} alt="Login" />
-                </Link>
+                {
+                    isLogin && auth ? (
+                        <Link href="/profile" className="navbar__profile">
+                            {auth.name}
+                        </Link>
+                    ) : (
+                        <>
+                            <Link href="/sign-in" className="navbar__login">
+                                Đăng nhập
+                            </Link>
+                            <Link href="/sign-up" className="navbar__login">
+                                Đăng ký
+                            </Link>
+                        </>
+                    )
+
+                }
+
                 <button className="navbar__mobile-toggle" onClick={toggleMobileMenu}>
                     <img src={icons.menu.src} alt="Menu" />
                 </button>
