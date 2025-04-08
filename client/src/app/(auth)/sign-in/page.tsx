@@ -27,13 +27,9 @@ const Signin = () => {
             setErrorMessage('')
         }
         console.log(form.email, form.password);
-        if (auth?.email) {
-            console.log('Auth đã được cập nhật:', auth);
-            router.push('/'); // Điều hướng sau khi auth được cập nhật
-        }
 
-    }, [form.email, form.password,auth])
-
+    }, [form.email, form.password])
+    //xử lí đăng nhập
     const handleLogin = async () => {
 
         const emailValidation = Validate.email(form.email)
@@ -47,11 +43,11 @@ const Signin = () => {
                     'post',
                 )
                 
-                dispatch(addAuth(res.data))
+                await dispatch(addAuth(res.data))
                 console.log(auth.email);
-                 localStorage.setItem('auth', JSON.stringify(res.data))
+                await localStorage.setItem('auth', JSON.stringify(res.data))
 
-                // router.push('/');
+                router.push('/');
             } catch (error) {
                 console.log(error);
 

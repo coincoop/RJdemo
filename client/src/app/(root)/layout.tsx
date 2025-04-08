@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Space from "@/components/Space";
 import { addAuth, authSelector } from "@/redux/reducers/authReducer";
+import { log } from "console";
 import { use, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,6 +30,8 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
     }
     
     console.log(auth);
+    console.log('auth', auth.accessToken);
+    
     
     return (
         <main>

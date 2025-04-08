@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: ;
+    height: 10rem; */
+    flex: 1 1 calc(33.33% - 1rem)
+}

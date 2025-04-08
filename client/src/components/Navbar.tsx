@@ -4,13 +4,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import "@/styles/Navbar.css";
 import { images, icons } from '@/constants'
 import Link from 'next/link';
-import { authSelector } from '@/redux/reducers/authReducer';
-import { useSelector } from 'react-redux';
+import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const auth = useSelector(authSelector)
+    const dispatch = useDispatch()
+    const router = useRouter()
 
     const toggleSubmenu = (menuName: string, event: React.MouseEvent) => {
         event.stopPropagation();
@@ -28,6 +31,12 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
         event.stopPropagation();
         setMobileMenuOpen(prev => !prev);
     };
+
+    const handleLogout = async () => {
+        await localStorage.setItem("auth", JSON.stringify({ email: auth.email }));
+        dispatch(removeAuth())
+        router.push('/')
+    }
 
     useEffect(() => {
         const handleClick = (event: MouseEvent) => {
@@ -56,7 +65,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                     <ul className="navbar__menu">
                         <li><Link href="/">Home</Link></li>
                         <li className={`navbar__dropdown ${activeSubmenu === 'products' ? 'active' : ''}`}>
-                            <span onClick={(e) => toggleSubmenu('products', e)}>Products</span>
+                            <span  onClick={(e) => toggleSubmenu('products', e)}><Link href={'/products'}>Products</Link></span>
                             <ul className="navbar__submenu">
                                 <li><Link href="/bmw">BMW</Link></li>
                                 <li><Link href="/ducati">Ducati</Link></li>
@@ -74,9 +83,12 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                 </Link>
                 {
                     isLogin && auth ? (
-                        <Link href="/profile" className="navbar__profile">
+                        // <Link href="/profile" className="navbar__profile">
+                        //     {auth.name}
+                        // </Link>
+                        <button onClick={handleLogout} className="navbar__profile">
                             {auth.name}
-                        </Link>
+                        </button>
                     ) : (
                         <>
                             <Link href="/sign-in" className="navbar__login">

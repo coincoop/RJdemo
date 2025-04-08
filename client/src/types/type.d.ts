@@ -1,22 +1,39 @@
+
+
 declare interface SpaceProps {
-    height: string ;
+  height: string;
 }
 
-declare interface ImageSliderProps{
-    imgUrls: string[];
-    query?: string;
+declare interface ImageSliderProps {
+  imgUrls: string[];
+  query?: string;
 }
 
 interface Product {
-    id: number;
-    category: string;
-    name: string;
-    image: string[];
-    price: number;
+  id: number;
+  category: string;
+  name: string;
+  image: string[];
+  price: number;
+  description: string;
+  star: decimal;
+}
+declare interface CarouselProductProps {
+  title: string;
+  products: Product[];
+}
+
+declare interface CardCarProps {
+  listCar: Car[{
+    id: string;
     description: string;
-    star: decimal
-  }
-declare interface CarouselProductProps{
-    title: string;
-    products: Product[]
+    name: string;
+    price: number;
+    item_no: string;
+    scale: string;
+    marque: string;
+    status: string;
+    img?: string[];
+    img_more: string[];
+  }];
 }

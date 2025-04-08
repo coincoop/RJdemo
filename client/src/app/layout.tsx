@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
 
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body style={{backgroundColor: '#f2f2f2'}} className={`${geistSans.variable} ${geistMono.variable}`}>
         <ReduxProvider>
           <>
             {children}
