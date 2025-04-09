@@ -1,6 +1,6 @@
 .img-slider-container{
-    width: 80%;
-    height: 50rem;
+    width: 90%;
+    height: 100vh;
     position: relative;
     justify-self: center;
 
@@ -17,6 +17,7 @@
 }
 
 .img-slider-btn{
+    height: 100%;
     all :  unset;
     display: block;
     position: absolute;
@@ -36,4 +37,11 @@
    fill: black ;
    width: 2rem;
    height: 2rem;
+}
+
+
+@media (max-width: 912px) {
+    .img-slider-container{
+        height: 30vh;
+    }
 }
