@@ -29,7 +29,7 @@ const ProductList = () => {
     }
     return (
         loading ? <div>Loading...</div> :
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
                 {
                     products.map((product: any) => (
                         <CardProduct key={product._id} listCar={product} />

@@ -32,6 +32,7 @@ import imsa2023_688_1 from '@/assets/images/imsa2023_688_1.jpg'
 import imsa2023_688_2 from '@/assets/images/imsa2023_688_2.jpg'
 import imsa2023_688_3 from '@/assets/images/imsa2023_688_3.jpg'
 import imsa2023_688_4 from '@/assets/images/imsa2023_688_4.jpg'
+import link from '@/assets/icons/link.png'
 
 export const images ={
     img_silder_1,
@@ -71,4 +72,5 @@ export const icons={
     menu,
     user,
     cart,
+    link,
 }
