@@ -101,7 +101,6 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                     )
 
                 }
-
                 <button className="navbar__mobile-toggle" onClick={toggleMobileMenu}>
                     <img src={icons.menu.src} alt="Menu" />
                 </button>

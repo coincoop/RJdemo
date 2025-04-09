@@ -1,13 +1,15 @@
 .navbar {
+    width: 90%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    height: 5rem;
+    padding: 1rem 1rem;
 }
 
-.navbar__left,
-.navbar__right {
-    width: 25%;
-}
 
 .navbar__right{
     justify-content: end;
@@ -23,33 +25,24 @@
 .navbar__menu {
     list-style: none;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1 calc(20% - 1rem);
+    gap: 2rem;
 }
 
 .navbar__menu li {
-    margin: 0 15px;
     position: relative;
 }
 
-.navbar__menu a,
-.navbar__menu span {
+.navbar__menu li a {
     color: #000000;
     text-decoration: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
 }
 
-.navbar__menu a {
-    color: #000000;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-/* .navbar__right {
-    justify-items: end;
-} */
 
 .navbar__cart img {
     height: 30px;
@@ -91,7 +84,7 @@
     margin: 0;
 }
 
-.navbar__submenu a {
+.navbar__submenu li a {
     display: block;
     padding: 10px 20px;
     color: white;
@@ -120,7 +113,7 @@
 }
 
 /* Styles cho màn hình mobile */
-@media (max-width: 768px) {
+@media (max-width: 912px) {
 
     /* Ẩn menu chính trên mobile */
     .navbar__center {
