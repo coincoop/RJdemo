@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import CardProduct from './CardProduct'
 import carsAPI from '@/apis/carApi'
-
+import style from '@/styles/ProductList.module.css'
 
 
 const ProductList = () => {
@@ -12,11 +12,11 @@ const ProductList = () => {
 
     useEffect(() => {
         fetchProducts();
-    },[]);
+    }, []);
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const res = await  carsAPI.handleCar('/get-all-car',
+            const res = await carsAPI.handleCar('/get-all-car',
                 'get'
             )
             setProducts(res.data);
@@ -29,7 +29,7 @@ const ProductList = () => {
     }
     return (
         loading ? <div>Loading...</div> :
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div className={style['container']}>
                 {
                     products.map((product: any) => (
                         <CardProduct key={product._id} listCar={product} />

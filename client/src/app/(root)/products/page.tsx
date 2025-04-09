@@ -12,12 +12,10 @@ const Products = () => {
 
     return (
         <div>
-
-            <div style={{ paddingTop: '2rem', margin: '0 auto', display: 'flex', gap:'2rem',flexDirection: 'row', width: '80%' }}>
+            <div style={{ paddingTop: '2rem', margin: '0 auto', display: 'flex', justifyContent: 'space-between',flexWrap: 'wrap', maxWidth: '80%' }}>
                 <BrandSidebar />
                 <ProductList />
             </div>
-
         </div>
 
     )

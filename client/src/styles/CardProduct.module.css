@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     max-height: 23rem;
-    width: 10rem;
+    width: calc(33.33% - 1rem);
     flex: 1 1 calc(33.33% - 1rem);
     gap: 1rem;
 }
@@ -79,4 +79,11 @@
 
 .img-container:hover .link {
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        flex: 1 1 calc(50% - 1rem); /* Chiếm 50% chiều rộng */
+        max-width: 50%; /* Đảm bảo không vượt quá 50% */
+    }
 }
