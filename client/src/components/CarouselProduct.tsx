@@ -57,6 +57,7 @@ const CarouselProdcut = ({ title }: CarouselProductProps) => {
                             <div  className="carousel-prod-btn">
                                 <button>Mua ngay</button>
                             </div>
+                            <Space height='1em'/>
                         </div>
                     ))}
                 </div>

@@ -3,12 +3,13 @@ import Image from 'next/image'
 import style from '@/styles/CardProduct.module.css'
 import { icons, images } from '@/constants'
 import Link from 'next/link'
+import { ListStart } from 'lucide-react'
 
 const CardProduct = ({ listCar }: {
   listCar: {
     img: keyof typeof images;
     name: string,
-    id: string;
+    _id: string;
     description: string;
     price: number;
     item_no: string;
@@ -17,7 +18,11 @@ const CardProduct = ({ listCar }: {
     status: string;
     img_more: keyof typeof images;
   }
+
+  
+  
 }) => {
+  console.log(listCar._id);
   return (
     <div className={style['container']} >
       <div className={style["img-container"]}>
@@ -25,7 +30,7 @@ const CardProduct = ({ listCar }: {
         <div className={style['icon-container']}>
           <Image className={style['icon']} src={icons.link} alt="Link Icon" />
         </div>
-        <Link className={style['link']} href={'#'} />
+        <Link className={style['link']} href={`/products/${listCar._id}`} />
 
       </div>
       <div className={style['text-container']}>

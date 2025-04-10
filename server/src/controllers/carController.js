@@ -56,8 +56,8 @@ const getAllCar = asyncHandle(async (req, res) => {
   res.status(200).json(cars);
 })
 
-const getCarByName = asyncHandle(async (req, res) => {
-  const cars = await CarModel.find({ name: req.params.name });
+const getCarById = asyncHandle(async (req, res) => {
+  const cars = await CarModel.findById({ _id: req.params._id });
   if (!cars) {
     res.status(404);
     throw new Error("Không tìm thấy xe nào!");
@@ -65,4 +65,4 @@ const getCarByName = asyncHandle(async (req, res) => {
   res.status(200).json(cars);
 })
 
-module.exports = { createCar, getAllCar };
+module.exports = { createCar, getAllCar, getCarById };

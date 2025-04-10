@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    flex: 0 0 70%;
+}
+
+.name{
+    line-height: 1.8;
+    font-size: 1.8rem;
+    color: #282936;
+    font-weight: 400;
+}
+
+.carousel img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.info > div{
+    margin: 0.5rem;
+    position: relative;
+    color: #363a3c;
+    font-size: 14px;
+    width: 40%;
+    padding: 7px 8px;
+    border-bottom: 1px solid #535353;
+}
+
+.right-column{
+    display: block;
+    float: right;
+    text-align: right;
+}

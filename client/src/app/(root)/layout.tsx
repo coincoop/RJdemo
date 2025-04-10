@@ -5,17 +5,20 @@ import Navbar from "@/components/Navbar";
 import Space from "@/components/Space";
 import { addAuth, authSelector } from "@/redux/reducers/authReducer";
 import { log } from "console";
-import { use, useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
-
+    const [isShowLoading, setIsShowLoading] = useState(true);
     const dispatch = useDispatch()
     const auth = useSelector(authSelector)
 
     useEffect(() => {
         checkLogin()
+        const timeout = setTimeout(() => {
+            setIsShowLoading(false);
+        }, 1500);
     }, [])
 
     const checkLogin = async () => {
@@ -28,23 +31,31 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
             console.log(error)
         }
     }
-    
+
     console.log(auth);
     console.log('auth', auth.accessToken);
-    
-    
+
+
     return (
         <main>
-            {auth.accessToken ? (
+            {isShowLoading ? (
                 <>
-                    <Navbar isLogin={true}/>
+                    <Navbar isLogin={true} />
+                    {/* code sau */}
+                    Loading...
+                    <Space height="2em" />
+                    <Footer />
+                </>
+            ) : auth.accessToken ? (
+                <>
+                    <Navbar isLogin={true} />
                     {children}
                     <Space height="2em" />
                     <Footer />
                 </>
             ) : (
                 <>
-                    <Navbar isLogin={false}/>
+                    <Navbar isLogin={false} />
                     {children}
                     <Space height="2em" />
                     <Footer />

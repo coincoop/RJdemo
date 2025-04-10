@@ -11,7 +11,7 @@
 
 .embla__container {
   display: flex;
-  
+  max-height: 40rem;
 }
 
 .carousel-prod {
@@ -51,6 +51,6 @@
 .carousel-prod-btn button:hover{
   background-color: white;
   color: black;
-  border: 2px solid black;
+  border: 1px solid black;
   transform: scale(1.1);
 }

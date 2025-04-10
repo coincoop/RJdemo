@@ -24,6 +24,7 @@ const ProductList = () => {
             )
             setProducts(res.data);
             console.log(res.data);
+            console.log(res.data._id);
         } catch (error) {
             console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
         } finally {
@@ -34,7 +35,7 @@ const ProductList = () => {
     const filteredProducts = products.filter((product: any) =>
         product.name.toLowerCase().includes(query.toLowerCase())
     );
-
+    
     return (
         loading ? <div>Loading...</div> :
             <div className={style['container']}>
