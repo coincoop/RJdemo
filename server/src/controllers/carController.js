@@ -56,5 +56,13 @@ const getAllCar = asyncHandle(async (req, res) => {
   res.status(200).json(cars);
 })
 
+const getCarByName = asyncHandle(async (req, res) => {
+  const cars = await CarModel.find({ name: req.params.name });
+  if (!cars) {
+    res.status(404);
+    throw new Error("Không tìm thấy xe nào!");
+  }
+  res.status(200).json(cars);
+})
 
 module.exports = { createCar, getAllCar };

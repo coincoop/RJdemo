@@ -33,7 +33,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     };
 
     const handleLogout = async () => {
-        await localStorage.setItem("auth", JSON.stringify({ email: auth.email }));
+        localStorage.setItem("auth", JSON.stringify({ email: auth.email }));
         dispatch(removeAuth())
         router.push('/')
     }

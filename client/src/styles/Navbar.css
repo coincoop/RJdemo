@@ -8,10 +8,11 @@
     margin: 0 auto;
     height: 5rem;
     padding: 1rem 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 
-.navbar__right{
+.navbar__right {
     justify-content: end;
     display: flex;
     align-items: center;
@@ -106,7 +107,8 @@
     height: 30px;
     width: 30px;
 }
-.navbar__mobile-toggle img{
+
+.navbar__mobile-toggle img {
     height: 100%;
     width: 100%;
     object-fit: contain;
@@ -117,27 +119,35 @@
 
     /* Ẩn menu chính trên mobile */
     .navbar__center {
+        margin: auto;
+        width: 90%;
         position: absolute;
-        top: 100%;
+        margin-top: 5rem;
+        top: 0;
         left: 0;
         right: 0;
         background-color: #333;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease-out;
+        z-index: 1000;
     }
 
     .navbar__center.active {
         max-height: 500px;
+        transform: translateY(0);
     }
 
     .navbar__menu {
+        display: flex;
         flex-direction: column;
-        padding: 10px 0;
+        gap: 1rem;
+        padding: 1rem;
+        width: 100%;
     }
-
     .navbar__menu li {
-        margin: 10px 0;
+        width: 100%;
+        text-align: center;
     }
 
     .navbar__dropdown .navbar__submenu {
@@ -165,5 +175,5 @@
         align-items: center;
     }
 
-   
+
 }

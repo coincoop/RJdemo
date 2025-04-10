@@ -1,11 +1,30 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Form from 'next/form'
 import "@/styles/SearchForm.css"
+import { useRouter } from 'next/navigation';
 const SearchForm = ({ query }: { query?: string }) => {
+    const [searchQuery, setSearchQuery] = useState(query || '');
+    const router = useRouter();
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            router.push(`/products?query=${encodeURIComponent(searchQuery)}`);
+        }
+    };
+
     return (
         <div className='search-form-container'>
-            <Form className='search-form' action="/" scroll={false}>
-                <input name="query" defaultValue={query} className='search-input' placeholder='Search' />
+            <Form onSubmit={handleSubmit} className='search-form' action="/" scroll={false}>
+                <input
+                    name="query"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className='search-input'
+                    placeholder='Search'
+                />
                 <div className="search-btn">
                     <button type="submit">S</button>
                 </div>
