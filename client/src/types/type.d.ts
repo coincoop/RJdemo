@@ -20,7 +20,6 @@ interface Product {
 }
 declare interface CarouselProductProps {
   title: string;
-  products: Product[];
 }
 
 declare interface CardCarProps {
