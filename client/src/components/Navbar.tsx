@@ -54,7 +54,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     }, []);
 
     return (
-        <div className="navbar">
+        <header className="navbar">
             <div className="navbar__left">
                 <Link href="/">
                     <img src={images.logo.src} alt="Logo" className="navbar__logo" />
@@ -105,6 +105,6 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                     <img src={icons.menu.src} alt="Menu" />
                 </button>
             </div>
-        </div>
+        </header>
     );
 }

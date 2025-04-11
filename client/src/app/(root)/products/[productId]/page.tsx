@@ -28,14 +28,12 @@ const ProductDetailsPage = () => {
 
     useEffect(() => {
         getProductbyId()
-        console.log(product);
     }, []);
 
     const getProductbyId = async () => {
         try {
             const res = await carsAPI.handleCar(`/get-car/${productId}`, 'get');
             setProduct(res.data);
-            console.log(res.data);
         } catch (error) {
             console.log(error);
         }

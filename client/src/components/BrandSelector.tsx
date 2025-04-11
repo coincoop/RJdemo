@@ -18,7 +18,7 @@ const BrandSelector = ({ onClose, isOpen, listBrand }: {
     if (!isOpen) return null;
 
     return (
-        <div onClick={onClose} className={style['container']}>
+        <section onClick={onClose} className={style['container']}>
 
             <div className={style['brand-item']} onClick={(e) => e.stopPropagation()}>
                 <div className={style['brand-header']}>
@@ -30,7 +30,7 @@ const BrandSelector = ({ onClose, isOpen, listBrand }: {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 

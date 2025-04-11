@@ -41,7 +41,7 @@ const CarouselProdcut = ({ title }: CarouselProductProps) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
 
     return (
-        <div className="embla">
+        <section className="embla">
             <h1 className='carousel-title'>{title}</h1>
             <Space height='1em' />
             <div className="embla__viewport" ref={emblaRef}>
@@ -65,7 +65,7 @@ const CarouselProdcut = ({ title }: CarouselProductProps) => {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

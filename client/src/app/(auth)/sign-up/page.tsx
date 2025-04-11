@@ -8,10 +8,10 @@ import Form from 'next/form'
 import Link from 'next/link'
 import authenticationAPI from '@/apis/authApi'
 import { Validate } from '@/utils/validate'
-import router from 'next/router'
 import Modal from '@/components/Modal'
 import { useDispatch } from 'react-redux'
 import { addAuth } from '@/redux/reducers/authReducer'
+import Loading from '@/components/Loading'
 
 const Signup = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -206,6 +206,9 @@ const Signup = () => {
                 {verification.state === 'success' && (
                     <Modal typeModal='success' setVerification={setVerification} />
                 )}
+                {
+                    isLoading && <Loading/>
+                }
             </section>
 
         </>

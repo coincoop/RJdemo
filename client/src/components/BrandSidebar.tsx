@@ -18,7 +18,7 @@ const BrandSidebar = () => {
     ];
     return (
 
-        <div className={style['container']}>
+        <section className={style['container']}>
             <div className={style['desktop-container']}>
 
                 <div className={style['brand-header']}>
@@ -50,7 +50,7 @@ const BrandSidebar = () => {
                 </div>
             </div>
             <div style={{ height: '2rem' }} />
-        </div>
+        </section>
 
     )
 }

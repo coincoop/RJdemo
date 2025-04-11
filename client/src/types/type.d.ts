@@ -1,5 +1,4 @@
 
-
 declare interface SpaceProps {
   height: string;
 }

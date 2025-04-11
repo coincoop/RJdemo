@@ -16,7 +16,7 @@ const SearchForm = ({ query }: { query?: string }) => {
     };
 
     return (
-        <div className='search-form-container'>
+        <section className='search-form-container'>
             <Form onSubmit={handleSubmit} className='search-form' action="/" scroll={false}>
                 <input
                     name="query"
@@ -29,7 +29,7 @@ const SearchForm = ({ query }: { query?: string }) => {
                     <button type="submit">S</button>
                 </div>
             </Form>
-        </div>
+        </section>
 
     )
 }

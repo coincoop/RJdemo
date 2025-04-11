@@ -18,7 +18,7 @@ const Modal = ({ typeModal, error, onSubmit, setVerification }:
     <>
       {
         typeModal === 'input' ? (
-          <section className={style["container"]}>
+          <div className={style["container"]}>
             <div className={style["modal-content"]}>
               <Form onSubmit={(e) => {
                 e.preventDefault()
@@ -38,9 +38,9 @@ const Modal = ({ typeModal, error, onSubmit, setVerification }:
                 </button>
               </Form>
             </div>
-          </section>
+          </div>
         ) : (
-          <section className={style["container"]}>
+          <div className={style["container"]}>
             <div className={style["modal-content"]}>
               <Form action="">
                 <p>  Chúc mừng bạn đã đăng kí thành công!</p>
@@ -56,7 +56,7 @@ const Modal = ({ typeModal, error, onSubmit, setVerification }:
                 </button>
               </Form>
             </div>
-          </section>
+          </div>
         )
       }
     </>

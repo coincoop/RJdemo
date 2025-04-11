@@ -9,6 +9,7 @@ import { shopContext } from "@/contexts/shopContext";
 import SearchForm from "@/components/SearchForm";
 import authenticationAPI from "@/apis/authApi";
 import TestApi from "@/components/TestApi";
+import Loading from "@/components/Loading";
 
 export  default async function Home({searchParams}: {searchParams:Promise< {query?: string}>}) {
 
@@ -22,6 +23,7 @@ export  default async function Home({searchParams}: {searchParams:Promise< {quer
             <ImageSlider imgUrls={img_slider}/>
             <Space height="2em"/>
             <CarouselProdcut title="Sản phẩm nổi bật" />
+            
         </section>
     )
 }

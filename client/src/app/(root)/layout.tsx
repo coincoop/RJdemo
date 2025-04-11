@@ -1,6 +1,7 @@
 'use client'
 
 import Footer from "@/components/Footer";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import Space from "@/components/Space";
 import { addAuth, authSelector } from "@/redux/reducers/authReducer";
@@ -42,7 +43,8 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                 <>
                     <Navbar isLogin={true} />
                     {/* code sau */}
-                    Loading...
+                    <Loading/>
+                    <Space height="100vh"/>
                     <Space height="2em" />
                     <Footer />
                 </>

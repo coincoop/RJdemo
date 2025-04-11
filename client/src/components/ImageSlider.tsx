@@ -23,7 +23,7 @@ const ImageSlider = ({ imgUrls, query }: ImageSliderProps) => {
     })
   }
   return (
-    <div className="img-slider-container">
+    <section className="img-slider-container">
       <div style={{ width: "100%", height: "100%", display: "flex", overflow: "hidden" }}>
         {imgUrls.map((url, index) => (
           <img key={index} src={url} className="img-slider-img" style={{
@@ -46,7 +46,7 @@ const ImageSlider = ({ imgUrls, query }: ImageSliderProps) => {
       >
         <ArrowBigRight />
       </button>
-    </div>
+    </section>
   )
 }
 

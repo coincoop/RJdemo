@@ -5,6 +5,7 @@ import CardProduct from './CardProduct'
 import carsAPI from '@/apis/carApi'
 import style from '@/styles/ProductList.module.css'
 import { useSearchParams } from 'next/navigation'
+import Loading from './Loading'
 
 
 const ProductList = () => {
@@ -37,8 +38,8 @@ const ProductList = () => {
     );
     
     return (
-        loading ? <div>Loading...</div> :
-            <div className={style['container']}>
+        loading ? <Loading/> :
+            <section className={style['container']}>
                 <div>
                     {
                         query ? <h1 className={style['title']}>Kết quả tìm kiếm cho "{query}"</h1> : <h1 className={style['title']}>Tất cả sản phẩm</h1>
@@ -55,7 +56,7 @@ const ProductList = () => {
                         ))
                     )}
                 </div>
-            </div>
+            </section>
 
     )
 }

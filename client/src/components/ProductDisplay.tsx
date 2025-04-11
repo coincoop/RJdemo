@@ -1,12 +1,12 @@
 
 import { images } from '@/constants';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import style from '@/styles/ProductDisplay.module.css'
 import Image from 'next/image';
 import NotFound from './NotFound';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import '@/styles/CustomCarousel.css'
+import '@/styles/CustomCarousel.css';
 
 const ProductDisplay = ({ productList }: {
     productList: {
