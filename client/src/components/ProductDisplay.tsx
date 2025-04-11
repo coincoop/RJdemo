@@ -37,7 +37,7 @@ const ProductDisplay = ({ productList }: {
                     showStatus={false}
                     showThumbs
                     showIndicators={false}
-                    // autoPlay
+                    autoPlay
                     infiniteLoop>
                     {allImages.map((imgKey, index) => (
                         <div key={index}>

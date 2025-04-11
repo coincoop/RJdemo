@@ -115,9 +115,7 @@ const verification = asyncHandle(async (req, res) => {
 
     res.status(200).json({
       message: "Gửi mã xác nhận thành công",
-      data: {
-        code: verificationCode,
-      },
+      code: verificationCode,
     });
   } catch (error) {
     res.status(401);

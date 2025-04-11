@@ -10,6 +10,7 @@ import { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import carsAPI from '@/apis/carApi';
 import { images } from '@/constants';
+import Link from 'next/link';
 
 type Product = {
     _id: string;
@@ -33,7 +34,7 @@ const CarouselProdcut = ({ title }: CarouselProductProps) => {
             console.log(res.data);
         } catch (error) {
             console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
-        } 
+        }
     }
 
 
@@ -48,16 +49,18 @@ const CarouselProdcut = ({ title }: CarouselProductProps) => {
                     {products.map(product => (
                         <div key={product._id} className="carousel-prod">
 
-                            <Image src={images[product.img]} alt={product.name} className="carousel-prod-image" />
-                            <Space height='1em'/>
+                            <Link href={`/products/${product._id}`}>
+                                <Image src={images[product.img]} alt={product.name} className="carousel-prod-image" />
+                            </Link>
+                            <Space height='1em' />
                             <h3 className="carousel-prod-name">{product.name}</h3>
-                            <Space height='1em'/>
+                            <Space height='1em' />
                             <p className=" carousel-prod-price">{product.price} vnđ</p>
-                            <Space height='1em'/>
-                            <div  className="carousel-prod-btn">
+                            <Space height='1em' />
+                            <div className="carousel-prod-btn">
                                 <button>Mua ngay</button>
                             </div>
-                            <Space height='1em'/>
+                            <Space height='1em' />
                         </div>
                     ))}
                 </div>
