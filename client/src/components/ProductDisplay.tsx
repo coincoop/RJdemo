@@ -1,8 +1,12 @@
+
 import { images } from '@/constants';
-import React from 'react'
+import React, { useState } from 'react'
 import style from '@/styles/ProductDisplay.module.css'
 import Image from 'next/image';
 import NotFound from './NotFound';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import '@/styles/CustomCarousel.css'
 
 const ProductDisplay = ({ productList }: {
     productList: {
@@ -19,6 +23,8 @@ const ProductDisplay = ({ productList }: {
     }
 }) => {
 
+    const allImages = [productList.img, ...productList.img_more];
+
     return (
 
         <div className={style['container']}>
@@ -27,7 +33,22 @@ const ProductDisplay = ({ productList }: {
             </h2>
             <div style={{ height: '1rem' }} />
             <div className={style['carousel']}>
-                <Image alt={productList.name ?? 'Product image'} src={images[productList.img ?? 'img_silder_1']} />
+                <Carousel
+                    showStatus={false}
+                    showThumbs
+                    showIndicators={false}
+                    // autoPlay
+                    infiniteLoop>
+                    {allImages.map((imgKey, index) => (
+                        <div key={index}>
+                            <img
+                                alt={`${productList.name} - Image ${index + 1}`}
+                                src={images[imgKey].src}
+                            />
+                        </div>
+                    ))}
+                </Carousel>
+
             </div>
             <div className={style['info']}>
                 <div className={style['item_no']}>
@@ -43,14 +64,19 @@ const ProductDisplay = ({ productList }: {
                     Status: <span className={style['right-column']}>{productList.status}</span>
                 </div>
                 <div className={style['price']}>
-                    {productList.price} <span className={style['right-column']}>vnđ</span> 
+                    {productList.price} <span className={style['right-column']}>vnđ</span>
                 </div>
             </div>
             <div className={style['btn']}>
                 <button >Buy Now</button>
             </div>
-            <div className={style['description']}>
-                {productList.description}
+            <div className={style['description-container']}>
+                <h2 className={style['description-header']}>
+                    Description
+                </h2>
+                <div className={style['description']}>
+                    <p>{productList.description}</p>
+                </div>
             </div>
         </div>
     )

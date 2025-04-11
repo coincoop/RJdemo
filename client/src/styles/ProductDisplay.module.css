@@ -1,31 +1,33 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     width: 70%;
     flex: 0 0 70%;
 }
 
-.name{
+.name {
     line-height: 1.8;
     font-size: 1.8rem;
     color: #282936;
     font-weight: 400;
 }
 
-.carousel img{
+
+
+.carousel img {
     width: 100%;
     height: auto;
     object-fit: cover;
 }
 
-.info{
+.info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 1rem 0;
 }
 
-.info > div{
+.info>div {
     margin: 0.5rem;
     position: relative;
     color: #363a3c;
@@ -35,8 +37,47 @@
     border-bottom: 1px solid #535353;
 }
 
-.right-column{
+.right-column {
     display: block;
     float: right;
     text-align: right;
 }
+
+.btn button {
+    width: 40%;
+    height: 3em;
+    background-color: black;
+    transition: all 0.3s ease;
+    border: 0;
+    margin: 0.5rem;
+}
+
+.description-container{
+    margin: 0.5rem;
+}
+
+.description-header{
+    padding: 7px 0px;
+    border-bottom: 1px solid #535353;
+}
+
+.description{
+    padding: 1rem;
+    color: #6c757d;
+}
+
+@media (max-width: 912px) {
+    .container{
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .info>div{
+        width: 100%;
+    }
+    
+    .btn button{
+        width: 100%;
+    }
+}
+

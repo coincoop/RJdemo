@@ -1,5 +1,5 @@
 .navbar {
-    width: 90%;
+    max-width: 70%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -176,4 +176,16 @@
     }
 
 
+}
+
+@media (max-width: 1024px) {
+    .navbar {
+        max-width: 80%; /* Khi màn hình nhỏ hơn 1024px */
+    }
+}
+
+@media (max-width: 912px) {
+    .navbar {
+        max-width: 90%; /* Khi màn hình nhỏ hơn 912px */
+    }
 }

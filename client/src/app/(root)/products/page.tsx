@@ -7,13 +7,14 @@ import TestApi from '@/components/TestApi'
 import { log } from 'console'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import style from '@/styles/Page.module.css'
 
 const Products = () => {
     
 
     return (
         <div>
-            <div style={{ paddingTop: '2rem', margin: '0 auto', display: 'flex', justifyContent: 'space-between',flexWrap: 'wrap', maxWidth: '90%' }}>
+            <div className={style['container']}>
                 <BrandSidebar />
                 <ProductList/>
             </div>

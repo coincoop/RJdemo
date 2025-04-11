@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 import BrandSidebar from '@/components/BrandSidebar';
 import ProductDisplay from '@/components/ProductDisplay';
 import NotFound from '@/components/NotFound';
+import style from '@/styles/Page.module.css'
 
 const ProductDetailsPage = () => {
 
@@ -23,7 +24,7 @@ const ProductDetailsPage = () => {
         marque: string;
         status: string;
         img_more: Array<keyof typeof images>;
-    } >();
+    }>();
 
     useEffect(() => {
         getProductbyId()
@@ -41,13 +42,13 @@ const ProductDetailsPage = () => {
     }
 
     return (
-        <div style={{ paddingTop: '2rem', margin: '0 auto', display: 'flex', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap', maxWidth: '90%' }}>
+        <div className={style['container']}>
             <BrandSidebar />
             {
                 product ? (
                     <ProductDisplay productList={product} />
-                ):(
-                    <NotFound/>
+                ) : (
+                    <NotFound />
                 )
             }
         </div>

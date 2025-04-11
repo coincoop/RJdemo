@@ -1,5 +1,5 @@
 .img-slider-container{
-    width: 90%;
+    max-width: 70%;
     height: 60vh;
     position: relative;
     justify-self: center;
@@ -39,9 +39,16 @@
    height: 2rem;
 }
 
+@media (max-width: 1024px){
+    .img-slider-container{
+        max-width: 70%;
+    }
+}
 
 @media (max-width: 912px) {
     .img-slider-container{
         height: 30vh;
+        max-width: 90%;
     }
 }
+

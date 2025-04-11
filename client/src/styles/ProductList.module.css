@@ -19,10 +19,10 @@
     flex: 0 0 calc(33.33% - 1rem); 
     max-width: calc(33.33% - 1rem);
 }
-.container-products > :first-child  {
+/* .container-products > :first-child  {
     flex: initial;
     max-width: none;
-}
+} */
 
 .no-results{
     display: flex;
