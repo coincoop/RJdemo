@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import cartsAPI from '@/apis/cartApi'
 import { io } from 'socket.io-client';
 import { appInfo } from '@/constants/appInfos'
+import type { ImageKey } from '@/constants';
 
 
 const DropdownCart = (
@@ -19,7 +20,7 @@ const DropdownCart = (
         name: string; // Tên sản phẩm
         price: number; // Giá sản phẩm
         description: string; // Mô tả sản phẩm
-        img: keyof typeof images; // Key của `images` để truyền vào
+        img: ImageKey; // Key của `images` để truyền vào
         img_more: string[]; // Danh sách ảnh bổ sung
         item_no: string; // Mã sản phẩm
         scale: string; // Tỷ lệ sản phẩm

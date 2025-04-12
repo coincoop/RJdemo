@@ -38,6 +38,7 @@ declare interface CardCarProps {
 }
 
 
+
 declare interface Product {
   _id: string; // ID của sản phẩm
   name: string; // Tên sản phẩm

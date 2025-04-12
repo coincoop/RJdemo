@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import style from '@/styles/CardProduct.module.css'
-import { icons, images } from '@/constants'
+import { icons, ImageKey, images } from '@/constants'
 import Link from 'next/link'
 import { ListStart } from 'lucide-react'
 
@@ -16,7 +16,7 @@ const CardProduct = ({ listCar }: {
     scale: string;
     marque: string;
     status: string;
-    img_more: keyof typeof images;
+    img_more: ImageKey;
   }
 
   

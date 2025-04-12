@@ -9,7 +9,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import productsAPI from '@/apis/productApi';
-import { images } from '@/constants';
+import { ImageKey, images } from '@/constants';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/redux/reducers/authReducer';
@@ -21,7 +21,7 @@ type Product = {
     _id: string;
     name: string;
     price: string;
-    img: keyof typeof images;
+    img: ImageKey;
 };
 
 const CarouselProdcut = ({ title }: CarouselProductProps) => {

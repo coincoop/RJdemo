@@ -1,5 +1,5 @@
 
-import { images } from '@/constants';
+import { ImageKey, images } from '@/constants';
 import React, { useState } from 'react';
 import style from '@/styles/ProductDisplay.module.css'
 import Image from 'next/image';
@@ -10,7 +10,7 @@ import '@/styles/CustomCarousel.css';
 
 const ProductDisplay = ({ productList }: {
     productList: {
-        img: keyof typeof images;
+        img: ImageKey;
         name: string;
         _id: string;
         description: string;
@@ -19,7 +19,7 @@ const ProductDisplay = ({ productList }: {
         scale: string;
         marque: string;
         status: string;
-        img_more: Array<keyof typeof images>;
+        img_more: Array<ImageKey>;
     }
 }) => {
 

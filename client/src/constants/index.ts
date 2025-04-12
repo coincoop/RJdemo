@@ -74,3 +74,6 @@ export const icons={
     cart,
     link,
 }
+
+
+export type ImageKey = keyof typeof images;
