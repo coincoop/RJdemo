@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { act } from "react";
+
 
 interface AuthState{
     id: String,

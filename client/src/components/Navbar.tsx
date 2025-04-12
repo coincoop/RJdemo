@@ -7,10 +7,12 @@ import Link from 'next/link';
 import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import DropdownCart from './DropdownCart';
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [cartOpen, setCartOpen] = useState(false)
     const auth = useSelector(authSelector)
     const dispatch = useDispatch()
     const router = useRouter()
@@ -25,11 +27,17 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const closeAll = () => {
         setActiveSubmenu(null);
         setMobileMenuOpen(false);
+        setCartOpen(false)
     };
 
     const toggleMobileMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         setMobileMenuOpen(prev => !prev);
+    };
+
+    const toggleCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        setCartOpen(prev => !prev); // Mở/đóng menu giỏ hàng
     };
 
     const handleLogout = async () => {
@@ -39,9 +47,11 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     }
 
     useEffect(() => {
+
         const handleClick = (event: MouseEvent) => {
             if (event.target instanceof Element &&
                 !event.target.closest('.navbar__submenu') &&
+                !event.target.closest('.navbar__cart') &&
                 !event.target.closest('.navbar__mobile-toggle')) {
                 closeAll();
             }
@@ -65,7 +75,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                     <ul className="navbar__menu">
                         <li><Link href="/">Home</Link></li>
                         <li className={`navbar__dropdown ${activeSubmenu === 'products' ? 'active' : ''}`}>
-                            <span  onClick={(e) => toggleSubmenu('products', e)}><Link href={'/products'}>Products</Link></span>
+                            <span onClick={(e) => toggleSubmenu('products', e)}><Link href={'/products'}>Products</Link></span>
                             <ul className="navbar__submenu">
                                 <li><Link href="/bmw">BMW</Link></li>
                                 <li><Link href="/ducati">Ducati</Link></li>
@@ -78,9 +88,14 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                 </nav>
             </div>
             <div className="navbar__right">
-                <Link href="/cart" className="navbar__cart">
-                    <img src={icons.cart.src} alt="Cart" />
-                </Link>
+                <div className="navbar__cart">
+                    <button className='navbar__cart__btn' onClick={toggleCart}>
+                        <img className='logo_cart' src={icons.cart.src} alt="Cart" />
+                    </button>
+                    {
+                        cartOpen && <DropdownCart  />
+                    }
+                </div>
                 {
                     isLogin && auth ? (
                         // <Link href="/profile" className="navbar__profile">
