@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import CardProduct from './CardProduct'
-import carsAPI from '@/apis/carApi'
+import carsAPI from '@/apis/productApi'
 import style from '@/styles/ProductList.module.css'
 import { useSearchParams } from 'next/navigation'
 import Loading from './Loading'
@@ -20,7 +20,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const res = await carsAPI.handleCar('/get-all-car',
+            const res = await carsAPI.handleCar('/get-all-product',
                 'get'
             )
             setProducts(res.data);

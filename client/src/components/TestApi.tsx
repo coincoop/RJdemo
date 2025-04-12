@@ -1,5 +1,5 @@
 'use client'
-import authenticationAPI from '@/apis/carApi'
+import authenticationAPI from '@/apis/productApi'
 import React from 'react'
 
 const TestApi = () => {

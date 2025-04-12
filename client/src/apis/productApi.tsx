@@ -1,14 +1,14 @@
 import { appInfo } from "@/constants/appInfos"
 import axiosCilent from "@/apis/axiosCilent"
 
-class carAPI {
+class productAPI {
     handleCar = async (
         url: string,
         data?: any,
         method?: 'get' | 'post' | 'put' | 'delete'
     )=>{
          return await axiosCilent({
-             url: `${appInfo.BASE_URL}/car${url}`,
+             url: `${appInfo.BASE_URL}/product${url}`,
              method: method ?? 'get',
              data,
          })
@@ -16,6 +16,6 @@ class carAPI {
     
 }
 
-const carsAPI = new carAPI()
+const productsAPI = new productAPI()
 
-export default carsAPI
+export default productsAPI

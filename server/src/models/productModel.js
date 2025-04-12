@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
-const CarSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema({
   description: {
     type: String,
     require: true,
@@ -48,6 +48,6 @@ const CarSchema = new mongoose.Schema({
   
 },
 { timestamps: true } );
-
-const CarModel = mongoose.model("car", CarSchema);
-module.exports = CarModel;
+//chuyển car thành product sau này
+const ProductModel = mongoose.model("car", ProductSchema);
+module.exports = ProductModel;

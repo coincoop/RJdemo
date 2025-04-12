@@ -1,6 +1,6 @@
 'use client'
 
-import carsAPI from '@/apis/carApi';
+import carsAPI from '@/apis/productApi';
 import { images } from '@/constants';
 import { useParams } from 'next/navigation';
 import Image from 'next/image'
@@ -9,9 +9,10 @@ import BrandSidebar from '@/components/BrandSidebar';
 import ProductDisplay from '@/components/ProductDisplay';
 import NotFound from '@/components/NotFound';
 import style from '@/styles/Page.module.css'
+import Loading from '@/components/Loading';
 
 const ProductDetailsPage = () => {
-
+    const [isLoading, setIsLoading] = useState(false)
     const { productId } = useParams();
     const [product, setProduct] = useState<{
         img: keyof typeof images;
@@ -31,25 +32,33 @@ const ProductDetailsPage = () => {
     }, []);
 
     const getProductbyId = async () => {
+        setIsLoading(true)
         try {
-            const res = await carsAPI.handleCar(`/get-car/${productId}`, 'get');
+            const res = await carsAPI.handleCar(`/get-product/${productId}`, 'get');
             setProduct(res.data);
+            setIsLoading(false)
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
-        <div className={style['container']}>
-            <BrandSidebar />
-            {
-                product ? (
-                    <ProductDisplay productList={product} />
-                ) : (
-                    <NotFound />
-                )
-            }
-        </div>
+        <>
+
+            <div className={style['container']}>
+                <BrandSidebar />
+                {
+                    product ? (
+                        <ProductDisplay productList={product} />
+                    ) : isLoading ? (
+                        <Loading />
+                    ) : (
+                        <NotFound />
+                    )
+                }
+            </div>
+
+        </>
     )
 }
 

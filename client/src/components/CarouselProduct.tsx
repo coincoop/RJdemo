@@ -8,7 +8,7 @@ import '@/styles/CarouselProduct.css'
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
-import carsAPI from '@/apis/carApi';
+import carsAPI from '@/apis/productApi';
 import { images } from '@/constants';
 import Link from 'next/link';
 

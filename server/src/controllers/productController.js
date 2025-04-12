@@ -1,8 +1,8 @@
-const CarModel = require("../models/carModel");
+const ProductModel = require("../models/productModel");
 const asyncHandle = require("express-async-handler");
 require("dotenv").config();
 
-const createCar = asyncHandle(async (req, res) => {
+const createProduct = asyncHandle(async (req, res) => {
   const {
     description,
     price,
@@ -15,16 +15,16 @@ const createCar = asyncHandle(async (req, res) => {
     status,
   } = req.body;
 
-  const existingHouse = await CarModel.findOne({
+  const existingProduct = await ProductModel.findOne({
     $or: [{ name: name }, { item_no: item_no }],
   });
 
-  if (existingHouse) {
+  if (existingProduct) {
     res.status(401);
-    throw new Error(`Nhà đã tồn tại!`);
+    throw new Error(`Sản phẩm đã tồn tại!`);
   }
 
-  const newCar = new HouseModel({
+  const newProduct = new ProductModel({
     description,
     price,
     name,
@@ -35,7 +35,7 @@ const createCar = asyncHandle(async (req, res) => {
     img_more,
     status,
   });
-  await newCar.save();
+  await newProduct.save();
   res.status(200).json({
     mess: "Tạo mới thành công !",
     id: newCar.id,
@@ -51,18 +51,18 @@ const createCar = asyncHandle(async (req, res) => {
   });
 });
 
-const getAllCar = asyncHandle(async (req, res) => {
-  const cars = await CarModel.find();
-  res.status(200).json(cars);
+const getAllProduct = asyncHandle(async (req, res) => {
+  const prods = await ProductModel.find();
+  res.status(200).json(prods);
 })
 
-const getCarById = asyncHandle(async (req, res) => {
-  const cars = await CarModel.findById({ _id: req.params._id });
-  if (!cars) {
+const getProductById = asyncHandle(async (req, res) => {
+  const prods = await ProductModel.findById({ _id: req.params._id });
+  if (!prods) {
     res.status(404);
     throw new Error("Không tìm thấy xe nào!");
   }
-  res.status(200).json(cars);
+  res.status(200).json(prods);
 })
 
-module.exports = { createCar, getAllCar, getCarById };
+module.exports = { createProduct, getAllProduct, getProductById };

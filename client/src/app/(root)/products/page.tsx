@@ -1,5 +1,5 @@
 
-import authenticationAPI from '@/apis/carApi'
+import authenticationAPI from '@/apis/productApi'
 import BrandSidebar from '@/components/BrandSidebar'
 import ProductList from '@/components/ProductList'
 import Space from '@/components/Space'
