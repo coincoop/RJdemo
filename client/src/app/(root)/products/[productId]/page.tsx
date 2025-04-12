@@ -1,6 +1,6 @@
 'use client'
 
-import carsAPI from '@/apis/productApi';
+import productsAPI from '@/apis/productApi';
 import { images } from '@/constants';
 import { useParams } from 'next/navigation';
 import Image from 'next/image'
@@ -34,7 +34,7 @@ const ProductDetailsPage = () => {
     const getProductbyId = async () => {
         setIsLoading(true)
         try {
-            const res = await carsAPI.handleCar(`/get-product/${productId}`, 'get');
+            const res = await productsAPI.handleProduct(`/get-product/${productId}`, 'get');
             setProduct(res.data);
             setIsLoading(false)
         } catch (error) {

@@ -49,5 +49,5 @@ const ProductSchema = new mongoose.Schema({
 },
 { timestamps: true } );
 //chuyển car thành product sau này
-const ProductModel = mongoose.model("car", ProductSchema);
+const ProductModel = mongoose.model("cars", ProductSchema);
 module.exports = ProductModel;

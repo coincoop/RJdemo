@@ -59,7 +59,7 @@ const getAllProduct = asyncHandle(async (req, res) => {
 const getProductById = asyncHandle(async (req, res) => {
   const prods = await ProductModel.findById({ _id: req.params._id });
   if (!prods) {
-    res.status(404);
+    res.status(401);
     throw new Error("Không tìm thấy xe nào!");
   }
   res.status(200).json(prods);
