@@ -1,21 +1,17 @@
-.container {
-    padding-top: 2rem;
+.container{
+    max-width: 70%;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-    width: 70%; /* Mặc định trên 1024px */
+
 }
 
-@media (max-width: 1024px) {
-    .container {
-        width: 80%; /* Khi màn hình nhỏ hơn 1024px */
+@media(max-width: 1024px){
+    .container{
+        max-width: 80%;
     }
 }
 
-@media (max-width: 912px) {
-    .container {
-        width: 90%; /* Khi màn hình nhỏ hơn 912px */
+@media(max-width: 912px){
+    .container{
+        max-width: 90%;
     }
 }

@@ -24,7 +24,7 @@ type Product = {
     img: ImageKey;
 };
 
-const CarouselProdcut = ({ title }: CarouselProductProps) => {
+const ProdcutCarousel = ({ title }: CarouselProductProps) => {
     const user = useSelector(authSelector)
     const [isLoading, setIsLoading] = useState(false)
     const [products, setProducts] = useState<Product[]>([])
@@ -110,4 +110,4 @@ const CarouselProdcut = ({ title }: CarouselProductProps) => {
     )
 }
 
-export default CarouselProdcut
+export default ProdcutCarousel

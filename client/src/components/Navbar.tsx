@@ -7,15 +7,17 @@ import Link from 'next/link';
 import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import DropdownCart from './DropdownCart';
+import CartDropdown from './CartDropdown';
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false)
     const auth = useSelector(authSelector)
-    const dispatch = useDispatch()
     const router = useRouter()
+    
+    const dispatch = useDispatch()
+    const closeCart = () => setCartOpen(false)
 
     const toggleSubmenu = (menuName: string, event: React.MouseEvent) => {
         event.stopPropagation();
@@ -93,7 +95,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                         <img className='logo_cart' src={icons.cart.src} alt="Cart" />
                     </button>
                     {
-                        cartOpen && <DropdownCart  />
+                        cartOpen && <CartDropdown onClose={closeCart}  />
                     }
                 </div>
                 {

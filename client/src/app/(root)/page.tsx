@@ -1,6 +1,6 @@
 // 'use client'
 
-import CarouselProdcut from "@/components/CarouselProduct";
+import ProductCarousel from "@/components/ProductCarousel";
 import ImageSlider from "@/components/ImageSlider";
 import Space from "@/components/Space";
 import {images} from "@/constants"
@@ -22,7 +22,7 @@ export  default async function Home({searchParams}: {searchParams:Promise< {quer
             <SearchForm query={query}/>
             <ImageSlider imgUrls={img_slider}/>
             <Space height="2em"/>
-            <CarouselProdcut title="Sản phẩm nổi bật" />
+            <ProductCarousel title="Sản phẩm nổi bật" />
             
         </section>
     )

@@ -19,8 +19,8 @@ const CardProduct = ({ listCar }: {
     img_more: ImageKey;
   }
 
-  
-  
+
+
 }) => {
   console.log(listCar._id);
   return (
@@ -28,7 +28,9 @@ const CardProduct = ({ listCar }: {
       <div className={style["img-container"]}>
         <Image src={images[listCar.img]} alt={listCar.name} className={style['image']} />
         <div className={style['icon-container']}>
-          <Image className={style['icon']} src={icons.link} alt="Link Icon" />
+          <Link href={`/products/${listCar._id}`} >
+            <Image className={style['icon']} src={icons.link} alt="Link Icon" />
+          </Link>
         </div>
         <Link className={style['link']} href={`/products/${listCar._id}`} />
 

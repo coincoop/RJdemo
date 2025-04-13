@@ -3,13 +3,12 @@
 import productsAPI from '@/apis/productApi';
 import { images } from '@/constants';
 import { useParams } from 'next/navigation';
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import BrandSidebar from '@/components/BrandSidebar';
 import ProductDisplay from '@/components/ProductDisplay';
 import NotFound from '@/components/NotFound';
-import style from '@/styles/Page.module.css'
 import Loading from '@/components/Loading';
+import style from '@/styles/PageProduct.module.css'
 
 const ProductDetailsPage = () => {
     const [isLoading, setIsLoading] = useState(false)

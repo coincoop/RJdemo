@@ -36,9 +36,9 @@ const ProductList = () => {
     const filteredProducts = products.filter((product: any) =>
         product.name.toLowerCase().includes(query.toLowerCase())
     );
-    
+
     return (
-        loading ? <Loading/> :
+        loading ? <Loading /> :
             <section className={style['container']}>
                 <div>
                     {

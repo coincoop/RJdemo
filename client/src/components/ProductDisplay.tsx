@@ -2,11 +2,12 @@
 import { ImageKey, images } from '@/constants';
 import React, { useState } from 'react';
 import style from '@/styles/ProductDisplay.module.css'
-import Image from 'next/image';
-import NotFound from './NotFound';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import '@/styles/CustomCarousel.css';
+import { useSelector } from 'react-redux';
+import { authSelector } from '@/redux/reducers/authReducer';
+import cartsAPI from '@/apis/cartApi';
 
 const ProductDisplay = ({ productList }: {
     productList: {
@@ -23,8 +24,32 @@ const ProductDisplay = ({ productList }: {
     }
 }) => {
 
+    const user = useSelector(authSelector)
     const allImages = [productList.img, ...productList.img_more];
+    const [isLoading, setIsLoading] = useState(false)
+    const [products, setProducts] = useState<Product[]>([])
+    const [idProduct, setIdProduct] = useState('')
 
+    const addCartHandle = async () => {
+        setIsLoading(true)
+        try {
+            const res = await cartsAPI.handleCart(
+                '/create-cart',
+                {
+                    id_user: user.id,
+                    products: [{
+                        id_product: productList._id,
+                        quantity: 1
+                    }]
+                },
+                'post',
+            )
+            setIsLoading(false)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
     return (
 
         <div className={style['container']}>
@@ -68,7 +93,13 @@ const ProductDisplay = ({ productList }: {
                 </div>
             </div>
             <div className={style['btn']}>
-                <button >Buy Now</button>
+                <button
+                    onClick={() => {
+                        setIdProduct(productList._id)
+                        addCartHandle()
+
+                    }}
+                >Buy Now</button>
             </div>
             <div className={style['description-container']}>
                 <h2 className={style['description-header']}>

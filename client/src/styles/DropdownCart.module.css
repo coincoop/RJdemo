@@ -69,3 +69,14 @@
     border: 1px solid #000000;
     transition: all 300ms ease;
 }
+
+@media (max-width: 912px) {
+    .container {
+        position: fixed;
+        top: 9%;
+        left: 50%;
+        transform: translate(-50%); 
+        margin: 0;
+        width: 90%;
+    }
+}
