@@ -95,7 +95,7 @@ const DropdownCart = ({ onClose }: {
                     <div className={style['items-container']}>
                         <p>Loading...</p>
                     </div>
-                ) : cart && cart.products.length > 0 ? (
+                ) : cart && cart?.products?.length > 0 ? (
                     cart.products.map((product) => (
 
                         <div key={product.id_product._id} className={style['items-container']}>
@@ -114,7 +114,7 @@ const DropdownCart = ({ onClose }: {
                     ))
                 ) : (
                     <div className={style['items-container']}>
-                        <p>Không có sản phẩm nào trong giỏ hàng</p>
+                        <p>Your cart are empty</p>
                     </div>
                 )
             }

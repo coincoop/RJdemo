@@ -15,6 +15,8 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
     const dispatch = useDispatch()
     const auth = useSelector(authSelector)
 
+
+
     useEffect(() => {
         checkLogin()
         const timeout = setTimeout(() => {
@@ -24,7 +26,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
 
     const checkLogin = async () => {
 
-        const userLocal = await localStorage.getItem('auth')
+        const userLocal = localStorage.getItem('auth')
         try {
             userLocal && dispatch(addAuth(JSON.parse(userLocal)))
 

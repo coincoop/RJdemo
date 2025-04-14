@@ -61,7 +61,7 @@ const CartList = () => {
       },
         'post'
       )
-      const total = res.data.products.reduce((sum: number, product: CartProduct): number => {
+      const total = res.data.products?.reduce((sum: number, product: CartProduct): number => {
         return sum + product.totalPrice;
       }, 0);
       setCart(res.data)
@@ -122,7 +122,7 @@ const CartList = () => {
       (product) => product.id_product._id !== productId
     )
 
-    const newTotalPrice = updatedProducts.reduce((sum, product) => sum + product.totalPrice, 0)
+    const newTotalPrice = updatedProducts?.reduce((sum, product) => sum + product.totalPrice, 0)
 
     setCart({ ...cart, products: updatedProducts })
     setTotalPrice(newTotalPrice)
@@ -140,7 +140,7 @@ const CartList = () => {
             </div>
             <div className={style['cart-list']}>
               {
-                cart && cart.products.length > 0 ? (
+                cart && cart?.products?.length > 0 ? (
                   cart.products.map((product) => (
                     <div key={product.id_product._id} className={style['product-container']}>
                       <div className={style['img-container']}>
@@ -181,7 +181,7 @@ const CartList = () => {
                 )
               }
             </div>
-            {cart && cart.products.length > 0 ? (
+            {cart && cart.products?.length > 0 ? (
               <>
                 <div className={style['total-price']}>Total Price:  <p>{totalPrice.toLocaleString()} vnđ</p></div>
                 <div className={style['btn-po']}>

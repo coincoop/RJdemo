@@ -50,6 +50,7 @@ const register = asyncHandle(async (req, res) => {
     name: newUser.name,
     id: newUser.id,
     email: newUser.email,
+    role: newUser.role,
     accessToken: await getJWT(email, newUser.id),
   });
 });
@@ -75,6 +76,7 @@ const login = asyncHandle(async (req, res) => {
     name: existingUser.name,
     id: existingUser.id,
     email: existingUser.email,
+    role: existingUser.role,
     accessToken: await getJWT(email, existingUser.id),
   });
 });

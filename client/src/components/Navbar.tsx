@@ -8,16 +8,19 @@ import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import CartDropdown from './CartDropdown';
+import UserDropdown from './UserDropdown';
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false)
+    const [userOpen, setUserOpen] = useState(false)
     const auth = useSelector(authSelector)
     const router = useRouter()
-    
+
     const dispatch = useDispatch()
     const closeCart = () => setCartOpen(false)
+    const closeUser = () => setUserOpen(false)
 
     const toggleSubmenu = (menuName: string, event: React.MouseEvent) => {
         event.stopPropagation();
@@ -30,6 +33,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
         setActiveSubmenu(null);
         setMobileMenuOpen(false);
         setCartOpen(false)
+        setUserOpen(false)
     };
 
     const toggleMobileMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,14 +43,15 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
 
     const toggleCart = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        setCartOpen(prev => !prev); // Mở/đóng menu giỏ hàng
+        closeAll()
+        setCartOpen(prev => !prev);
     };
 
-    const handleLogout = async () => {
-        localStorage.setItem("auth", JSON.stringify({ email: auth.email }));
-        dispatch(removeAuth())
-        router.push('/')
-    }
+    const toggleUser = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        closeAll()
+        setUserOpen(prev => !prev);
+    };
 
     useEffect(() => {
 
@@ -54,7 +59,9 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
             if (event.target instanceof Element &&
                 !event.target.closest('.navbar__submenu') &&
                 !event.target.closest('.navbar__cart') &&
-                !event.target.closest('.navbar__mobile-toggle')) {
+                !event.target.closest('.navbar__profile') &&
+                !event.target.closest('.navbar__mobile-toggle')
+            ) {
                 closeAll();
             }
         };
@@ -95,17 +102,20 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                         <img className='logo_cart' src={icons.cart.src} alt="Cart" />
                     </button>
                     {
-                        cartOpen && <CartDropdown onClose={closeCart}  />
+                        cartOpen && <CartDropdown onClose={closeCart} />
                     }
                 </div>
                 {
                     isLogin && auth ? (
-                        // <Link href="/profile" className="navbar__profile">
-                        //     {auth.name}
-                        // </Link>
-                        <button onClick={handleLogout} className="navbar__profile">
-                            {auth.name}
-                        </button>
+                        <div className="navbar__profile">
+                            <button onClick={toggleUser} className='navbar__profile-btn'>
+
+                            <img src={(icons.user).src} alt="" />
+                            </button>
+                            {
+                                userOpen && <UserDropdown onClose={closeUser} />
+                            }
+                        </div>
                     ) : (
                         <>
                             <Link href="/sign-in" className="navbar__login">
