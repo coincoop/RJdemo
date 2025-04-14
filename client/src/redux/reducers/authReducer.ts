@@ -5,14 +5,16 @@ interface AuthState{
     id: String,
     email:String,
     accessToken: String,
-    name: String
+    name: String,
+    role: string,
 }
 
 const initialState:AuthState = {
     id: '',
     email: '',
     accessToken: '',
-    name: ''
+    name: '',
+    role: ''
 }
 
 const authSlice = createSlice({

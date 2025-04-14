@@ -26,7 +26,6 @@ const Signin = () => {
         if (form.email || form.password) {
             setErrorMessage('')
         }
-        console.log(form.email, form.password);
 
     }, [form.email, form.password])
     //xử lí đăng nhập
@@ -42,14 +41,15 @@ const Signin = () => {
                 },
                     'post',
                 )
-                
-                await dispatch(addAuth(res.data))
-                console.log(auth.email);
-                await localStorage.setItem('auth', JSON.stringify(res.data))
 
+                dispatch(addAuth(res.data))
+                localStorage.setItem('auth', JSON.stringify(res.data))
                 router.push('/');
-            } catch (error) {
+            } catch (error : any) {
                 console.log(error);
+                if (error?.status === 403) {
+                    setErrorMessage('Sai tài khoản hoặc mật khẩu')
+                }
 
             }
         } else {

@@ -16,6 +16,11 @@ const UserSchema = new mongoose.Schema({
     photoUrl: {
         type: String
     },
+    role:{
+        type: String,
+        require: true,
+        default: 'user'
+    },
     createdAt:{
         type: Date,
         default: Date.now()

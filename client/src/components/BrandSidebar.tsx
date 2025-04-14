@@ -1,5 +1,6 @@
 'use client'
-import React, { useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import style from '@/styles/BrandSidebar.module.css'
 import Link from 'next/link';
 import { link } from 'fs';
@@ -8,6 +9,21 @@ import BrandSelector from './BrandSelector';
 const BrandSidebar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const closeModal = () => setIsModalOpen(false);
+
+    useEffect(()=>{
+        const handleClick = (event: MouseEvent) => {
+            if (event.target instanceof Element &&
+                !event.target.closest('.BrandSidebar_btn__F9HDT') &&
+                !event.target.closest('.BrandSelector_container__fJD6F')) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('click', handleClick);
+        return () => {
+            document.removeEventListener('click', handleClick);
+        };
+    },[])
 
     const listBrands = [
         { id: 1, name: 'BMW', link: '#' },

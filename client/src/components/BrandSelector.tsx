@@ -18,7 +18,7 @@ const BrandSelector = ({ onClose, isOpen, listBrand }: {
     if (!isOpen) return null;
 
     return (
-        <section onClick={onClose} className={style['container']}>
+        <section className={style['container']}>
             <div style={{ height: '1rem' }} />
             <div className={style['brand-header']}>
                 <h3 className={style['brand-title']}>Brands</h3>

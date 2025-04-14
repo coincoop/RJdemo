@@ -10,7 +10,7 @@ const CartSchema = new mongoose.Schema({
     {
       id_product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'cars',//đổi lại sau 
+        ref: 'products',//đổi lại sau 
         required: true,
       },
       quantity: {

@@ -1,4 +1,4 @@
-// 'use client'
+
 
 import ProductCarousel from "@/components/ProductCarousel";
 import ImageSlider from "@/components/ImageSlider";
