@@ -27,13 +27,11 @@ const ProductDisplay = ({ productList }: {
     const user = useSelector(authSelector)
     const allImages = [productList.img, ...productList.img_more];
     const [isLoading, setIsLoading] = useState(false)
-    const [products, setProducts] = useState<Product[]>([])
-    const [idProduct, setIdProduct] = useState('')
 
     const addCartHandle = async () => {
         setIsLoading(true)
         try {
-            const res = await cartsAPI.handleCart(
+            await cartsAPI.handleCart(
                 '/create-cart',
                 {
                     id_user: user.id,
@@ -95,9 +93,7 @@ const ProductDisplay = ({ productList }: {
             <div className={style['btn']}>
                 <button
                     onClick={() => {
-                        setIdProduct(productList._id)
                         addCartHandle()
-
                     }}
                 >Buy Now</button>
             </div>

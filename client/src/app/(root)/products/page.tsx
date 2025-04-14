@@ -7,7 +7,7 @@ import TestApi from '@/components/TestApi'
 import { log } from 'console'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import style from '@/styles/Page.module.css'
+import style from '@/styles/PageProduct.module.css'
 
 const Products = () => {
     

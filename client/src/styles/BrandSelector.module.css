@@ -1,28 +1,21 @@
 .container {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    max-height: 30%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
     z-index: 100;
-}
-
-.brand-item {
-    display: flex;
     flex-direction: column;
     background: white;
-    width: 100%;
     border-radius: 10px 10px 0 0;
     padding: 1rem;
     animation: slideUp 0.3s ease-out;
-    justify-content: center;
+}
+
+.brand-item {
     overflow-y: auto;
-    max-height: 30%;
-   
 }
 
 .brand-header {
@@ -31,14 +24,14 @@
     align-items: center;
     gap: 1rem;
     width: 100%;
-    height: 40px;
     background: black;
     background: linear-gradient(0deg, rgba(0, 0, 0, .8) 0, rgba(76, 76, 76, 1) 64%);
 }
 
 .brand-title {
-    padding-inline: 1rem;
+    padding: 10px;
     width: 100%;
+
     text-align: left;
     text-transform: uppercase;
     font-weight: 600;
@@ -51,6 +44,7 @@
 }
 
 .brand-name {
+   
     display: flex;
     width: 100%;
     height: 3rem;
@@ -77,5 +71,11 @@
     to {
         transform: translateY(0);
         /* Đưa modal lên vị trí ban đầu */
+    }
+}
+
+@media (max-width: 912px) {
+    .brand-name a {
+        font-size: 1rem;
     }
 }

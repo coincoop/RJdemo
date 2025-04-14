@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import { authSelector } from '@/redux/reducers/authReducer'
 import cartsAPI from '@/apis/cartApi'
 import Loading from './Loading'
+import { useRouter } from 'next/navigation'
+
 
 const CartList = () => {
   interface Product {
@@ -45,6 +47,7 @@ const CartList = () => {
   const [cart, setCart] = useState<CartUseState>()
   const [isLoading, setIsLoading] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
+  const router = useRouter()
 
   useEffect(() => {
     handleGetCart()
@@ -66,6 +69,22 @@ const CartList = () => {
       setIsLoading(false)
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const updateCartOnServer = async (updatedProducts: CartProduct[]) => {
+    try {
+      await cartsAPI.handleCart(
+        '/update-cart',
+        {
+          id_user: user.id,
+          products: updatedProducts
+        },
+        'post'
+      )
+    } catch (error) {
+      console.log(error);
+
     }
   }
 
@@ -93,13 +112,32 @@ const CartList = () => {
     setCart({ ...cart, products: updatedProducts });
     setTotalPrice(newTotalPrice);
 
-    // updateCartOnServer(updatedProducts);
+    updateCartOnServer(updatedProducts);
   };
+
+  const handleDeleteProduct = (productId: string) => {
+    if (!cart) return
+
+    const updatedProducts = cart.products.filter(
+      (product) => product.id_product._id !== productId
+    )
+
+    const newTotalPrice = updatedProducts.reduce((sum, product) => sum + product.totalPrice, 0)
+
+    setCart({ ...cart, products: updatedProducts })
+    setTotalPrice(newTotalPrice)
+
+    updateCartOnServer(updatedProducts)
+  }
   return (
     <>
       {
         !isLoading ? (
           <div className={style['container']}>
+            <div style={{height: '1rem'}}/>
+            <div className={style['header-container']}>
+              <p>Cart</p>
+            </div>
             <div className={style['cart-list']}>
               {
                 cart && cart.products.length > 0 ? (
@@ -118,7 +156,7 @@ const CartList = () => {
                             className={style['btn-pm']}>
                             <img className={style['icon-pm']} src={(icons.plus).src} alt="" />
                           </button>
-                          <input className={style['quantity']} type="number" value={product.quantity} readOnly/>
+                          <input className={style['quantity']} type="number" value={product.quantity} readOnly />
                           <button onClick={() =>
                             handleQuantityChange(product.id_product._id, 'minus')
                           }
@@ -128,21 +166,34 @@ const CartList = () => {
                         </div>
                       </div>
                       <div className={style['btn-del-container']}>
-                        <button className={style['btn-del']}>
+                        <button onClick={() => handleDeleteProduct(product.id_product._id)} className={style['btn-del']}>
                           <img className={style['icon-del']} src={(icons.remove).src} alt="" />
                         </button>
                       </div>
                     </div>
                   ))
                 ) : (
-                  <div className={style['cart-list']}>khong co san pham</div>
+                  <div className={style['cart-list']}>
+                    <div className={style['empty-container']}>
+                      <p className={style['empty']}>Không có sản phẩm trong giỏ hàng</p>
+                    </div>
+                  </div>
                 )
               }
             </div>
-            <div className={style['total-price']}>Total Price:  <p>{totalPrice.toLocaleString()} vnđ</p></div>
-            <div className={style['btn-po']}>
-              <button>Place Order</button>
-            </div>
+            {cart && cart.products.length > 0 ? (
+              <>
+                <div className={style['total-price']}>Total Price:  <p>{totalPrice.toLocaleString()} vnđ</p></div>
+                <div className={style['btn-po']}>
+                  <button >Place Order</button>
+                </div>
+              </>
+
+            ) : (
+              <div className={style['btn-po']}>
+                <button onClick={()=> router.push('/products')} className={style['']}>Tiếp tục mua sắm</button>
+              </div>
+            )}
           </div>
         ) : (
           <Loading />

@@ -28,8 +28,6 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
     const user = useSelector(authSelector)
     const [isLoading, setIsLoading] = useState(false)
     const [products, setProducts] = useState<Product[]>([])
-    const [idProduct, setIdProduct] = useState('')
-    const router = useRouter()
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
 
 
@@ -37,20 +35,26 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
         fetchProducts();
     }, []);
 
-    const addCartHandle = async () => {
-        setIsLoading(true)
+    const addCartHandle = async (productId: string) => {
+        if (!productId) {
+            console.error("idProduct is not set");
+            return;
+        }
         try {
-            const res = await cartsAPI.handleCart(
+            setIsLoading(true)
+            const res =await cartsAPI.handleCart(
                 '/create-cart',
                 {
                     id_user: user.id,
                     products: [{
-                        id_product: idProduct,
+                        id_product: productId,
                         quantity: 1
                     }]
                 },
                 'post',
             )
+            console.log(res);
+            
             setIsLoading(false)
         } catch (error) {
             console.log(error);
@@ -93,8 +97,7 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
                                         <Space height='1em' />
                                         <div className="carousel-prod-btn">
                                             <button onClick={() => {
-                                                setIdProduct(product._id)
-                                                addCartHandle()
+                                                addCartHandle(product._id)
                                             }
                                             }>Mua ngay</button>
                                         </div>

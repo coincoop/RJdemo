@@ -19,11 +19,11 @@ const BrandSelector = ({ onClose, isOpen, listBrand }: {
 
     return (
         <section onClick={onClose} className={style['container']}>
-
+            <div style={{ height: '1rem' }} />
+            <div className={style['brand-header']}>
+                <h3 className={style['brand-title']}>Brands</h3>
+            </div>
             <div className={style['brand-item']} onClick={(e) => e.stopPropagation()}>
-                <div className={style['brand-header']}>
-                    <h3 className={style['brand-title']}>Brands</h3>
-                </div>
                 {listBrand.map((item) => (
                     <div key={item.id} className={style['brand-name']}>
                         <Link href={'/'}>{item.name}</Link>

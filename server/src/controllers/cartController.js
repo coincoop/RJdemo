@@ -91,6 +91,22 @@ const getCartByUserId = asyncHandle(async (req, res) => {
   res.status(200).json(cart);
 });
 
+const updateCart = asyncHandle(async(req,res)=>{
+  const {id_user, products} = req.body
+
+  try {
+    const cart = await CartModel.findOne({id_user})
+
+    if(!cart) return res.status(404).json({mess: 'Cart không tồn tại'})
+
+    cart.products = products
+    await cart.save()
+
+    res.status(200).json({mess: 'Cập nhật Cart thành công' ,cart})
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+})
 
 
-module.exports = { createCart, getCartByUserId };
+module.exports = { createCart, getCartByUserId, updateCart };

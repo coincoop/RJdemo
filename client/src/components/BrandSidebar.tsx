@@ -15,6 +15,10 @@ const BrandSidebar = () => {
         { id: 3, name: 'IMSA 2023', link: '#' },
         { id: 4, name: 'Audi', link: '#' },
         { id: 5, name: 'McLarren', link: '#' },
+        { id: 7, name: 'McLarren', link: '#' },
+        { id: 8, name: 'McLarren', link: '#' },
+        { id: 9, name: 'McLarren', link: '#' },
+        { id: 10, name: 'McLarren', link: '#' },
     ];
     return (
 
