@@ -6,7 +6,7 @@ import { images, icons } from '@/constants'
 import Link from 'next/link';
 import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import CartDropdown from './CartDropdown';
 import UserDropdown from './UserDropdown';
 import style from '@/styles/Navbar.module.css'
@@ -111,7 +111,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                         <div className="navbar__profile">
                             <button onClick={toggleUser} className='navbar__profile-btn'>
 
-                            <img src={(icons.user).src} alt="" />
+                                <img src={(icons.user).src} alt="" />
                             </button>
                             {
                                 userOpen && <UserDropdown onClose={closeUser} />
@@ -137,18 +137,49 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     );
 }
 
-export  function DashBoardNavbar(){
-    return(
+export function DashBoardNavbar() {
+
+    const pathname = usePathname();
+    console.log(pathname);
+    
+    const getPageTitle = () => {
+        switch (pathname) {
+            case '/admin/':
+                return 'Home';
+            case '/admin/customers':
+                return 'Customer';
+            case '/admin/products':
+                return 'Products';
+            case '/admin/carts':
+                return 'Carts';
+            default:
+                return 'Dashboard'; // Tên mặc định
+        }
+    };
+
+    return (
         <div className={style['container']}>
-            <div className={style['header']}>
-                Dashboard
+            <div className={style['header-container']}>
+                <p className={style['header']}>
+                    {getPageTitle()}
+                </p>
             </div>
             <div className={style['right-container']}>
-                <div className='notification'>
-                    <img src={(icons.cart).src} alt="" />
+                <div className={style['right-items']}>
+                    <button style={{position: 'relative'}} className={style['btn']}>
+                        <img  className={style['notification']} src={(icons.notification).src} alt="" />
+                        <div className={style['dot']}></div>
+                    </button>
                 </div>
-                <div>
-                    <img src={(icons.user).src} alt="" />
+                <div className={style['right-items']}>
+                    <button className={style['btn']}>
+                        <img src={(icons.setting).src} alt="" />
+                    </button>
+                </div>
+                <div className={style['right-items']}>
+                    <button className={style['btn']}>
+                        <img src={(icons.user).src} alt="" />
+                    </button>
                 </div>
             </div>
         </div>

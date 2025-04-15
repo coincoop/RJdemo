@@ -31,6 +31,15 @@ const DashboardSidebar = () => {
       <div className={style['list-items-container']}>
         <div className={style['items-container']}>
           <button
+            className={`${style['btn']} ${activeButton === 'Home' ? style['active-btn'] : ''}`}
+            onClick={() => handleNavigation('')}
+          >
+            <img className={style['img']} src={(icons.chart).src} alt="" />
+            <p className={style['name']}>Customer</p>
+          </button>
+        </div>
+        <div className={style['items-container']}>
+          <button
             className={`${style['btn']} ${activeButton === 'Customers' ? style['active-btn'] : ''}`}
             onClick={() => handleNavigation('Customers')}
           >

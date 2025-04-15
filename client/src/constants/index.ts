@@ -41,6 +41,9 @@ import left_arrow from '@/assets/icons/left-arrow.png'
 import product from '@/assets/icons/box.png'
 import dashboard from '@/assets/icons/dashboard.png'
 import customer from '@/assets/icons/customer.png'
+import setting from '@/assets/icons/settings.png'
+import notification from '@/assets/icons/notification.png'
+import chart from '@/assets/icons/chart.png'
 
 export const images ={
     img_silder_1,
@@ -89,6 +92,9 @@ export const icons={
     product,
     dashboard,
     customer,
+    setting,
+    notification,
+    chart,
 }
 
 
