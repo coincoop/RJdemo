@@ -43,7 +43,12 @@ const Signin = () => {
                 )
 
                 dispatch(addAuth(res.data))
-                localStorage.setItem('auth', JSON.stringify(res.data))
+                localStorage.setItem('auth', JSON.stringify({
+                    email: res.data.email,
+                    accessToken: res.data.accessToken,
+                    name: res.data.name,
+                    id: res.data.id
+                }))
                 router.push('/');
             } catch (error : any) {
                 console.log(error);

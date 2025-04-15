@@ -14,10 +14,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const getJWT = async (email, id) => {
+const getJWT = async (email, id, role) => {
   const payload = {
     email,
     id,
+    role,
   };
   const token = jwt.sign(payload, process.env.SECRET_KEY, {
     expiresIn: "7d",
@@ -50,8 +51,7 @@ const register = asyncHandle(async (req, res) => {
     name: newUser.name,
     id: newUser.id,
     email: newUser.email,
-    role: newUser.role,
-    accessToken: await getJWT(email, newUser.id),
+    accessToken: await getJWT(email, newUser.id, newUser.role),
   });
 });
 
@@ -72,12 +72,10 @@ const login = asyncHandle(async (req, res) => {
 
   res.status(200).json({
     message: "Đăng nhập thành công",
-
     name: existingUser.name,
     id: existingUser.id,
     email: existingUser.email,
-    role: existingUser.role,
-    accessToken: await getJWT(email, existingUser.id),
+    accessToken: await getJWT(email, existingUser.id, existingUser.role),
   });
 });
 

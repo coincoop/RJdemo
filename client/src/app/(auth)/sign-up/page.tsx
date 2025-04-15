@@ -59,7 +59,12 @@ const Signup = () => {
             try {
                 const res = await authenticationAPI.handleAuthentitation('/register', { name: form.name, email: form.email, password: form.password }, 'post')
                 dispatch(addAuth(res.data))
-                localStorage.setItem('auth', JSON.stringify(res.data))
+                localStorage.setItem('auth', JSON.stringify({
+                    email: res.data.email,
+                    accessToken: res.data.accessToken,
+                    name: res.data.name,
+                    id: res.data.id
+                }))
                 console.log(res);
 
             } catch (error) {
@@ -207,7 +212,7 @@ const Signup = () => {
                     <Modal typeModal='success' setVerification={setVerification} />
                 )}
                 {
-                    isLoading && <Loading/>
+                    isLoading && <Loading />
                 }
             </section>
 

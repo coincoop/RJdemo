@@ -1,58 +1,60 @@
-'use client'
+'use client';
 
-import Loading from "@/components/Loading"
-import NotFound from "@/components/NotFound"
-import { addAuth, authReducer, authSelector } from "@/redux/reducers/authReducer"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import style from '@/styles/AdminPage.module.css'
-import { DashBoardNavbar } from "@/components/Navbar"
-import DashboardSidebar from "@/components/DashboardSidebar"
+import Loading from "@/components/Loading";
+import NotFound from "@/components/NotFound";
+import { addAuth, authSelector } from "@/redux/reducers/authReducer";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import style from '@/styles/AdminPage.module.css';
+import { DashBoardNavbar } from "@/components/Navbar";
+import DashboardSidebar from "@/components/DashboardSidebar";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
+    interface CustomJwtPayload extends JwtPayload {
+        role: string; // Thêm thuộc tính role
+    }
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true);
     const [isAuthorized, setIsAuthorized] = useState(false);
-    const user = useSelector(authSelector)
-
-    const router = useRouter()
-    const dispatch = useDispatch()
+    const [role, setRole] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        checkRole();
+        checkAuth();
     }, []);
 
-    const checkRole = async () => {
-        setIsLoading(true)
+    const checkAuth = async () => {
         try {
             const userLocal = localStorage.getItem('auth');
             if (userLocal) {
                 const parsedUser = JSON.parse(userLocal);
                 dispatch(addAuth(parsedUser));
-    
-                if (!parsedUser.role || parsedUser.role === "user") {
-                    setIsAuthorized(false);
-                } else {
+                const decoded = jwtDecode<CustomJwtPayload>(parsedUser.accessToken);
+                setRole(decoded.role);
+
+                if (decoded.role === 'admin') {
                     setIsAuthorized(true);
+                } else {
+                    setIsAuthorized(false);
                 }
             } else {
                 setIsAuthorized(false);
             }
         } catch (error) {
-            console.log(error);
+            console.error('Auth error:', error);
             setIsAuthorized(false);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
-    //tat tam thoi
     if (isLoading) {
         return <Loading />;
     }
 
-    if (!isAuthorized) {
+    if (!isAuthorized && !isLoading) {
         return <NotFound />;
     }
 

@@ -6,7 +6,6 @@ interface AuthState{
     email:String,
     accessToken: String,
     name: String,
-    role: string,
 }
 
 const initialState:AuthState = {
@@ -14,7 +13,6 @@ const initialState:AuthState = {
     email: '',
     accessToken: '',
     name: '',
-    role: ''
 }
 
 const authSlice = createSlice({

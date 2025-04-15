@@ -19,7 +19,11 @@ const DashboardSidebar = () => {
 
   const handleNavigation = (page: string) => {
     setActiveButton(page);
-    router.push(`/admin/${page.toLowerCase()}`);
+    if (page !== 'Home') {
+      router.push(`/admin/${page.toLowerCase()}`)
+    }else{
+      router.push('/admin')
+    }
   };
 
   return (
@@ -32,10 +36,10 @@ const DashboardSidebar = () => {
         <div className={style['items-container']}>
           <button
             className={`${style['btn']} ${activeButton === 'Home' ? style['active-btn'] : ''}`}
-            onClick={() => handleNavigation('')}
+            onClick={() => handleNavigation('Home')}
           >
             <img className={style['img']} src={(icons.chart).src} alt="" />
-            <p className={style['name']}>Customer</p>
+            <p className={style['name']}>Dashboard</p>
           </button>
         </div>
         <div className={style['items-container']}>
