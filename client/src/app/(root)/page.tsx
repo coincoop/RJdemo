@@ -22,7 +22,7 @@ export  default async function Home({searchParams}: {searchParams:Promise< {quer
             <SearchForm query={query}/>
             <ImageSlider imgUrls={img_slider}/>
             <Space height="2em"/>
-            <ProductCarousel title="Sản phẩm nổi bật" />
+            <ProductCarousel title="Trending Products" />
             
         </section>
     )

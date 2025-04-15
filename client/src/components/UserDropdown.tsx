@@ -27,7 +27,7 @@ const UserDropdown = ({ onClose }: {
                     <img src={(icons.user).src} alt="" />
                 </div>
                 <p className={style['name-btn']}>
-                    Infomation
+                    Hello {user.name}
                 </p>
             </button>
             <div style={{ height: '1rem' }} />

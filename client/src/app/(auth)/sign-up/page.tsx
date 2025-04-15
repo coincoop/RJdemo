@@ -136,7 +136,7 @@ const Signup = () => {
 
                 <div className={styles['right-container']}>
                     <div className={styles['form-container']}>
-                        <h1>Đăng Ký</h1>
+                        <h1>Register</h1>
                         <Form
                             action=""
 
@@ -192,10 +192,10 @@ const Signup = () => {
                                 </div>
                             )}
 
-                            <button type='submit'>Đăng Kí</button>
+                            <button type='submit'>Register</button>
                         </Form>
                         <div className={styles['form-footer']}>
-                            <p>Bạn đã có tài khoản? <Link href={"/sign-in"}>Đăng nhập</Link></p>
+                            <p>You alrealy have an account? <Link href={"/sign-in"}>Login</Link></p>
 
                         </div>
                     </div>

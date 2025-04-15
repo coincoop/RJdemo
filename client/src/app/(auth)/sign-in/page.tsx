@@ -48,7 +48,7 @@ const Signin = () => {
             } catch (error : any) {
                 console.log(error);
                 if (error?.status === 403) {
-                    setErrorMessage('Sai tài khoản hoặc mật khẩu')
+                    setErrorMessage('Password or email are incorret')
                 }
 
             }
@@ -66,7 +66,7 @@ const Signin = () => {
 
             <div className={styles['right-container']}>
                 <div className={styles['form-container']}>
-                    <h1>Đăng nhập</h1>
+                    <h1>Login</h1>
                     <Form
                         action=""
                         onSubmit={(e) => {
@@ -91,12 +91,12 @@ const Signin = () => {
                                 <p>{errorMessage}</p>
                             </div>
                         )}
-                        <button type='submit'>Đăng nhập</button>
+                        <button type='submit'>Login</button>
 
                     </Form>
                     <div className={styles['form-footer']}>
-                        <p>Bạn quên mật khẩu? <Link href={"/forgot-password"}>Quên mật khẩu</Link></p>
-                        <p>Bạn chưa có tài khoản <Link href={"/sign-up"}>Đăng kí</Link></p>
+                        <p>Forgot your password <Link href={"/forgot-password"}>Forgot password</Link></p>
+                        <p>Don't have an account <Link href={"/sign-up"}>Register</Link></p>
                     </div>
                 </div>
             </div>

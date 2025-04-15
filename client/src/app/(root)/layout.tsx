@@ -5,7 +5,6 @@ import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import Space from "@/components/Space";
 import { addAuth, authSelector } from "@/redux/reducers/authReducer";
-import { log } from "console";
 import { use, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,7 +27,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
 
         const userLocal = localStorage.getItem('auth')
         try {
-            userLocal && dispatch(addAuth(JSON.parse(userLocal)))
+            userLocal &&  dispatch(addAuth(JSON.parse(userLocal)))
 
         } catch (error) {
             console.log(error)

@@ -42,13 +42,13 @@ const ProductList = () => {
             <section className={style['container']}>
                 <div>
                     {
-                        query ? <h1 className={style['title']}>Kết quả tìm kiếm cho "{query}"</h1> : <h1 className={style['title']}>Tất cả sản phẩm</h1>
+                        query ? <h1 className={style['title']}>Search results for "{query}"</h1> : <h1 className={style['title']}>All product</h1>
                     }
                 </div>
                 <div className={style['container-products']}>
                     {query && filteredProducts.length === 0 ? (
                         <div className={style['no-results']}>
-                            Không có kết quả nào phù hợp với "{query}".
+                            No results found "{query}".
                         </div>
                     ) : (
                         (query ? filteredProducts : products).map((product: any) => (

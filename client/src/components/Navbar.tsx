@@ -119,10 +119,10 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                     ) : (
                         <>
                             <Link href="/sign-in" className="navbar__login">
-                                Đăng nhập
+                                Login
                             </Link>
                             <Link href="/sign-up" className="navbar__login">
-                                Đăng ký
+                                Register
                             </Link>
                         </>
                     )

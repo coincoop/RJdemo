@@ -28,7 +28,7 @@ const Modal = ({ typeModal, error, onSubmit, setVerification }:
                 }
                 onSubmit && onSubmit()
               }} action="">
-                <p style={{textAlign:'center', fontSize:'1.5rem'}}>Vui lòng xác nhận email</p>
+                <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>Verification email</p>
                 <input type="number" onChange={(e) => {
                   setVerification && setVerification(prev => ({ ...prev, code: e.target.value }))
                 }} />
@@ -43,7 +43,8 @@ const Modal = ({ typeModal, error, onSubmit, setVerification }:
           <div className={style["container"]}>
             <div className={style["modal-content"]}>
               <Form action="">
-                <p>  Chúc mừng bạn đã đăng kí thành công!</p>
+                <p>
+                You're all set! Thanks for registering!</p>
                 <button onClick={() => {
 
                   setVerification && setVerification(prev => ({
@@ -52,7 +53,7 @@ const Modal = ({ typeModal, error, onSubmit, setVerification }:
                   }))
                   router.replace('/')
                 }} type='submit' className={style["btn"]} >
-                  Bắt đầu mua hàng
+                 Start Shopping
                 </button>
               </Form>
             </div>
