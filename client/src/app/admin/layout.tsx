@@ -6,6 +6,9 @@ import { addAuth, authReducer, authSelector } from "@/redux/reducers/authReducer
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import style from '@/styles/AdminPage.module.css'
+import { DashBoardNavbar } from "@/components/Navbar"
+import DashboardSidebar from "@/components/DashboardSidebar"
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
 
@@ -25,14 +28,16 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
         try {
             const userLocal = localStorage.getItem('auth');
             if (userLocal) {
-                dispatch(addAuth(JSON.parse(userLocal)));
-            }
-            if (!user || !user.role) {
-                setIsAuthorized(false);
-            } else if (user.role === "user") {
-                setIsAuthorized(false);
+                const parsedUser = JSON.parse(userLocal);
+                dispatch(addAuth(parsedUser));
+    
+                if (!parsedUser.role || parsedUser.role === "user") {
+                    setIsAuthorized(false);
+                } else {
+                    setIsAuthorized(true);
+                }
             } else {
-                setIsAuthorized(true);
+                setIsAuthorized(false);
             }
         } catch (error) {
             console.log(error);
@@ -42,6 +47,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
         }
     }
 
+    //tat tam thoi
     if (isLoading) {
         return <Loading />;
     }
@@ -50,5 +56,13 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
         return <NotFound />;
     }
 
-    return <>{children}</>;
+    return (
+        <section className={style['container']}>
+            <DashboardSidebar />
+            <div className={style['component-container']}>
+                <DashBoardNavbar />
+                {children}
+            </div>
+        </section>
+    );
 }

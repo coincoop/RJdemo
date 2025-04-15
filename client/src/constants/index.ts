@@ -36,6 +36,11 @@ import link from '@/assets/icons/link.png'
 import remove from '@/assets/icons/remove.png'
 import plus from '@/assets/icons/plus.png'
 import minus from '@/assets/icons/minus.png'
+import right_arrow from '@/assets/icons/right-arrow.png'
+import left_arrow from '@/assets/icons/left-arrow.png'
+import product from '@/assets/icons/box.png'
+import dashboard from '@/assets/icons/dashboard.png'
+import customer from '@/assets/icons/customer.png'
 
 export const images ={
     img_silder_1,
@@ -79,6 +84,11 @@ export const icons={
     remove,
     plus,
     minus,
+    right_arrow,
+    left_arrow,
+    product,
+    dashboard,
+    customer,
 }
 
 

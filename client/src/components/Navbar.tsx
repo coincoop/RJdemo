@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import CartDropdown from './CartDropdown';
 import UserDropdown from './UserDropdown';
+import style from '@/styles/Navbar.module.css'
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -134,4 +135,22 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
             </div>
         </header>
     );
+}
+
+export  function DashBoardNavbar(){
+    return(
+        <div className={style['container']}>
+            <div className={style['header']}>
+                Dashboard
+            </div>
+            <div className={style['right-container']}>
+                <div className='notification'>
+                    <img src={(icons.cart).src} alt="" />
+                </div>
+                <div>
+                    <img src={(icons.user).src} alt="" />
+                </div>
+            </div>
+        </div>
+    )
 }

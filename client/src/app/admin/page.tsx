@@ -1,8 +1,12 @@
+import DashboardSidebar from '@/components/DashboardSidebar'
 import React from 'react'
+import style from '@/styles/AdminPage.module.css'
 
 const AdminPage = () => {
   return (
-    <div>AdminPage</div>
+    <div className={style['container']}>
+    hêlo
+    </div>
   )
 }
 
