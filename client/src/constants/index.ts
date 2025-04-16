@@ -44,6 +44,7 @@ import customer from '@/assets/icons/customer.png'
 import setting from '@/assets/icons/settings.png'
 import notification from '@/assets/icons/notification.png'
 import chart from '@/assets/icons/chart.png'
+import filter from '@/assets/icons/filter.png'
 
 export const images ={
     img_silder_1,
@@ -95,6 +96,7 @@ export const icons={
     setting,
     notification,
     chart,
+    filter,
 }
 
 
