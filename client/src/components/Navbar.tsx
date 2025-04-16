@@ -11,6 +11,17 @@ import CartDropdown from './CartDropdown';
 import UserDropdown from './UserDropdown';
 import style from '@/styles/Navbar.module.css'
 
+interface DropdownItem {
+    name: string;
+    url: string;
+    icon: keyof typeof icons;
+}
+  
+  interface DropdownButtonGroup {
+    onClose: () => void;
+    items: DropdownItem[];
+  }
+
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -153,7 +164,7 @@ export function DashBoardNavbar() {
             case '/admin/carts':
                 return 'Carts';
             default:
-                return 'Dashboard'; // Tên mặc định
+                return 'Dashboard';
         }
     };
 

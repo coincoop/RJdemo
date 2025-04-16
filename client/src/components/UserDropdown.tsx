@@ -8,13 +8,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useRouter } from 'next/navigation';
 
+interface CustomJwtPayload extends JwtPayload {
+    role: string;
+}
+
+
 const UserDropdown = ({ onClose }: {
     onClose?: () => void;
 }) => {
-    interface CustomJwtPayload extends JwtPayload {
-        role: string; // Thêm thuộc tính role
-    }
-
+   
+   
     const [role, setRole] = useState('')
     const router = useRouter()
     const dispatch = useDispatch()
@@ -57,7 +60,7 @@ const UserDropdown = ({ onClose }: {
                     router.push('/admin')
                 }} className={style['items-btn-container']}>
                     <div className={style['icon-user']}>
-                        <img src={(icons.user).src} alt="" />
+                        <img src={(icons.dashboard).src} alt="" />
                     </div>
                     <p className={style['name-btn']}>
                         Go to Dashboard
@@ -67,7 +70,7 @@ const UserDropdown = ({ onClose }: {
             <div style={{ height: '1rem' }} />
             <button onClick={handleLogout} className={style['items-btn-container']}>
                 <div className={style['icon-user']}>
-                    <img src={(icons.user).src} alt="" />
+                    <img src={(icons.logout).src} alt="" />
                 </div>
                 <p className={style['name-btn']}>
                     Logout

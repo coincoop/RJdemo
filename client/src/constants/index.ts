@@ -45,6 +45,7 @@ import setting from '@/assets/icons/settings.png'
 import notification from '@/assets/icons/notification.png'
 import chart from '@/assets/icons/chart.png'
 import filter from '@/assets/icons/filter.png'
+import logout from '@/assets/icons/logout.png'
 
 export const images ={
     img_silder_1,
@@ -97,6 +98,7 @@ export const icons={
     notification,
     chart,
     filter,
+    logout,
 }
 
 
