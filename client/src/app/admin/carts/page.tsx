@@ -58,7 +58,6 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 interface HeadCell {
   disablePadding: boolean;
   id: DataKey;
-  // sub_id?: keyof ProductsList
   label: string;
   numeric: boolean;
 }

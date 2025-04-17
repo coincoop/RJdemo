@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import "@/styles/Navbar.css";
-import { images, icons } from '@/constants'
+import { images, icons, Iconkey } from '@/constants'
 import Link from 'next/link';
 import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,29 +10,63 @@ import { useRouter, usePathname } from 'next/navigation';
 import CartDropdown from './CartDropdown';
 import UserDropdown from './UserDropdown';
 import style from '@/styles/Navbar.module.css'
+import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { relative } from 'path';
 
 interface DropdownItem {
     name: string;
-    url: string;
-    icon: keyof typeof icons;
+    btn: () => void;
+    icon: Iconkey;
 }
-  
-  interface DropdownButtonGroup {
-    onClose: () => void;
-    items: DropdownItem[];
-  }
+
+interface CustomJwtPayload extends JwtPayload {
+    role: string;
+}
+
+
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false)
     const [userOpen, setUserOpen] = useState(false)
+    const [role, setRole] = useState('')
     const auth = useSelector(authSelector)
     const router = useRouter()
 
+    useEffect(() => {
+        const userData = auth.accessToken;
+        if (userData) {
+            try {
+                const decoded = jwtDecode<CustomJwtPayload>(userData);
+                setRole(decoded.role);
+            } catch (error) {
+                console.error('Invalid token:', error);
+            }
+        }
+    }, [auth]);
+
+    const userDropdown: DropdownItem[] = [
+        { name: `Hello ${auth.name}`, btn: () => console.log('hello'), icon: 'cart' },
+        { name: 'Logout', btn: () => handleLogout(), icon: 'logout' }
+    ]
+
+    const adminDropdown: DropdownItem[] = [
+        { name: `Hello ${auth.name}`, btn: () => console.log('hello'), icon: 'cart' },
+        { name: 'Go to Dashboard', btn: () => router.push('/admin'), icon: 'dashboard' },
+        { name: 'Logout', btn: () => handleLogout(), icon: 'logout' }
+    ]
+
     const dispatch = useDispatch()
     const closeCart = () => setCartOpen(false)
-    const closeUser = () => setUserOpen(false)
+    const closeUser = () => { setUserOpen(false); }
+
+    const handleLogout = async () => {
+        closeUser()
+        localStorage.removeItem("auth");
+        dispatch(removeAuth())
+        router.push('/')
+    }
 
     const toggleSubmenu = (menuName: string, event: React.MouseEvent) => {
         event.stopPropagation();
@@ -56,13 +90,13 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const toggleCart = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         closeAll()
-        setCartOpen(prev => !prev);
+        setCartOpen(!cartOpen);
     };
 
     const toggleUser = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         closeAll()
-        setUserOpen(prev => !prev);
+        setUserOpen(!userOpen);
     };
 
     useEffect(() => {
@@ -124,9 +158,13 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
 
                                 <img src={(icons.user).src} alt="" />
                             </button>
-                            {
-                                userOpen && <UserDropdown onClose={closeUser} />
-                            }
+                            {userOpen && (
+                                role == 'admin' ? (
+                                    <UserDropdown items={adminDropdown} />
+                                ) : role == 'user' ? (
+                                    <UserDropdown items={userDropdown} />
+                                ) : null
+                            )}
                         </div>
                     ) : (
                         <>
@@ -151,8 +189,16 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
 export function DashBoardNavbar() {
 
     const pathname = usePathname();
-    console.log(pathname);
-    
+    const auth = useSelector(authSelector)
+    const router = useRouter()
+    const [userOpen, setUserOpen] = useState(false)
+    const closeUser = () => { setUserOpen(false); }
+
+    const adminDropdown: DropdownItem[] = [
+        { name: `Hello ${auth.name}`, btn: () => console.log('hello'), icon: 'user' },
+        { name: 'Back to your shop', btn: () => router.push('/'), icon: 'cart' },
+    ]
+
     const getPageTitle = () => {
         switch (pathname) {
             case '/admin/':
@@ -168,6 +214,32 @@ export function DashBoardNavbar() {
         }
     };
 
+    const closeAll = () => {
+        setUserOpen(false)
+    };
+
+    const toggleUser = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        closeAll()
+        setUserOpen(!userOpen);
+    };
+
+    useEffect(() => {
+
+        const handleClick = (event: MouseEvent) => {
+            if (event.target instanceof Element &&
+                !event.target.closest('.Navbar_right-items__iO6tx')
+            ) {
+                closeAll();
+            }
+        };
+
+        document.addEventListener('click', handleClick);
+        return () => {
+            document.removeEventListener('click', handleClick);
+        };
+    }, []);
+
     return (
         <div className={style['container']}>
             <div className={style['header-container']}>
@@ -177,8 +249,8 @@ export function DashBoardNavbar() {
             </div>
             <div className={style['right-container']}>
                 <div className={style['right-items']}>
-                    <button style={{position: 'relative'}} className={style['btn']}>
-                        <img  className={style['notification']} src={(icons.notification).src} alt="" />
+                    <button style={{ position: 'relative' }} className={style['btn']}>
+                        <img className={style['notification']} src={(icons.notification).src} alt="" />
                         <div className={style['dot']}></div>
                     </button>
                 </div>
@@ -187,10 +259,13 @@ export function DashBoardNavbar() {
                         <img src={(icons.setting).src} alt="" />
                     </button>
                 </div>
-                <div className={style['right-items']}>
-                    <button className={style['btn']}>
+                <div style={{ position: 'relative' }} className={style['right-items']}>
+                    <button onClick={toggleUser} className={style['btn']}>
                         <img src={(icons.user).src} alt="" />
                     </button>
+                    {
+                        userOpen && <UserDropdown items={adminDropdown} />
+                    }
                 </div>
             </div>
         </div>

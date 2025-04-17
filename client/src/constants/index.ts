@@ -103,3 +103,4 @@ export const icons={
 
 
 export type ImageKey = keyof typeof images;
+export type Iconkey = keyof typeof icons;
