@@ -11,6 +11,8 @@ import { io } from 'socket.io-client';
 import { appInfo } from '@/constants/appInfos'
 import type { ImageKey } from '@/constants';
 import { useRouter } from 'next/navigation'
+import Button from './ui/Button'
+import Loading from './Loading'
 
 
 const DropdownCart = ({ onClose }: {
@@ -54,7 +56,7 @@ const DropdownCart = ({ onClose }: {
     const socket = io(appInfo.BASE_URL);
     const user = useSelector(authSelector)
     const [cart, setCart] = useState<CartUseState>()
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
 
     useEffect(() => {
@@ -72,19 +74,17 @@ const DropdownCart = ({ onClose }: {
 
     const handleGetCart = async () => {
         try {
-            setIsLoading(true)
             const res = await cartsAPI.handleCart('/get-cart-by-id_user', {
                 id_user: user.id,
             },
                 'post',
             )
             setCart(res.data)
-          
-            
-            setIsLoading(false)
         } catch (error) {
             console.log(error);
 
+        }finally{
+            setIsLoading(false)
         }
     }
 
@@ -92,9 +92,7 @@ const DropdownCart = ({ onClose }: {
         <div className={style['container']}>
             {
                 isLoading ? (
-                    <div className={style['items-container']}>
-                        <p>Loading...</p>
-                    </div>
+                   <Loading/>
                 ) : cart && cart?.products?.length > 0 ? (
                     cart.products.map((product) => (
 
@@ -119,13 +117,10 @@ const DropdownCart = ({ onClose }: {
                 )
             }
             <div className={style['btn-container']}>
-
-                <button
-                    onClick={() => {
-                        if(onClose) onClose()
-                        router.push('/cart')
-                    }}
-                    className={style['btn']}>Check out</button>
+                <Button name='Check out' onClick={() => {
+                    router.push('/cart') 
+                    onClose && onClose()
+                    }} />
             </div>
         </div>
     )

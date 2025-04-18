@@ -72,3 +72,7 @@ declare interface CartUseState {
   __v: number; // Phiên bản của document
 }
 
+declare interface ButtonProps{
+  name: string,
+  onClick: () => void
+}

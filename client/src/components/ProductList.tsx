@@ -37,7 +37,7 @@ const ProductList = () => {
     const sortProducts = (a: any, b: any) => {
         let fieldA = a[sortField];
         let fieldB = b[sortField];
-    
+
         if (sortField === 'name') {
             fieldA = fieldA.toLowerCase();
             fieldB = fieldB.toLowerCase();
@@ -45,36 +45,39 @@ const ProductList = () => {
             if (fieldA > fieldB) return sortOrder === 'asc' ? 1 : -1;
             return 0;
         }
-    
+
         if (sortField === 'price') {
             return sortOrder === 'asc' ? fieldA - fieldB : fieldB - fieldA;
         }
-    
+
         return 0;
     };
-    
+
     const filteredProducts = (query ? products.filter((p: any) =>
         p.name.toLowerCase().includes(query.toLowerCase())
     ) : [...products]).sort(sortProducts);
-    
+
 
 
     return (
         loading ? <Loading /> :
             <section className={style['container']}>
-                <select onChange={(e) => setSortField(e.target.value as 'name' | 'price')}>
-                    <option value="name">Sắp xếp theo tên</option>
-                    <option value="price">Sắp xếp theo giá</option>
-                </select>
 
-                <select onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}>
-                    <option value="asc">Tăng dần</option>
-                    <option value="desc">Giảm dần</option>
-                </select>
-                <div>
+                <div className={style['header-container']}>
                     {
                         query ? <h1 className={style['title']}>Search results for "{query}"</h1> : <h1 className={style['title']}>All product</h1>
                     }
+                    <div className={style['selection-container']}>
+                        <select className={style['selection']} onChange={(e) => setSortField(e.target.value as 'name' | 'price')}>
+                            <option value="name">Sort by Name</option>
+                            <option value="price">Sort by Price</option>
+                        </select>
+
+                        <select className={style['selection']} onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}>
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Decreasing</option>
+                        </select>
+                    </div>
                 </div>
                 <div className={style['container-products']}>
                     {query && filteredProducts.length === 0 ? (

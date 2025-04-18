@@ -10,7 +10,7 @@ const BrandSidebar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const closeModal = () => setIsModalOpen(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         const handleClick = (event: MouseEvent) => {
             if (event.target instanceof Element &&
                 !event.target.closest('.BrandSidebar_btn__F9HDT') &&
@@ -23,7 +23,7 @@ const BrandSidebar = () => {
         return () => {
             document.removeEventListener('click', handleClick);
         };
-    },[])
+    }, [])
 
     const listBrands = [
         { id: 1, name: 'BMW', link: '#' },
@@ -63,8 +63,8 @@ const BrandSidebar = () => {
                                 console.log(isModalOpen);
                             }}
                             className={style['btn']}>
-                                
-                                Select Brands</button>
+
+                            Select Brands</button>
                     </div>
                     <BrandSelector onClose={closeModal} isOpen={isModalOpen} listBrand={listBrands} />
                 </div>

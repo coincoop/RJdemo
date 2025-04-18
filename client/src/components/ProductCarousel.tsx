@@ -16,6 +16,7 @@ import { authSelector } from '@/redux/reducers/authReducer';
 import cartsAPI from '@/apis/cartApi';
 import Loading from './Loading';
 import { useRouter } from 'next/navigation';
+import Button from './ui/Button';
 
 type Product = {
     _id: string;
@@ -96,10 +97,7 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
                                         <p className=" carousel-prod-price">{product.price} vnđ</p>
                                         <Space height='1em' />
                                         <div className="carousel-prod-btn">
-                                            <button onClick={() => {
-                                                addCartHandle(product._id)
-                                            }
-                                            }>Mua ngay</button>
+                                           <Button name='Buy' onClick={() => addCartHandle(product._id)}/>
                                         </div>
                                         <Space height='1em' />
                                     </div>

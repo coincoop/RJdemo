@@ -8,6 +8,7 @@ import '@/styles/CustomCarousel.css';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/redux/reducers/authReducer';
 import cartsAPI from '@/apis/cartApi';
+import Button from './ui/Button';
 
 const ProductDisplay = ({ productList }: {
     productList: {
@@ -26,10 +27,9 @@ const ProductDisplay = ({ productList }: {
 
     const user = useSelector(authSelector)
     const allImages = [productList.img, ...productList.img_more];
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const addCartHandle = async () => {
-        setIsLoading(true)
         try {
             await cartsAPI.handleCart(
                 '/create-cart',
@@ -42,10 +42,11 @@ const ProductDisplay = ({ productList }: {
                 },
                 'post',
             )
-            setIsLoading(false)
         } catch (error) {
             console.log(error);
 
+        } finally {
+            setIsLoading(false)
         }
     }
     return (
@@ -91,11 +92,7 @@ const ProductDisplay = ({ productList }: {
                 </div>
             </div>
             <div className={style['btn']}>
-                <button
-                    onClick={() => {
-                        addCartHandle()
-                    }}
-                >Buy Now</button>
+                <Button name='Buy now' onClick={() => { addCartHandle }} />
             </div>
             <div className={style['description-container']}>
                 <h2 className={style['description-header']}>

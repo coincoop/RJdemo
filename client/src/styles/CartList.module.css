@@ -13,7 +13,7 @@
     justify-content: space-between;
     padding: 10px 12px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
+    align-items: center;
 }
 
 .img-container{
@@ -169,12 +169,73 @@
     display: flex;
     align-items: center;
     padding: 7px 8px;
+    justify-content: space-between;
 }
 
 .header-container p{
     font-size: 30px;
     font-weight: 700;
 }
+
+.btn-del-selected-container button{
+    background:none;
+    border: 1px solid var(--textGray);
+    color: var(--textGray);
+    height: 30px;
+    padding: 7px 8px;
+    cursor: pointer;
+}
+
+/* Style cho checkbox */
+.checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    appearance: none; /* Loại bỏ style mặc định của checkbox */
+    border: 2px solid #ccc; /* Viền mặc định */
+    border-radius: 4px; /* Bo góc */
+    background-color: #fff; /* Nền mặc định */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+  }
+  
+  /* Khi checkbox được chọn */
+  .checkbox:checked {
+    background-color: var(--textGray); /* Nền màu xanh khi được chọn */
+    border-color:  var(--textGray); /* Viền màu xanh khi được chọn */
+    position: relative;
+  }
+  
+  /* Dấu check khi checkbox được chọn */
+  .checkbox:checked::after {
+    content: '✔'; /* Dấu check */
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Hiệu ứng hover */
+  .checkbox:hover {
+    border-color: var(--textGray); /* Đổi màu viền khi hover */
+  }
+
+  .btn-del-all-container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 7px 8px;
+  }
+
+  .btn-del-all{
+    background:none;
+    border: 1px solid var(--textGray);
+    color: var(--textGray);
+    height: 30px;
+    padding: 7px 8px;
+    cursor: pointer;
+  }
 
 @media(max-width: 1024px){
     .quantity-container{
