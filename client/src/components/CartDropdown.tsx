@@ -83,16 +83,22 @@ const DropdownCart = ({ onClose }: {
         } catch (error) {
             console.log(error);
 
-        }finally{
+        } finally {
             setIsLoading(false)
         }
     }
 
     return (
         <div className={style['container']}>
+        <div style={{height: '1rem'}}/>
             {
                 isLoading ? (
-                   <Loading/>
+
+                    <div className={style["loading-container"]}>
+                        <div className={style["spinner"]}></div>
+                        <p>Loading...</p>
+                    </div>
+
                 ) : cart && cart?.products?.length > 0 ? (
                     cart.products.map((product) => (
 
@@ -118,9 +124,9 @@ const DropdownCart = ({ onClose }: {
             }
             <div className={style['btn-container']}>
                 <Button name='Check out' onClick={() => {
-                    router.push('/cart') 
+                    router.push('/cart')
                     onClose && onClose()
-                    }} />
+                }} />
             </div>
         </div>
     )
