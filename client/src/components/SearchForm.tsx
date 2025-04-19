@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import Form from 'next/form'
 import "@/styles/SearchForm.css"
 import { useRouter } from 'next/navigation';
-import Button from '@/components/ui/Button'
 const SearchForm = ({ query }: { query?: string }) => {
     const [searchQuery, setSearchQuery] = useState(query || '');
     const router = useRouter();

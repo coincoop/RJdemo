@@ -1,7 +1,7 @@
 'use client'
 
 import productsAPI from '@/apis/productApi';
-import { images } from '@/constants';
+import { ImageKey, images } from '@/constants';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import BrandSidebar from '@/components/BrandSidebar';
@@ -14,7 +14,7 @@ const ProductDetailsPage = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { productId } = useParams();
     const [product, setProduct] = useState<{
-        img: keyof typeof images;
+        img: ImageKey;
         name: string;
         _id: string;
         description: string;
@@ -23,7 +23,7 @@ const ProductDetailsPage = () => {
         scale: string;
         marque: string;
         status: string;
-        img_more: Array<keyof typeof images>;
+        img_more: Array<ImageKey>;
     }>();
 
     useEffect(() => {
@@ -35,7 +35,9 @@ const ProductDetailsPage = () => {
         try {
             const res = await productsAPI.handleProduct(`/get-product/${productId}`, 'get');
             setProduct(res.data);
+            console.log(res.data);
             setIsLoading(false)
+            
         } catch (error) {
             console.log(error);
         }
@@ -45,7 +47,6 @@ const ProductDetailsPage = () => {
         <>
 
             <div className={style['container']}>
-                <BrandSidebar />
                 {
                     product ? (
                         <ProductDisplay productList={product} />

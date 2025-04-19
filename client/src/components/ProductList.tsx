@@ -8,31 +8,13 @@ import { useSearchParams } from 'next/navigation'
 import Loading from './Loading'
 
 
-const ProductList = () => {
+const ProductList = ({ products }: {
+    products: any[],
+}) => {
     const searchParams = useSearchParams();
     const query = searchParams.get('query') || '';
     const [sortField, setSortField] = useState<'name' | 'price'>('name');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
-    const fetchProducts = async () => {
-        try {
-            const res = await productsAPI.handleProduct('/get-all-product',
-                'get'
-            )
-            setProducts(res.data);
-            console.log(res.data);
-            console.log(res.data._id);
-        } catch (error) {
-            console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
-        } finally {
-            setLoading(false);
-        }
-    }
 
     const sortProducts = (a: any, b: any) => {
         let fieldA = a[sortField];
@@ -60,37 +42,36 @@ const ProductList = () => {
 
 
     return (
-        loading ? <Loading /> :
-            <section className={style['container']}>
+        <section className={style['container']}>
 
-                <div className={style['header-container']}>
-                    {
-                        query ? <h1 className={style['title']}>Search results for "{query}"</h1> : <h1 className={style['title']}>All product</h1>
-                    }
-                    <div className={style['selection-container']}>
-                        <select className={style['selection']} onChange={(e) => setSortField(e.target.value as 'name' | 'price')}>
-                            <option value="name">Sort by Name</option>
-                            <option value="price">Sort by Price</option>
-                        </select>
+            <div className={style['header-container']}>
+                {
+                    query ? <h1 className={style['title']}>Search results for "{query}"</h1> : <h1 className={style['title']}>All product</h1>
+                }
+                <div className={style['selection-container']}>
+                    <select className={style['selection']} onChange={(e) => setSortField(e.target.value as 'name' | 'price')}>
+                        <option value="name">Sort by Name</option>
+                        <option value="price">Sort by Price</option>
+                    </select>
 
-                        <select className={style['selection']} onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}>
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Decreasing</option>
-                        </select>
+                    <select className={style['selection']} onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}>
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Decreasing</option>
+                    </select>
+                </div>
+            </div>
+            <div className={style['container-products']}>
+                {query && filteredProducts.length === 0 ? (
+                    <div className={style['no-results']}>
+                        No results found "{query}".
                     </div>
-                </div>
-                <div className={style['container-products']}>
-                    {query && filteredProducts.length === 0 ? (
-                        <div className={style['no-results']}>
-                            No results found "{query}".
-                        </div>
-                    ) : (
-                        (query ? filteredProducts : products).map((product: any) => (
-                            <CardProduct key={product._id} listCar={product} />
-                        ))
-                    )}
-                </div>
-            </section>
+                ) : (
+                    (query ? filteredProducts : products).map((product: any) => (
+                        <CardProduct key={product._id} listCar={product} />
+                    ))
+                )}
+            </div>
+        </section>
 
     )
 }

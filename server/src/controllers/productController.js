@@ -54,7 +54,7 @@ const createProduct = asyncHandle(async (req, res) => {
 const getAllProduct = asyncHandle(async (req, res) => {
   const prods = await ProductModel.find();
   res.status(200).json(prods);
-})
+});
 
 const getProductById = asyncHandle(async (req, res) => {
   const prods = await ProductModel.findById({ _id: req.params._id });
@@ -63,6 +63,27 @@ const getProductById = asyncHandle(async (req, res) => {
     throw new Error("Không tìm thấy xe nào!");
   }
   res.status(200).json(prods);
-})
+});
 
-module.exports = { createProduct, getAllProduct, getProductById };
+const getProductByBrand = asyncHandle(async (req, res) => {
+  try {
+    const products = await ProductModel.find({ marque: req.params.marque });
+    if (!products) {
+      res.status(401);
+      throw new Error("Không tìm thấy xe nào!");
+    }
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({
+      mess: "Lỗi server !",
+      error: error.message,
+    });
+  }
+});
+
+module.exports = {
+  createProduct,
+  getAllProduct,
+  getProductById,
+  getProductByBrand,
+};
