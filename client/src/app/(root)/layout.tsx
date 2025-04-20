@@ -1,9 +1,9 @@
 'use client'
 
-import Footer from "@/components/Footer";
-import Loading from "@/components/Loading";
-import Navbar from "@/components/Navbar";
-import Space from "@/components/Space";
+import Footer from "@/components/layout/Footer";
+import Loading from "@/components/common/Loading";
+import Navbar from "@/components/layout/Navbar";
+import Space from "@/components/ui/Space";
 import { addAuth, authSelector } from "@/redux/reducers/authReducer";
 import { use, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

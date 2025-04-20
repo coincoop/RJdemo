@@ -11,8 +11,8 @@ import { io } from 'socket.io-client';
 import { appInfo } from '@/constants/appInfos'
 import type { ImageKey } from '@/constants';
 import { useRouter } from 'next/navigation'
-import Button from './ui/Button'
-import Loading from './Loading'
+import Button from '../ui/Button'
+import Loading from '../common/Loading'
 
 
 const DropdownCart = ({ onClose }: {

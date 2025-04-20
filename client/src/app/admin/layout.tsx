@@ -1,14 +1,14 @@
 'use client';
 
-import Loading from "@/components/Loading";
-import NotFound from "@/components/NotFound";
+import Loading from "@/components/common/Loading";
+import NotFound from "@/components/common/NotFound";
 import { addAuth, authSelector } from "@/redux/reducers/authReducer";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from '@/styles/AdminPage.module.css';
-import { DashBoardNavbar } from "@/components/Navbar";
-import DashboardSidebar from "@/components/DashboardSidebar";
+import { DashBoardNavbar } from "@/components/layout/Navbar";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {

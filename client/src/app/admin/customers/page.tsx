@@ -25,7 +25,7 @@ import { visuallyHidden } from '@mui/utils';
 import { icons } from '@/constants';
 import adminsAPI from '@/apis/adminApi';
 import { useEffect, useMemo } from 'react';
-import Loading from '@/components/Loading';
+import Loading from '@/components/common/Loading';
 
 interface Data {
   _id: string;

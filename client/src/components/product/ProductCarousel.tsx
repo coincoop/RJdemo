@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick';
-import Space from './Space';
+import Space from '../ui/Space';
 import '@/styles/CarouselProduct.css'
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel'
@@ -14,9 +14,9 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/redux/reducers/authReducer';
 import cartsAPI from '@/apis/cartApi';
-import Loading from './Loading';
+import Loading from '../common/Loading';
 import { useRouter } from 'next/navigation';
-import Button from './ui/Button';
+import Button from '../ui/Button';
 
 type Product = {
     _id: string;

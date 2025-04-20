@@ -7,8 +7,8 @@ import Link from 'next/link';
 import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter, usePathname } from 'next/navigation';
-import CartDropdown from './CartDropdown';
-import UserDropdown from './UserDropdown';
+import CartDropdown from '@/components/cart/CartDropdown';
+import UserDropdown from '../ui/UserDropdown';
 import style from '@/styles/Navbar.module.css'
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { relative } from 'path';

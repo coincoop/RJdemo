@@ -1,5 +1,5 @@
 import React from 'react'
-import CartList from '@/components/CartList'
+import CartList from '@/components/cart/CartList'
 import style from '@/styles/Page.module.css'
 
 const Cart = () => {

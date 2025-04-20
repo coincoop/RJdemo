@@ -5,7 +5,7 @@ import { icons, ImageKey, images } from '@/constants'
 import Link from 'next/link'
 import { ListStart } from 'lucide-react'
 
-const CardProduct = ({ listCar }: {
+const ProductCard = ({ listCar }: {
   listCar: {
     img: keyof typeof images;
     name: string,
@@ -51,4 +51,4 @@ const CardProduct = ({ listCar }: {
   )
 }
 
-export default CardProduct
+export default ProductCard

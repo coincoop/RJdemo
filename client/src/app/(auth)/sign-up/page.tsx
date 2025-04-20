@@ -8,10 +8,10 @@ import Form from 'next/form'
 import Link from 'next/link'
 import authenticationAPI from '@/apis/authApi'
 import { Validate } from '@/utils/validate'
-import Modal from '@/components/Modal'
+import Modal from '@/components/ui/Modal'
 import { useDispatch } from 'react-redux'
 import { addAuth } from '@/redux/reducers/authReducer'
-import Loading from '@/components/Loading'
+import Loading from '@/components/common/Loading'
 
 const Signup = () => {
     const [isLoading, setIsLoading] = useState(false)

@@ -25,8 +25,8 @@ import { visuallyHidden } from '@mui/utils';
 import { icons } from '@/constants';
 import adminsAPI from '@/apis/adminApi';
 import { useEffect, useMemo } from 'react';
-import Loading from '@/components/Loading';
-import ProductList from '@/components/ProductList';
+import Loading from '@/components/common/Loading';
+import ProductList from '@/components/product/ProductList';
 
 type DataKey = keyof Data | keyof ProductsList;
 

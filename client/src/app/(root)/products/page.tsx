@@ -1,15 +1,15 @@
 'use client'
 
 import authenticationAPI from '@/apis/productApi'
-import BrandSidebar from '@/components/BrandSidebar'
-import ProductList from '@/components/ProductList'
-import Space from '@/components/Space'
+import BrandSidebar from '@/components/brand/BrandSidebar'
+import ProductList from '@/components/product/ProductList'
+import Space from '@/components/ui/Space'
 import { log } from 'console'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import style from '@/styles/PageProduct.module.css'
 import productsAPI from '@/apis/productApi'
-import Loading from '@/components/Loading'
+import Loading from '@/components/common/Loading'
 
 const Products = () => {
     const [products, setProducts] = useState([])

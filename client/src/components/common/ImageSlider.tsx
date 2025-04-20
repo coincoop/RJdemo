@@ -4,7 +4,7 @@ import { useState } from "react"
 import React from 'react'
 import { ArrowBigLeft, ArrowBigRight, Search } from "lucide-react"
 import "@/styles/ImageSlider.css"
-import SearchForm from "./SearchForm"
+import SearchForm from "../ui/SearchForm"
 
 const ImageSlider = ({ imgUrls, query }: ImageSliderProps) => {
 

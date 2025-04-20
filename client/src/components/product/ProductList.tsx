@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import CardProduct from './CardProduct'
+import ProductCard from './ProductCard'
 import productsAPI from '@/apis/productApi'
 import style from '@/styles/ProductList.module.css'
 import { useSearchParams } from 'next/navigation'
-import Loading from './Loading'
+import Loading from '../common/Loading'
 
 
 const ProductList = ({ products, title }: {
@@ -78,7 +78,7 @@ const ProductList = ({ products, title }: {
                 )
                     : (
                         finalProductList.map((product: any) => (
-                            <CardProduct key={product._id} listCar={product} />
+                            <ProductCard key={product._id} listCar={product} />
                         ))
                     )}
             </div>

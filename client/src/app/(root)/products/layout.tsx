@@ -1,4 +1,4 @@
-import BrandSidebar from '@/components/BrandSidebar'
+import BrandSidebar from '@/components/brand/BrandSidebar'
 import React from 'react'
 import style from '@/styles/PageProduct.module.css'
 

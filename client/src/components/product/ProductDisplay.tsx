@@ -8,8 +8,8 @@ import '@/styles/CustomCarousel.css';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/redux/reducers/authReducer';
 import cartsAPI from '@/apis/cartApi';
-import Button from './ui/Button';
-import Loading from './Loading';
+import Button from '../ui/Button';
+import Loading from '../common/Loading';
 
 const ProductDisplay = ({ productList }: {
     productList: {

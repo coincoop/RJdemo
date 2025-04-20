@@ -4,12 +4,12 @@ import productsAPI from '@/apis/productApi';
 import { ImageKey, images } from '@/constants';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import BrandSidebar from '@/components/BrandSidebar';
-import ProductDisplay from '@/components/ProductDisplay';
-import NotFound from '@/components/NotFound';
-import Loading from '@/components/Loading';
+import BrandSidebar from '@/components/brand/BrandSidebar';
+import ProductDisplay from '@/components/product/ProductDisplay';
+import NotFound from '@/components/common/NotFound';
+import Loading from '@/components/common/Loading';
 import style from '@/styles/PageProduct.module.css'
-import ProductList from '@/components/ProductList';
+import ProductList from '@/components/product/ProductList';
 
 
 const Brand = () => {

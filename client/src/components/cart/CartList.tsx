@@ -6,9 +6,9 @@ import { icons, ImageKey, images } from '@/constants'
 import { useSelector } from 'react-redux'
 import { authSelector } from '@/redux/reducers/authReducer'
 import cartsAPI from '@/apis/cartApi'
-import Loading from './Loading'
+import Loading from '../common/Loading'
 import { useRouter } from 'next/navigation'
-import Button from './ui/Button'
+import Button from '../ui/Button'
 
 
 const CartList = () => {
