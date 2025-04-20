@@ -39,7 +39,7 @@ interface Data {
   img: string
   img_more: string[]
   createdAt: Date;
-  updateAt: Date;
+  updatedAt: Date;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -141,7 +141,7 @@ const headCells: readonly HeadCell[] = [
     label: 'Created At'
   },
   {
-    id: 'updateAt',
+    id: 'updatedAt',
     numeric: true,
     disablePadding: false,
     label: 'Updated At'
@@ -419,7 +419,7 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.img}</TableCell>
                     <TableCell align="right">{row.img_more}</TableCell>
                     <TableCell align="right">{row.createdAt.toLocaleString()}</TableCell>
-                    <TableCell align="right">{row.updateAt.toLocaleString()}</TableCell>
+                    <TableCell align="right">{row.updatedAt.toLocaleString()}</TableCell>
                   </TableRow>
                 );
               })}

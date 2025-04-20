@@ -15,30 +15,36 @@ import ProductList from '@/components/ProductList';
 const Brand = () => {
     const [isLoading, setIsLoading] = useState(false)
     const marque = useParams<{brand : string}>();
-    console.log(marque.brand);
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<any>([]);
 
     useEffect(() => {
         getProductByBrand()
+        
     }, []);
 
     const getProductByBrand = async () => {
         setIsLoading(true)
         try {
             const res = await productsAPI.handleProduct(`/get-product-by-brand/${marque.brand}`, 'get');
-            setProducts(res.data);
-
+            setProducts(res.data); 
             setIsLoading(false)
         } catch (error) {
             console.log(error);
         }
     }
 
+    const capitalizeFirstLetter = (string: string | undefined) => {
+        if (!string) return '';
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const pageTitle = capitalizeFirstLetter(marque.brand);
+
 
     if(isLoading) {
         return <Loading/>
     }
-    return <ProductList products={products}/>
+    return <ProductList title={pageTitle} products={products}/>
 }
 
 export default Brand

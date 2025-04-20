@@ -46,6 +46,9 @@ import notification from '@/assets/icons/notification.png'
 import chart from '@/assets/icons/chart.png'
 import filter from '@/assets/icons/filter.png'
 import logout from '@/assets/icons/logout.png'
+import porsche from '@/assets/icons/porsche.jpg'
+import imsa_2023 from '@/assets/icons/imsa_2023.jpg'
+import chevrolet from '@/assets/icons/chevrolet.jpg'
 
 export const images ={
     img_silder_1,
@@ -99,6 +102,9 @@ export const icons={
     chart,
     filter,
     logout,
+    porsche,
+    imsa_2023,
+    chevrolet,
 }
 
 

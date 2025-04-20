@@ -34,7 +34,7 @@ interface Data {
   password: string;
   role: string;
   createdAt: Date;
-  updateAt: Date;
+  updatedAt: Date;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -106,7 +106,7 @@ const headCells: readonly HeadCell[] = [
     label: 'Created At'
   },
   {
-    id: 'updateAt',
+    id: 'updatedAt',
     numeric: true,
     disablePadding: false,
     label: 'Updated At'
@@ -379,7 +379,7 @@ export default function EnhancedTable() {
                     <TableCell align="right">{row.password}</TableCell>
                     <TableCell align="right">{row.role}</TableCell>
                     <TableCell align="right">{row.createdAt.toLocaleString()}</TableCell>
-                    <TableCell align="right">{row.updateAt.toLocaleString()}</TableCell>
+                    <TableCell align="right">{row.updatedAt.toLocaleString()}</TableCell>
                   </TableRow>
                 );
               })}

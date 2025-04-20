@@ -10,7 +10,8 @@ const productRouter = require('./src/routers/productRouter');
 const cartRouter = require('./src/routers/cartRouter');
 const connectDB = require('./src/configs/connectDb');
 const { errorMiddleHandle } = require('./middlewares/errorMiddleware');
-const adminRouter = require('./src/routers/adminRouter')
+const adminRouter = require('./src/routers/adminRouter');
+const marqueRouter = require('./src/routers/marqueRouter');
 
 const app = express();
 const PORT = 3001;
@@ -37,6 +38,7 @@ app.use('/auth', authRouter);
 app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 app.use('/admin',adminRouter)
+app.use('/marque',marqueRouter)
 
 // Middleware xử lý lỗi
 app.use(errorMiddleHandle);

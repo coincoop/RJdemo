@@ -1,4 +1,5 @@
 const ProductModel = require("../models/productModel");
+const MarqueModel = require("../models/marqueModel");
 const asyncHandle = require("express-async-handler");
 require("dotenv").config();
 
@@ -14,6 +15,17 @@ const createProduct = asyncHandle(async (req, res) => {
     img_more,
     status,
   } = req.body;
+
+  const existingMarque = await MarqueModel.findOne({
+    $or: [{ name: name }, { slug: slug }],
+  });
+
+  if (!existingMarque) {
+    res.status(401); 
+    throw new Error(
+      `Thương hiệu (marque) '${marque}' không tồn tại trong hệ thống.`
+    );
+  }
 
   const existingProduct = await ProductModel.findOne({
     $or: [{ name: name }, { item_no: item_no }],

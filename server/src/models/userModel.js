@@ -21,15 +21,7 @@ const UserSchema = new mongoose.Schema({
         require: true,
         default: 'user'
     },
-    createdAt:{
-        type: Date,
-        default: Date.now()
-    },
-    updateAt:{
-        type: Date,
-        default: Date.now()
-    },
-}) 
+},{timestamps: true} ) 
 
 const UserModel = mongoose.model('users',UserSchema)
 module.exports = UserModel

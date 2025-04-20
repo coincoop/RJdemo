@@ -12,6 +12,7 @@ import UserDropdown from './UserDropdown';
 import style from '@/styles/Navbar.module.css'
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { relative } from 'path';
+import marquesAPI from '@/apis/marqueApi';
 
 interface DropdownItem {
     name: string;
@@ -28,6 +29,7 @@ interface CustomJwtPayload extends JwtPayload {
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [marque, setMarque] = useState([])
     const [cartOpen, setCartOpen] = useState(false)
     const [userOpen, setUserOpen] = useState(false)
     const [role, setRole] = useState('')
@@ -60,6 +62,20 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const dispatch = useDispatch()
     const closeCart = () => setCartOpen(false)
     const closeUser = () => { setUserOpen(false); }
+
+    useEffect(() => {
+        getMarques()
+    },[])
+
+    const getMarques = async () => {
+        try {
+            const res = await marquesAPI.handleMarque('/get-all-marque','get')
+            setMarque(res.data.allMarque)
+            console.log(res.data.allMarque);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleLogout = async () => {
         closeUser()
@@ -132,8 +148,15 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
                         <li className={`navbar__dropdown ${activeSubmenu === 'products' ? 'active' : ''}`}>
                             <span onClick={(e) => toggleSubmenu('products', e)}><Link href={'/products'}>Products</Link></span>
                             <ul className="navbar__submenu">
-                                <li><Link href="/bmw">BMW</Link></li>
-                                <li><Link href="/ducati">Ducati</Link></li>
+                                {
+                                    marque.map((item: any) => (
+                                        <li key={item._id}>
+                                            <Link href={`/products/brands/${item.url}`}>{item.name}</Link>
+                                        </li>
+                                    ))
+                                }
+                                {/* <li><Link href="/bmw">BMW</Link></li>
+                                <li><Link href="/ducati">Ducati</Link></li> */}
                             </ul>
                         </li>
                         <li><Link href="/about">About</Link></li>

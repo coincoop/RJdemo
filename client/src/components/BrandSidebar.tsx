@@ -5,12 +5,20 @@ import style from '@/styles/BrandSidebar.module.css'
 import Link from 'next/link';
 import { link } from 'fs';
 import BrandSelector from './BrandSelector';
+import marquesAPI from '@/apis/marqueApi';
 
 const BrandSidebar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const closeModal = () => setIsModalOpen(false);
+    const [marques, setMarques] = useState([]);
 
     useEffect(() => {
+        getMarque()
+    }
+    ,   [])
+
+    useEffect(() => {
+    
         const handleClick = (event: MouseEvent) => {
             if (event.target instanceof Element &&
                 !event.target.closest('.BrandSidebar_btn__F9HDT') &&
@@ -25,17 +33,15 @@ const BrandSidebar = () => {
         };
     }, [])
 
-    const listBrands = [
-        { id: 1, name: 'BMW', link: '#' },
-        { id: 2, name: 'Porsche', link: '#' },
-        { id: 3, name: 'IMSA 2023', link: '#' },
-        { id: 4, name: 'Audi', link: '#' },
-        { id: 5, name: 'McLarren', link: '#' },
-        { id: 7, name: 'McLarren', link: '#' },
-        { id: 8, name: 'McLarren', link: '#' },
-        { id: 9, name: 'McLarren', link: '#' },
-        { id: 10, name: 'McLarren', link: '#' },
-    ];
+    const getMarque = async () => {
+        try {
+            const res = await marquesAPI.handleMarque('/get-all-marque', 'get')
+            console.log(res.data);
+            setMarques(res.data.allMarque)
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
 
         <section className={style['container']}>
@@ -46,9 +52,11 @@ const BrandSidebar = () => {
                 </div>
                 <div className={style['brand-item']}>
                     {
-                        listBrands.map((item) => (
-                            <div key={item.id} className={style['brand-name']}>
-                                <Link href={'#'}>{item.name}</Link>
+                         marques.map((item: any) => (
+                            <div key={item._id} className={style['brand-name']} onClick={() => console.log('Clicked DIV:', item.name)}>
+                                <Link href={`/products/brands/${item.url}`} onClick={() => console.log('Clicked LINK:', item.name)}>
+                                    {item.name}
+                                </Link>
                             </div>
                         ))
                     }
@@ -66,7 +74,7 @@ const BrandSidebar = () => {
 
                             Select Brands</button>
                     </div>
-                    <BrandSelector onClose={closeModal} isOpen={isModalOpen} listBrand={listBrands} />
+                    <BrandSelector onClose={closeModal} isOpen={isModalOpen} listBrand={marques} />
                 </div>
             </div>
             <div style={{ height: '2rem' }} />

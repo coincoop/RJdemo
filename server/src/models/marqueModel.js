@@ -17,14 +17,6 @@ const MarqueSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    createAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updateAt: {
-        type: Date,
-        default: Date.now,
-    },
     
 },{ timestamps: true } );
  

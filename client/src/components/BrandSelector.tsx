@@ -7,11 +7,7 @@ import Link from 'next/link';
 const BrandSelector = ({ onClose, isOpen, listBrand }: {
     isOpen: boolean;
     onClose: () => void;
-    listBrand: {
-        id: number;
-        name: string;
-        link: string;
-    }[]
+    listBrand: any[]
 }) => {
 
 
@@ -26,7 +22,7 @@ const BrandSelector = ({ onClose, isOpen, listBrand }: {
             <div className={style['brand-item']} onClick={(e) => e.stopPropagation()}>
                 {listBrand.map((item) => (
                     <div key={item.id} className={style['brand-name']}>
-                        <Link href={'/'}>{item.name}</Link>
+                        <Link href={`/products/brands/${item.url}`}>{item.name}</Link>
                     </div>
                 ))}
             </div>
