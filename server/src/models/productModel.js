@@ -1,11 +1,11 @@
 const { default: mongoose } = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
-  description: {
+  name: {
     type: String,
     require: true,
   },
-  name: {
+  description: {
     type: String,
     require: true,
   },
