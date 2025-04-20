@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import style from '@/styles/DashBoardSidebar.module.css'
 import { icons } from '@/constants'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const DashboardSidebar = () => {
 
@@ -21,7 +21,7 @@ const DashboardSidebar = () => {
     setActiveButton(page);
     if (page !== 'Home') {
       router.push(`/admin/${page.toLowerCase()}`)
-    }else{
+    } else {
       router.push('/admin')
     }
   };
@@ -69,9 +69,17 @@ const DashboardSidebar = () => {
             <p className={style['name']}>Carts</p>
           </button>
         </div>
+        <div className={style['items-container']}>
+          <button
+            className={`${style['btn']} ${activeButton === 'Marque' ? style['active-btn'] : ''}`}
+            onClick={() => handleNavigation('Brands')}
+          >
+            <img className={style['img']} src={(icons.cart).src} alt="" />
+            <p className={style['name']}>Marque</p>
+          </button>
+        </div>
       </div>
       <div className={style['header']}>
-
         <button onClick={toggleSidebar} className={style['btn']}>
           {isActive ?
             <>
