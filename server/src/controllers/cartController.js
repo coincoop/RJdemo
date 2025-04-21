@@ -96,7 +96,7 @@ const addToCart = asyncHandle(async (req, res) => {
       if (cartItem) {
         cartItem.quantity += quantity;
         await cartItem.save();
-      
+
         updatedItemsInfo.push({
           id: cartItem._id,
           quantity: cartItem.quantity,
@@ -105,7 +105,7 @@ const addToCart = asyncHandle(async (req, res) => {
       } else {
         cartItem = new CartItemModel({ id_cart, id_product, quantity, price });
         await cartItem.save();
-    
+
         updatedItemsInfo.push({
           id: cartItem._id,
           quantity: cartItem.quantity,
@@ -129,7 +129,6 @@ const addToCart = asyncHandle(async (req, res) => {
   }
 });
 
-// --- Sửa lại getCartByUserId ---
 const getCartByUserId = asyncHandle(async (req, res) => {
   const id_user = req.params.userId || req.query.userId || req.body.id_user;
 
@@ -138,8 +137,7 @@ const getCartByUserId = asyncHandle(async (req, res) => {
   }
 
   try {
-    // Sử dụng helper function để lấy dữ liệu (không cần emit ở đây)
-    const { cart, items } = await getCartItemsAndEmit(null, id_user); // Truyền null cho io
+    const { cart, items } = await getCartItemsAndEmit(null, id_user);
 
     if (!cart && items.length === 0) {
       return res.status(200).json({
@@ -156,16 +154,13 @@ const getCartByUserId = asyncHandle(async (req, res) => {
   }
 });
 
-// --- Ví dụ: Hàm cập nhật số lượng một item cụ thể ---
 const updateCartItemQuantity = asyncHandle(async (req, res) => {
   const { id_user, id_item, quantity } = req.body;
 
   if (!id_user || !id_item || quantity == null || quantity < 0) {
-    return res
-      .status(400)
-      .json({
-        message: "User ID, Item ID, and non-negative quantity are required.",
-      });
+    return res.status(400).json({
+      message: "User ID, Item ID, and non-negative quantity are required.",
+    });
   }
 
   try {
@@ -187,16 +182,12 @@ const updateCartItemQuantity = asyncHandle(async (req, res) => {
 
     if (quantity === 0) {
       await CartItemModel.deleteOne({ _id: id_item });
-      // console.log(`Deleted cart item ${id_item}`); // Debug log
     } else {
       cartItem.quantity = quantity;
       await cartItem.save();
-      // console.log(`Updated quantity for item ${id_item} to ${quantity}`); // Debug log
     }
 
-    // --- BEGIN: Gọi helper function để lấy và emit ---
     const { items: updatedItems } = await getCartItemsAndEmit(req.io, id_user);
-    // --- END: Gọi helper function ---
 
     res.status(200).json({
       mess:
@@ -211,15 +202,30 @@ const updateCartItemQuantity = asyncHandle(async (req, res) => {
   }
 });
 
-// --- Ví dụ: Hàm xóa một item cụ thể ---
 const removeCartItem = asyncHandle(async (req, res) => {
-  const { id_user } = req.body; // Hoặc req.user.id
-  const { itemId } = req.params;
+  const { id_user, id_item } = req.body;
 
-  if (!id_user || !itemId) {
+  if (!id_user) {
+    return res.status(400).json({ message: "id_user không hợp lệ" });
+  }
+  if (!id_item || (Array.isArray(id_item) && id_item.length === 0)) {
     return res
       .status(400)
-      .json({ message: "User ID and Item ID are required." });
+      .json({ message: "id_item không hợp lệ" });
+  }
+
+  let productsToRemove = [];
+  if (Array.isArray(id_item)) {
+    productsToRemove = id_item;
+  } else if (typeof id_item === 'string') {
+    productsToRemove = [id_item]; 
+  } else {
+    return res.status(400).json({ message: "Không đúng định dạng của id_item" });
+  }
+
+  productsToRemove = productsToRemove.filter(id => id && typeof id === 'string');
+  if (productsToRemove.length === 0) {
+     return res.status(400).json({ message: "Định dạng sai" });
   }
 
   try {
@@ -228,38 +234,35 @@ const removeCartItem = asyncHandle(async (req, res) => {
       return res.status(404).json({ message: "Cart không tồn tại" });
     }
 
-    const result = await CartItemModel.deleteOne({
-      _id: itemId,
-      id_cart: cart._id,
+    const result = await CartItemModel.deleteMany({
+      id_product: { $in: productsToRemove }, 
+      id_cart: cart._id,                 
     });
 
     if (result.deletedCount === 0) {
-      return res
-        .status(404)
-        .json({
-          message: "Cart item không tồn tại hoặc không thuộc giỏ hàng này",
-        });
-    }
-    // console.log(`Removed cart item ${itemId}`); // Debug log
+      console.log(
+        `No cart items found for user ${id_user} with productIds: ${productsToRemove.join(", ")}`
+      );
 
-    // --- BEGIN: Gọi helper function để lấy và emit ---
+    } else {
+      console.log(
+        `Deleted ${result.deletedCount} cart items for user ${id_user} related to productIds: ${productsToRemove.join(", ")}`
+      );
+    }
+
     const { items: updatedItems } = await getCartItemsAndEmit(req.io, id_user);
-    // --- END: Gọi helper function ---
 
     res.status(200).json({
-      mess: "Xóa sản phẩm khỏi giỏ hàng thành công",
+      mess: `Đã xóa ${result.deletedCount} mục sản phẩm khỏi giỏ hàng.`,
       items: updatedItems,
     });
+
   } catch (error) {
-    console.error("Error in removeCartItem:", error);
+    console.error("Error in removeProductFromCart:", error);
     res.status(500).json({ message: error.message || "Internal server error" });
   }
 });
 
-// --- Bỏ hàm updateCart cũ ---
-// const updateCart = asyncHandle(async(req,res)=>{ ... })
-
-// --- Export các hàm mới ---
 module.exports = {
   addToCart,
   getCartByUserId,

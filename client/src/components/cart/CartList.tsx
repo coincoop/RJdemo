@@ -62,37 +62,52 @@ const CartList = () => {
   };
 
   const handleDeleteSelectedProducts = () => {
-    if (!cart) return;
+    if (!user?.id || selectedProducts.length === 0) return;
+
+    const productIdsToDelete: string[] = selectedProducts;
 
     const updatedProducts = cartItems.filter(
       (item) => !selectedProducts.includes(item.id_product._id)
     );
-
     const newTotalPrice = updatedProducts.reduce((sum, product) => sum + product.quantity * product.price, 0);
-
     setCartItems(updatedProducts);
     setTotalPrice(newTotalPrice);
     setSelectedProducts([]);
+    console.log(productIdsToDelete);
 
-    const cartProducts: CartItem[] = updatedProducts.map(item => ({
-      ...item,
-      id_product: item.id_product, // Ensure id_product is a single Product object
-      totalPrice: item.quantity * item.price,
-    }));
-
-    console.log(cartProducts);
-    // updateCartOnServer(cartProducts);
+    handleDeleteProductCart(productIdsToDelete);
   };
 
   const handleDeleteAllProducts = () => {
-    if (!cart) return;
-
-    setCart({ ...cart, products: [] });
+    if (!cartItems) return;
+    const allProductIds = cartItems.map(item => item.id_product._id);
+    if (allProductIds.length > 0) {
+      handleDeleteProductCart(allProductIds);
+    }
+    setCartItems([]);
     setTotalPrice(0);
     setSelectedProducts([]);
 
-    // updateCartOnServer([]);
   };
+
+  const handleDeleteProductCart = async (productId: string[]) => {
+    try {
+      setIsLoading(true)
+      console.log(productId);
+
+      await cartsAPI.handleCart('/delete-cart', {
+        id_user: user.id,
+        id_item: productId
+      },
+        'delete'
+      )
+    } catch (error) {
+      console.log(error);
+
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleGetCart = async () => {
     try {
@@ -130,7 +145,7 @@ const CartList = () => {
       )
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setIsLoading(false);
     }
   }
@@ -145,7 +160,7 @@ const CartList = () => {
 
     const updatedItems = cartItems.map((item) => {
       if (item.id_product._id === itemId) {
-        changedItem = { ...item, quantity: newQuantity }; 
+        changedItem = { ...item, quantity: newQuantity };
         return changedItem;
       }
       return item;
@@ -161,19 +176,19 @@ const CartList = () => {
     };
   }
 
-    const handleDeleteProduct = (productId: string) => {
-      if (!cart) return
+  const handleDeleteProduct = (productId: string) => {
+    if (!cart) return
 
-      const updatedProducts = cart.products.filter(
-        (product) => product.id_product._id !== productId
-      )
+    const updatedProducts = cart.products.filter(
+      (product) => product.id_product._id !== productId
+    )
 
-      const newTotalPrice = updatedProducts?.reduce((sum, product) => sum + (product.price * product.quantity), 0)
+    const newTotalPrice = updatedProducts?.reduce((sum, product) => sum + (product.price * product.quantity), 0)
 
-      setCart({ ...cart, products: updatedProducts })
-      setTotalPrice(newTotalPrice)
-      // updateCartOnServer(updatedProducts)
-    }
+    setCart({ ...cart, products: updatedProducts })
+    setTotalPrice(newTotalPrice)
+    // updateCartOnServer(updatedProducts)
+  }
   return (
     <>
       {

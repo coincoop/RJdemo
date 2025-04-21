@@ -31,8 +31,8 @@ const ProductDisplay = ({ productList }: {
     const [isLoading, setIsLoading] = useState(false)
 
     const addCartHandle = async () => {
-        setIsLoading(true)
         try {
+            setIsLoading(true)
             await cartsAPI.handleCart(
                 '/create-cart',
                 {
@@ -99,7 +99,7 @@ const ProductDisplay = ({ productList }: {
                             </div>
                         </div>
                         <div className={style['btn']}>
-                            <Button name='Buy now' onClick={() => { addCartHandle }} />
+                            <Button name='Buy now' onClick={() => {addCartHandle()}} />
                         </div>
                         <div className={style['description-container']}>
                             <h2 className={style['description-header']}>

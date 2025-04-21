@@ -20,40 +20,39 @@ const DropdownCart = ({ onClose }: {
 }
 ) => {
 
-    interface Product {
-        _id: string;
-        name: string;
-        price: number;
-        description: string;
-        img: ImageKey;
-        img_more: string[];
-        item_no: string;
-        scale: string;
-        marque: string;
-        status: string;
-        createdAt: string;
-        updatedAt: string;
-    }
+  interface Product {
+    _id: string;
+    name: string;
+    price: number;
+    description: string;
+    img: ImageKey;
+    img_more: string[];
+    item_no: string;
+    scale: string;
+    marque: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  }
 
-    interface CartProduct {
-        id_product: Product;
-        quantity: number;
-        price: number;
-        id_cart: string;
-    }
+  interface Cart {
+    _id: string;
+    id_user: string;
+    products: CartItem[];
+  }
 
-    interface CartUseState {
-        _id: string;
-        id_user: string;
-        products: CartProduct[];
-        createdAt: string;
-        updatedAt: string;
-        __v: number;
-    }
+  interface CartItem {
+    _id: string;
+    id_cart: string;
+    id_product: Product;
+    quantity: number;
+    price: number;
+  }
 
     const socket = io(appInfo.BASE_URL);
     const user = useSelector(authSelector)
-    const [cart, setCart] = useState<CartUseState>()
+    const [cart, setCart] = useState<CartItem[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
 
@@ -75,10 +74,10 @@ const DropdownCart = ({ onClose }: {
             const res = await cartsAPI.handleCart('/get-cart-by-id_user', {
                 id_user: user.id,
             },
-                'post',
+                'post', 
             )
-            setCart(res.data)
-            console.log(res.data);
+            setCart(res.data.items)
+            console.log(res.data.items);
             
         } catch (error) {
             console.log(error);
@@ -99,8 +98,8 @@ const DropdownCart = ({ onClose }: {
                         <p>Loading...</p>
                     </div>
 
-                ) : cart && cart?.products?.length > 0 ? (
-                    cart.products.map((product) => (
+                ) : cart && cart?.length > 0 ? (
+                    cart.map((product) => (
 
                         <div key={product.id_product._id} className={style['items-container']}>
                             <img
