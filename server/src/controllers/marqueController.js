@@ -30,10 +30,10 @@ const createMarque = asyncHandle(async (req, res) => {
 
 const getAllMarque = asyncHandle(async (req, res) => {
   try {
-    const allMarque = await MarqueModel.find({});
+    const all_marque = await MarqueModel.find({});
     res.status(200).json({
       mess: "Lấy tất cả thương hiệu thành công !",
-      allMarque,
+      all_marque,
     });
   } catch (error) {
     res.status(500).json({ message: "Internal server error", error });

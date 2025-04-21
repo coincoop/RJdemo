@@ -232,6 +232,8 @@ export function DashBoardNavbar() {
                 return 'Products';
             case '/admin/carts':
                 return 'Carts';
+            case 'admin/brands':
+                return 'Brands';
             default:
                 return 'Dashboard';
         }

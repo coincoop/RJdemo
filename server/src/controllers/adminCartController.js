@@ -1,5 +1,5 @@
 const asyncHandle = require("express-async-handler");
-const CartModel = require("../models/cartModel")
+const {CartModel} = require("../models/cartModel")
 
 const getAllCarts = asyncHandle(async(req, res)=>{
     try {

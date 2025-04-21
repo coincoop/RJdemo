@@ -38,7 +38,7 @@ const nameData = ['_id', 'name', 'slug', 'logo','url', 'createdAt', 'updatedAt']
 
 const MarqueDashboard = () => {
     const [listBrand, setListBrand] = React.useState<BrandData[]>([]);
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         getBrands()
@@ -48,7 +48,7 @@ const MarqueDashboard = () => {
         try {
             const res = await marquesAPI.handleMarque('/get-all-marque', 'get')
             console.log(res.data);
-            setListBrand(res.data.allMarque)
+            setListBrand(res.data.all_marque)
         } catch (error) {
             console.log(error);
 

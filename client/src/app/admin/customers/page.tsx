@@ -38,7 +38,7 @@ const nameData = ['_id', 'name', 'email', 'password','role', 'createdAt', 'updat
 
 const CustomerDashboard = () => {
     const [listCustomer, setListCustomer] = React.useState<CustomerData[]>([]);
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         getCustomers()

@@ -48,7 +48,7 @@ const nameData = ['_id', 'name', 'description', 'price','item_no','scale','marqu
 
 const ProductDashboard = () => {
     const [listProduct, setListProduct] = React.useState<ProductData[]>([]);
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         getBrands()
