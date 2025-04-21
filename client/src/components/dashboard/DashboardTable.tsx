@@ -50,7 +50,7 @@ interface EnhancedTableProps<T extends Data> {
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T | string) {
-    const valA = a[orderBy as keyof T]; // Cần ép kiểu nếu orderBy là string
+    const valA = a[orderBy as keyof T];
     const valB = b[orderBy as keyof T];
 
     // Xử lý các kiểu dữ liệu khác nhau (số, chuỗi, ngày tháng)
@@ -70,24 +70,18 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T | string) {
     return 0;
 }
 
-function getComparator<T extends Data>(
+function getComparator<Key extends keyof any>(
     order: Order,
-    orderBy: keyof T | string,
-): (a: T, b: T) => number {
+    orderBy: Key,
+  ): (
+    a: { [key in Key]: number | string },
+    b: { [key in Key]: number | string },
+  ) => number {
     return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
-}
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
 
-function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
-    const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
-    stabilizedThis.sort((a, b) => {
-        const order = comparator(a[0], b[0]);
-        if (order !== 0) return order;
-        return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-}
 
 interface EnhancedTableHeadProps<T extends Data> {
     numSelected: number;
@@ -213,7 +207,7 @@ export default function EnhancedTable<T extends Data>({
     onDeleteSelected
 }: EnhancedTableProps<T>) {
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof T | string>(initialOrderBy || headCells[0]?.id || '');
+    const [orderBy, setOrderBy] = React.useState<keyof T | string>(initialOrderBy || headCells[0]?.id || 'name');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -225,6 +219,9 @@ export default function EnhancedTable<T extends Data>({
     const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof T | string) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
+        console.log('ne');
+        console.log(property);
+        
         setOrderBy(property);
     };
 
@@ -281,13 +278,14 @@ export default function EnhancedTable<T extends Data>({
 
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const visibleRows = useMemo(() => {
-        return data.slice(
-            page * rowsPerPage,
-            page * rowsPerPage + rowsPerPage
-        );
-    }, [data, page, rowsPerPage]);
+
+    const visibleRows = React.useMemo(
+        () =>
+            [...data]
+                .sort(getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+        [order, orderBy, page, rowsPerPage],
+    );
 
     if (isLoading) {
         return <Loading />
@@ -348,14 +346,14 @@ export default function EnhancedTable<T extends Data>({
 
                                             return (
                                                 <TableCell
-                                                    key={columnName} 
+                                                    key={columnName}
                                                     align={align}
                                                 >
                                                     {typeof value === 'object' && value !== null && value instanceof Date
                                                         ? value.toLocaleString()
                                                         : Array.isArray(value)
-                                                        ? value.join(', ')
-                                                        : String(value ?? '')
+                                                            ? value.join(', ')
+                                                            : String(value ?? '')
                                                     }
                                                 </TableCell>
                                             );
