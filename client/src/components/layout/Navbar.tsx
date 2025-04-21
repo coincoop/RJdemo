@@ -31,7 +31,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [marque, setMarque] = useState([])
     const [cartOpen, setCartOpen] = useState(false)
-    const [userOpen, setUserOpen] = useState(false)
+    const [userOpen, setUserOpen] = useState(true)
     const [role, setRole] = useState('')
     const auth = useSelector(authSelector)
     const router = useRouter()

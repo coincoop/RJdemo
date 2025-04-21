@@ -33,15 +33,13 @@ const DropdownCart = ({ onClose }: {
         status: string;
         createdAt: string;
         updatedAt: string;
-        __v: number;
     }
 
     interface CartProduct {
         id_product: Product;
         quantity: number;
         price: number;
-        totalPrice: number;
-        _id: string;
+        id_cart: string;
     }
 
     interface CartUseState {
@@ -80,6 +78,8 @@ const DropdownCart = ({ onClose }: {
                 'post',
             )
             setCart(res.data)
+            console.log(res.data);
+            
         } catch (error) {
             console.log(error);
 

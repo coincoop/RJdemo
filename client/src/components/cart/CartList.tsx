@@ -28,24 +28,22 @@ const CartList = () => {
     __v: number;
   }
 
-  interface CartProduct {
+  interface Cart {
+    _id: string;
+    id_user: string;
+    products: CartItem[];
+  }
+
+  interface CartItem {
+    _id: string;
+    id_cart: string;
     id_product: Product;
     quantity: number;
     price: number;
-    totalPrice: number;
-    _id: string;
-  }
-
-  interface CartUseState {
-    _id: string;
-    id_user: string;
-    products: CartProduct[];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
   }
   const user = useSelector(authSelector)
-  const [cart, setCart] = useState<CartUseState>()
+  const [cart, setCart] = useState<Cart>()
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -66,27 +64,34 @@ const CartList = () => {
   const handleDeleteSelectedProducts = () => {
     if (!cart) return;
 
-    const updatedProducts = cart.products.filter(
-      (product) => !selectedProducts.includes(product.id_product._id)
+    const updatedProducts = cartItems.filter(
+      (item) => !selectedProducts.includes(item.id_product._id)
     );
 
-    const newTotalPrice = updatedProducts.reduce((sum, product) => sum + product.totalPrice, 0);
+    const newTotalPrice = updatedProducts.reduce((sum, product) => sum + product.quantity * product.price, 0);
 
-    setCart({ ...cart, products: updatedProducts });
+    setCartItems(updatedProducts);
     setTotalPrice(newTotalPrice);
     setSelectedProducts([]);
 
-    updateCartOnServer(updatedProducts);
+    const cartProducts: CartItem[] = updatedProducts.map(item => ({
+      ...item,
+      id_product: item.id_product, // Ensure id_product is a single Product object
+      totalPrice: item.quantity * item.price,
+    }));
+
+    console.log(cartProducts);
+    // updateCartOnServer(cartProducts);
   };
 
   const handleDeleteAllProducts = () => {
     if (!cart) return;
-  
+
     setCart({ ...cart, products: [] });
     setTotalPrice(0);
     setSelectedProducts([]);
-  
-    updateCartOnServer([]);
+
+    // updateCartOnServer([]);
   };
 
   const handleGetCart = async () => {
@@ -97,73 +102,78 @@ const CartList = () => {
       },
         'post'
       )
-      const total = res.data.products?.reduce((sum: number, product: CartProduct): number => {
-        return sum + product.totalPrice;
+      const total = res.data.items.reduce((sum: number, product: CartItem): number => {
+        return sum + (product.price * product.quantity);
       }, 0);
-      setCart(res.data)
+      setCart(res.data.cart)
+      setCartItems(res.data.items)
       setTotalPrice(total)
       setIsLoading(false)
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
   }
 
-  const updateCartOnServer = async (updatedProducts: CartProduct[]) => {
+  const updateCartOnServer = async (itemId: string, newQuantity: number) => {
+    if (!user?.id) return;
+    setIsLoading(true);
     try {
       await cartsAPI.handleCart(
         '/update-cart',
         {
           id_user: user.id,
-          products: updatedProducts
+          id_item: itemId,
+          quantity: newQuantity
         },
         'post'
       )
     } catch (error) {
       console.log(error);
-
+    }finally{
+      setIsLoading(false);
     }
   }
 
-  const handleQuantityChange = (productId: string, action: 'plus' | 'minus') => {
-    if (!cart) return;
+  const handleQuantityChange = (itemId: string, currentQuantity: number, action: 'plus' | 'minus') => {
 
-    const updatedProducts = cart.products.map((product) => {
-      if (product.id_product._id === productId) {
-        const newQuantity = action === 'plus' ? product.quantity + 1 : product.quantity - 1;
+    const newQuantity = action === 'plus' ? currentQuantity + 1 : currentQuantity - 1;
 
-        if (newQuantity < 1) return product;
+    if (newQuantity < 1) return;
 
-        return {
-          ...product,
-          quantity: newQuantity,
-          totalPrice: newQuantity * product.price,
-        };
+    let changedItem: CartItem | undefined;
+
+    const updatedItems = cartItems.map((item) => {
+      if (item.id_product._id === itemId) {
+        changedItem = { ...item, quantity: newQuantity }; 
+        return changedItem;
       }
-      return product;
+      return item;
     });
 
-    const newTotalPrice = updatedProducts.reduce((sum, product) => sum + product.totalPrice, 0);
-
-    setCart({ ...cart, products: updatedProducts });
-    setTotalPrice(newTotalPrice);
-
-    updateCartOnServer(updatedProducts);
-  };
-
-  const handleDeleteProduct = (productId: string) => {
-    if (!cart) return
-
-    const updatedProducts = cart.products.filter(
-      (product) => product.id_product._id !== productId
-    )
-
-    const newTotalPrice = updatedProducts?.reduce((sum, product) => sum + product.totalPrice, 0)
-
-    setCart({ ...cart, products: updatedProducts })
-    setTotalPrice(newTotalPrice)
-
-    updateCartOnServer(updatedProducts)
+    if (changedItem) {
+      const newTotalPrice = updatedItems.reduce((sum, product) => sum + (product.quantity * product.price), 0);
+      setCartItems(updatedItems)
+      setTotalPrice(newTotalPrice);
+      updateCartOnServer(itemId, newQuantity);
+    } else {
+      console.error('Item not found in cart items');
+    };
   }
+
+    const handleDeleteProduct = (productId: string) => {
+      if (!cart) return
+
+      const updatedProducts = cart.products.filter(
+        (product) => product.id_product._id !== productId
+      )
+
+      const newTotalPrice = updatedProducts?.reduce((sum, product) => sum + (product.price * product.quantity), 0)
+
+      setCart({ ...cart, products: updatedProducts })
+      setTotalPrice(newTotalPrice)
+      // updateCartOnServer(updatedProducts)
+    }
   return (
     <>
       {
@@ -182,8 +192,10 @@ const CartList = () => {
             </div>
             <div className={style['cart-list']}>
               {
-                cart && cart?.products?.length > 0 ? (
-                  cart.products.map((product) => (
+
+
+                cartItems && cartItems?.length > 0 ? (
+                  cartItems.map((product) => (
                     <div key={product.id_product._id} className={style['product-container']}>
                       <input
                         type="checkbox"
@@ -199,14 +211,14 @@ const CartList = () => {
                         <div className={style['price']}>{product.id_product.price} vnđ</div>
                         <div className={style['quantity-container']}>
                           <button onClick={() =>
-                            handleQuantityChange(product.id_product._id, 'plus')
+                            handleQuantityChange(product.id_product._id, product.quantity, 'plus')
                           }
                             className={style['btn-pm']}>
                             <img className={style['icon-pm']} src={(icons.plus).src} alt="" />
                           </button>
                           <input className={style['quantity']} type="number" value={product.quantity} readOnly />
                           <button onClick={() =>
-                            handleQuantityChange(product.id_product._id, 'minus')
+                            handleQuantityChange(product.id_product._id, product.quantity, 'minus')
                           }
                             className={style['btn-pm']}>
                             <img className={style['icon-pm']} src={(icons.minus).src} alt="" />
@@ -230,15 +242,15 @@ const CartList = () => {
               }
             </div>
 
-            {cart && cart.products?.length > 0 && (
+            {cartItems && cartItems.length > 0 && (
               <div className={style['btn-del-all-container']}>
                 <button onClick={handleDeleteAllProducts} className={style['btn-del-all']}>
                   Xóa tất cả sản phẩm
                 </button>
               </div>
             )}
-            
-            {cart && cart.products?.length > 0 ? (
+
+            {cartItems && cartItems.length > 0 ? (
               <>
                 <div className={style['total-price']}>Total Price:  <p>{totalPrice.toLocaleString()} vnđ</p></div>
                 <div className={style['btn-po']}>

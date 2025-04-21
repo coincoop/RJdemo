@@ -1,103 +1,5 @@
 [{
   "_id": {
-    "$oid": "67f49f84def535ddca180ed1"
-  },
-  "description": "Chevrolet Corvette Z06 GT3.R #3Corvette Racing by Pratt Miller Motorsports 2024 IMSA Daytona 24 Hrs",
-  "name": "Chevrolet Corvette Z06 GT3.R #3 Corvette Racing by Pratt Miller Motorsports 2024 IMSA Daytona 24 Hrs",
-  "price": 12001,
-  "item_no": "MGT00854",
-  "scale": "1:64",
-  "marque": "Chevrolet",
-  "status": "Pre-Order",
-  "img": "chevrolet_854_1",
-  "img_more": [
-    "chevrolet_854_2",
-    "chevrolet_854_3"
-  ],
-  "createdAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "updateAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67f4a082def535ddca180ed4"
-  },
-  "description": "Chevrolet Corvette C8.R #4 Corvette Racing 2021 IMSA Sebring 12 Hrs",
-  "name": "Chevrolet Corvette C8.R #4 2021 IMSA Sebring 12 Hrs",
-  "price": 12005,
-  "item_no": "MGT00316",
-  "scale": "1:64",
-  "marque": "Chevrolet",
-  "status": "Released",
-  "img": "chevrolet_316_1",
-  "img_more": [
-    "chevrolet_316_2",
-    "chevrolet_316_3",
-    "chevrolet_316_4"
-  ],
-  "createdAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "updateAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67f4a1c2def535ddca180eda"
-  },
-  "description": "Porsche 911 GT3 R #28 \n HubAuto Racing \n 2023 FIA GT World Cup 70th Macau Grand Prix",
-  "name": "Porsche 911 GT3 R #28 HubAuto Racing 2023 FIA GT World Cup 70th Macau Grand Prix",
-  "price": 12004,
-  "item_no": "MGT00804",
-  "scale": "1:64",
-  "marque": "Porsche",
-  "status": "Pre-Order",
-  "img": "porsche_804_1",
-  "img_more": [
-    "porsche_804_2",
-    "porsche_804_3",
-    "porsche_804_4"
-  ],
-  "createdAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "updateAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67f4a235def535ddca180edd"
-  },
-  "description": "Porsche 963 #75 Porsche Penske Motorsport  2023 24 Hrs of Le Mans",
-  "name": "Porsche 963 #75 Porsche Penske Motorsport 2023 24 Hrs of Le Mans",
-  "price": 12003,
-  "item_no": "MGT00740",
-  "scale": "1:64",
-  "marque": "Porsche",
-  "status": "Pre-Order",
-  "img": "porsche_740_1",
-  "img_more": [
-    "porsche_740_2",
-    "porsche_740_3"
-  ],
-  "createdAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "updateAt": {
-    "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "67f4a338def535ddca180ee0"
   },
   "description": "Porsche 911(991) GT2 RS Weissach Package Black /n LHD / RHD version available",
@@ -105,7 +7,7 @@
   "price": 12010,
   "item_no": "MGT00401",
   "scale": "1:64",
-  "marque": "Porsche",
+  "marque": "porsche",
   "status": "Pre-Order",
   "img": "porsche_401_1",
   "img_more": [
@@ -116,10 +18,108 @@
   "createdAt": {
     "$date": "2025-04-08T04:00:47.044Z"
   },
-  "updateAt": {
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f4a1c2def535ddca180eda"
+  },
+  "description": "Porsche 911 GT3 R #28 \n HubAuto Racing \n 2023 FIA GT World Cup 70th Macau Grand Prix",
+  "name": "Porsche 911 GT3 R #28 HubAuto Racing 2023 FIA GT World Cup 70th Macau Grand Prix",
+  "price": 12004,
+  "item_no": "MGT00804",
+  "scale": "1:64",
+  "marque": "porsche",
+  "status": "Pre-Order",
+  "img": "porsche_804_1",
+  "img_more": [
+    "porsche_804_2",
+    "porsche_804_3",
+    "porsche_804_4"
+  ],
+  "createdAt": {
     "$date": "2025-04-08T04:00:47.044Z"
   },
-  "__v": 0
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f4a082def535ddca180ed4"
+  },
+  "description": "Chevrolet Corvette C8.R #4 Corvette Racing 2021 IMSA Sebring 12 Hrs",
+  "name": "Chevrolet Corvette C8.R #4 2021 IMSA Sebring 12 Hrs",
+  "price": 12005,
+  "item_no": "MGT00316",
+  "scale": "1:64",
+  "marque": "chevrolet",
+  "status": "Released",
+  "img": "chevrolet_316_1",
+  "img_more": [
+    "chevrolet_316_2",
+    "chevrolet_316_3",
+    "chevrolet_316_4"
+  ],
+  "createdAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  },
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f4a235def535ddca180edd"
+  },
+  "description": "Porsche 963 #75 Porsche Penske Motorsport  2023 24 Hrs of Le Mans",
+  "name": "Porsche 963 #75 Porsche Penske Motorsport 2023 24 Hrs of Le Mans",
+  "price": 12003,
+  "item_no": "MGT00740",
+  "scale": "1:64",
+  "marque": "porsche",
+  "status": "Pre-Order",
+  "img": "porsche_740_1",
+  "img_more": [
+    "porsche_740_2",
+    "porsche_740_3"
+  ],
+  "createdAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  },
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f49f84def535ddca180ed1"
+  },
+  "description": "Chevrolet Corvette Z06 GT3.R #3Corvette Racing by Pratt Miller Motorsports 2024 IMSA Daytona 24 Hrs",
+  "name": "Chevrolet Corvette Z06 GT3.R #3 Corvette Racing by Pratt Miller Motorsports 2024 IMSA Daytona 24 Hrs",
+  "price": 12001,
+  "item_no": "MGT00854",
+  "scale": "1:64",
+  "marque": "chevrolet",
+  "status": "Pre-Order",
+  "img": "chevrolet_854_1",
+  "img_more": [
+    "chevrolet_854_2",
+    "chevrolet_854_3"
+  ],
+  "createdAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  },
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-08T04:00:47.044Z"
+  }
 },
 {
   "_id": {
@@ -130,7 +130,7 @@
   "price": 12007,
   "item_no": "MGT00668",
   "scale": "1:64",
-  "marque": "IMSA 2023",
+  "marque": "imsa_2023",
   "status": "Released",
   "img": "imsa2023_688_1",
   "img_more": [
@@ -141,8 +141,8 @@
   "createdAt": {
     "$date": "2025-04-08T04:00:47.044Z"
   },
-  "updateAt": {
+  "__v": 0,
+  "updatedAt": {
     "$date": "2025-04-08T04:00:47.044Z"
-  },
-  "__v": 0
+  }
 }]
