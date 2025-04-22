@@ -5,34 +5,29 @@ const asyncHandle = require("express-async-handler");
 const { Server } = require("socket.io");
 require("dotenv").config();
 
-// --- BEGIN: Helper function để lấy cart items và emit ---
 const getCartItemsAndEmit = async (io, id_user) => {
   try {
-    // Tìm cart chính (không cần thiết nếu chỉ cần items, nhưng có thể hữu ích)
     const cart = await CartModel.findOne({ id_user });
     if (!cart) {
-      // Nếu không có cart, emit mảng rỗng
       if (io) io.emit("cartUpdated", { id_user, cart: null, items: [] });
       return { cart: null, items: [] }; // Trả về để hàm gọi có thể sử dụng
     }
 
-    // Tìm tất cả cart items liên quan và populate sản phẩm
     const items = await CartItemModel.find({ id_cart: cart._id }).populate(
       "id_product"
-    ); // Populate để lấy thông tin sản phẩm
+    ); 
 
-    // Emit dữ liệu mới nhất qua Socket.IO
     if (io) {
-      // console.log(`Emitting cartUpdated for user ${id_user} with ${items.length} items`); // Debug log
+  
       io.emit("cartUpdated", { id_user, cart, items });
     }
-    return { cart, items }; // Trả về để hàm gọi có thể sử dụng
+    return { cart, items };
   } catch (error) {
     console.error(
       `Error fetching/emitting cart items for user ${id_user}:`,
       error
     );
-    // Trong trường hợp lỗi, có thể emit trạng thái lỗi hoặc mảng rỗng
+   
     if (io)
       io.emit("cartUpdated", {
         id_user,
@@ -40,10 +35,9 @@ const getCartItemsAndEmit = async (io, id_user) => {
         items: [],
         error: "Failed to fetch cart items",
       });
-    return { cart: null, items: [] }; // Trả về rỗng nếu lỗi
+    return { cart: null, items: [] };
   }
 };
-// --- END: Helper function ---
 
 const addToCart = asyncHandle(async (req, res) => {
   try {
@@ -114,10 +108,7 @@ const addToCart = asyncHandle(async (req, res) => {
       }
     }
 
-    // --- BEGIN: Gọi helper function để lấy và emit ---
-    // Truyền req.io vào helper function
     const { items: updatedItems } = await getCartItemsAndEmit(req.io, id_user);
-    // --- END: Gọi helper function ---
 
     res.status(200).json({
       mess: "Cập nhật giỏ hàng thành công",

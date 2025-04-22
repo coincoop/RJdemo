@@ -1,5 +1,5 @@
 const asyncHandle = require("express-async-handler");
-const {CartModel} = require("../models/cartModel")
+const {CartModel, CartItemModel} = require("../models/cartModel")
 
 const getAllCarts = asyncHandle(async(req, res)=>{
     try {
@@ -13,4 +13,16 @@ const getAllCarts = asyncHandle(async(req, res)=>{
     }
 })
 
-module.exports= {getAllCarts}
+const getCartItem = asyncHandle(async(req, res)=>{
+    try {
+        const all_cart_item = await CartItemModel.find().populate('id_product')
+        res.status(200).json({
+            mess: 'Lấy dữ liệu thành công',
+            all_cart_item 
+        })
+    } catch (error) {
+        res.status(500).json({mess: `Lỗi ${error}`})
+    }
+})
+
+module.exports= {getAllCarts, getCartItem}

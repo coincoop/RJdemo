@@ -21,8 +21,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
 import { icons } from '@/constants';
-import adminsAPI from '@/apis/adminApi';
-import { useEffect, useMemo } from 'react';
 import Loading from '@/components/common/Loading';
 
 interface Data {

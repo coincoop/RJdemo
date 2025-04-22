@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "67fe7352dab82695345c68cf"
+  },
+  "name": "haithuy21103",
+  "email": "jinjay8@gmail.com",
+  "password": "$2b$10$C0veIzNAC/k8XOAzAiVDHu8EwIQg6vDyYrnUgAyLG7hwr8SvF5DNO",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2025-04-15T14:54:23.763Z"
+  },
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-15T14:54:23.763Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67fe777e8f2f045af74e4a26"
+  },
+  "name": "haithuy21103",
+  "email": "jinjay03@gmail.com",
+  "password": "$2b$10$EbqK/sRglG.Ur.qXFTu5Iuqk4DvCWUBmnsBPQOem55NuP8bnG0N1e",
+  "role": "user",
+  "createdAt": {
+    "$date": "2025-04-15T15:12:42.683Z"
+  },
+  "__v": 0,
+  "updatedAt": {
+    "$date": "2025-04-15T15:12:42.683Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "680773c80f348c07fe3fed5b"
+  },
+  "name": "admin",
+  "email": "admin@gmail.com",
+  "password": "$2a$10$a6XoA2ptVfbm2G8zYVY9reKwPawY8qgILNJyWOrHij2fmk1uVaAw6",
+  "role": "admin",
+  "__v": 0
+}]

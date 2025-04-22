@@ -49,6 +49,8 @@ import logout from '@/assets/icons/logout.png'
 import porsche from '@/assets/icons/porsche.jpg'
 import imsa_2023 from '@/assets/icons/imsa_2023.jpg'
 import chevrolet from '@/assets/icons/chevrolet.jpg'
+import down_arrow from '@/assets/icons/down-arrow.png'
+import up_arrow from '@/assets/icons/up-arrow.png'
 
 export const images ={
     img_silder_1,
@@ -105,6 +107,8 @@ export const icons={
     porsche,
     imsa_2023,
     chevrolet,
+    down_arrow,
+    up_arrow,
 }
 
 
