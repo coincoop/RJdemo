@@ -1,24 +1,23 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/styles/BrandSidebar.module.css'
 import Link from 'next/link';
-import { link } from 'fs';
 import BrandSelector from './BrandSelector';
 import marquesAPI from '@/apis/marqueApi';
+import Loading from '../common/Loading';
 
 const BrandSidebar = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
     const closeModal = () => setIsModalOpen(false);
-    const [marques, setMarques] = useState([]);
+    const [marques, setMarques] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         getMarque()
-    }
-    ,   [])
+    }, [])
 
-    useEffect(() => {
-    
+    React.useEffect(() => {
         const handleClick = (event: MouseEvent) => {
             if (event.target instanceof Element &&
                 !event.target.closest('.BrandSidebar_btn__F9HDT') &&
@@ -36,10 +35,11 @@ const BrandSidebar = () => {
     const getMarque = async () => {
         try {
             const res = await marquesAPI.handleMarque('/get-all-marque', 'get')
-            console.log(res.data);
-            setMarques(res.data.allMarque)
+            setMarques(res.data.all_marque)
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsLoading(false)
         }
     }
     return (
@@ -52,9 +52,15 @@ const BrandSidebar = () => {
                 </div>
                 <div className={style['brand-item']}>
                     {
-                         marques.map((item: any) => (
-                            <div key={item._id} className={style['brand-name']} onClick={() => console.log('Clicked DIV:', item.name)}>
-                                <Link href={`/products/brands/${item.url}`} onClick={() => console.log('Clicked LINK:', item.name)}>
+                        marques.map((item: any) => (
+                            <div key={item._id} className={style['brand-name']} >
+                                <Link href={
+                                    `/products/brands/${item.url}`
+                                }
+                                    onClick={(e) => {
+                                        console.log('Clicked LINK:', item.name)
+                                        e.stopPropagation();
+                                    }}>
                                     {item.name}
                                 </Link>
                             </div>

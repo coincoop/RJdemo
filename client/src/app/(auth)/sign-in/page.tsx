@@ -1,7 +1,7 @@
 'use client'
 
 import { useDispatch, useSelector } from 'react-redux'
-import React, { use, useEffect, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { images } from '@/constants'
 import styles from '@/styles/Login.module.css'
@@ -17,12 +17,12 @@ const Signin = () => {
     const auth = useSelector(authSelector)
     const router = useRouter()
     const dispatch = useDispatch()
-    const [errorMessage, setErrorMessage] = useState('')
-    const [form, setForm] = useState({
+    const [errorMessage, setErrorMessage] = React.useState('')
+    const [form, setForm] = React.useState({
         email: '',
         password: '',
     })
-    useEffect(() => {
+    React.useEffect(() => {
         if (form.email || form.password) {
             setErrorMessage('')
         }
@@ -90,7 +90,6 @@ const Signin = () => {
                         <div className={styles['input-container']}>
                             <input onChange={(e) => setForm({ ...form, password: e.target.value })} type="password" id='password' placeholder='Password' />
                         </div>
-
                         {errorMessage && (
                             <div className={styles['error-message']}>
                                 <p>{errorMessage}</p>

@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from "react"
 import React from 'react'
 import { ArrowBigLeft, ArrowBigRight, Search } from "lucide-react"
 import "@/styles/ImageSlider.css"
@@ -8,7 +7,7 @@ import SearchForm from "../ui/SearchForm"
 
 const ImageSlider = ({ imgUrls, query }: ImageSliderProps) => {
 
-  const [imgIndex, setImgIndex] = useState(0)
+  const [imgIndex, setImgIndex] = React.useState(0)
 
   const showNextImage = () => {
     setImgIndex(index => {

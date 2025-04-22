@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/styles/CartList.module.css'
 import { icons, ImageKey, images } from '@/constants'
 import { useSelector } from 'react-redux'
@@ -42,14 +42,14 @@ const CartList = () => {
     price: number;
   }
   const user = useSelector(authSelector)
-  const [cart, setCart] = useState<Cart>()
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+  const [cart, setCart] = React.useState<Cart>()
+  const [cartItems, setCartItems] = React.useState<CartItem[]>([])
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [totalPrice, setTotalPrice] = React.useState(0)
+  const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
   const router = useRouter()
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleGetCart()
   }, [])
 
@@ -73,8 +73,6 @@ const CartList = () => {
     setCartItems(updatedProducts);
     setTotalPrice(newTotalPrice);
     setSelectedProducts([]);
-    console.log(productIdsToDelete);
-
     handleDeleteProductCart(productIdsToDelete);
   };
 
@@ -90,7 +88,7 @@ const CartList = () => {
 
   };
 
-  const handleDeleteProductCart = async (productId: string[]) => {
+  const handleDeleteProductCart = async (productId: string[] | string) => {
     try {
       setIsLoading(true)
       console.log(productId);
@@ -177,17 +175,16 @@ const CartList = () => {
   }
 
   const handleDeleteProduct = (productId: string) => {
-    if (!cart) return
+    if (!cartItems) return
 
-    const updatedProducts = cart.products.filter(
+    const updatedProducts = cartItems.filter(
       (product) => product.id_product._id !== productId
     )
 
     const newTotalPrice = updatedProducts?.reduce((sum, product) => sum + (product.price * product.quantity), 0)
-
-    setCart({ ...cart, products: updatedProducts })
+    handleDeleteProductCart(productId)
+    setCartItems(updatedProducts)
     setTotalPrice(newTotalPrice)
-    // updateCartOnServer(updatedProducts)
   }
   return (
     <>
@@ -207,8 +204,6 @@ const CartList = () => {
             </div>
             <div className={style['cart-list']}>
               {
-
-
                 cartItems && cartItems?.length > 0 ? (
                   cartItems.map((product) => (
                     <div key={product.id_product._id} className={style['product-container']}>

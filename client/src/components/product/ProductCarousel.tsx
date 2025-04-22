@@ -1,12 +1,10 @@
 'use client';
 
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import Slider from 'react-slick';
+import React from 'react'
 import Space from '../ui/Space';
 import '@/styles/CarouselProduct.css'
 import useEmblaCarousel from 'embla-carousel-react';
-import { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import productsAPI from '@/apis/productApi';
 import { ImageKey, images } from '@/constants';
@@ -15,7 +13,6 @@ import { useSelector } from 'react-redux';
 import { authSelector } from '@/redux/reducers/authReducer';
 import cartsAPI from '@/apis/cartApi';
 import Loading from '../common/Loading';
-import { useRouter } from 'next/navigation';
 import Button from '../ui/Button';
 
 type Product = {
@@ -27,12 +24,12 @@ type Product = {
 
 const ProdcutCarousel = ({ title }: CarouselProductProps) => {
     const user = useSelector(authSelector)
-    const [isLoading, setIsLoading] = useState(false)
-    const [products, setProducts] = useState<Product[]>([])
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [products, setProducts] = React.useState<Product[]>([])
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
 
 
-    useEffect(() => {
+    React.useEffect(() => {
         fetchProducts();
     }, []);
 

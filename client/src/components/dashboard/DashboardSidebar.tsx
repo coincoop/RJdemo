@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import style from '@/styles/DashBoardSidebar.module.css'
 import { icons } from '@/constants'
 import { useRouter } from 'next/navigation';
 
 const DashboardSidebar = () => {
 
-  const [isActive, setIsActive] = useState(false);
-  const [activeButton, setActiveButton] = useState('');
+  const [isActive, setIsActive] = React.useState(false);
+  const [activeButton, setActiveButton] = React.useState('');
   const router = useRouter();
 
 

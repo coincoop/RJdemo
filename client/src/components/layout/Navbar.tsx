@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import "@/styles/Navbar.css";
 import { images, icons, Iconkey } from '@/constants'
 import Link from 'next/link';
@@ -27,16 +27,16 @@ interface CustomJwtPayload extends JwtPayload {
 
 
 export default function Navbar({ isLogin }: { isLogin?: boolean }) {
-    const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [marque, setMarque] = useState([])
-    const [cartOpen, setCartOpen] = useState(false)
-    const [userOpen, setUserOpen] = useState(false)
-    const [role, setRole] = useState('')
+    const [activeSubmenu, setActiveSubmenu] = React.useState<string | null>(null);
+    const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+    const [marque, setMarque] = React.useState([])
+    const [cartOpen, setCartOpen] = React.useState(false)
+    const [userOpen, setUserOpen] = React.useState(false)
+    const [role, setRole] = React.useState('')
     const auth = useSelector(authSelector)
     const router = useRouter()
 
-    useEffect(() => {
+    React.useEffect(() => {
         const userData = auth.accessToken;
         if (userData) {
             try {
@@ -63,15 +63,14 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
     const closeCart = () => setCartOpen(false)
     const closeUser = () => { setUserOpen(false); }
 
-    useEffect(() => {
+    React.useEffect(() => {
         getMarques()
     },[])
 
     const getMarques = async () => {
         try {
             const res = await marquesAPI.handleMarque('/get-all-marque','get')
-            setMarque(res.data.allMarque)
-            console.log(res.data.allMarque);
+            setMarque(res.data.all_marque)
         } catch (error) {
             console.log(error);
         }
@@ -115,7 +114,7 @@ export default function Navbar({ isLogin }: { isLogin?: boolean }) {
         setUserOpen(!userOpen);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
 
         const handleClick = (event: MouseEvent) => {
             if (event.target instanceof Element &&
@@ -214,7 +213,7 @@ export function DashBoardNavbar() {
     const pathname = usePathname();
     const auth = useSelector(authSelector)
     const router = useRouter()
-    const [userOpen, setUserOpen] = useState(false)
+    const [userOpen, setUserOpen] = React.useState(false)
     const closeUser = () => { setUserOpen(false); }
 
     const adminDropdown: DropdownItem[] = [
@@ -232,7 +231,7 @@ export function DashBoardNavbar() {
                 return 'Products';
             case '/admin/carts':
                 return 'Carts';
-            case 'admin/brands':
+            case 'admin/marques':
                 return 'Brands';
             default:
                 return 'Dashboard';
@@ -249,7 +248,7 @@ export function DashBoardNavbar() {
         setUserOpen(!userOpen);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
 
         const handleClick = (event: MouseEvent) => {
             if (event.target instanceof Element &&

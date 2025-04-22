@@ -1,8 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ProductCard from './ProductCard'
-import productsAPI from '@/apis/productApi'
 import style from '@/styles/ProductList.module.css'
 import { useSearchParams } from 'next/navigation'
 import Loading from '../common/Loading'
@@ -14,8 +13,8 @@ const ProductList = ({ products, title }: {
 }) => {
     const searchParams = useSearchParams();
     const query = searchParams.get('query') || '';
-    const [sortField, setSortField] = useState<'name' | 'price'>('name');
-    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+    const [sortField, setSortField] = React.useState<'name' | 'price'>('name');
+    const [sortOrder, setSortOrder] = React.useState<'asc' | 'desc'>('asc');
 
     const sortProducts = (a: any, b: any) => {
         let fieldA = a[sortField];

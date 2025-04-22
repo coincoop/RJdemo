@@ -6,16 +6,16 @@ import ProductList from '@/components/product/ProductList'
 import Space from '@/components/ui/Space'
 import { log } from 'console'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/styles/PageProduct.module.css'
 import productsAPI from '@/apis/productApi'
 import Loading from '@/components/common/Loading'
 
 const Products = () => {
-    const [products, setProducts] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [products, setProducts] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(true)
 
-    useEffect(() => {
+    React.useEffect(() => {
         fetchProducts();
     }, []);
     const fetchProducts = async () => {

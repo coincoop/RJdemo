@@ -7,7 +7,7 @@ import { ListStart } from 'lucide-react'
 
 const ProductCard = ({ listCar }: {
   listCar: {
-    img: keyof typeof images;
+    img: ImageKey;
     name: string,
     _id: string;
     description: string;
@@ -22,7 +22,7 @@ const ProductCard = ({ listCar }: {
 
 
 }) => {
-  console.log(listCar._id);
+
   return (
     <div className={style['container']} >
       <div className={style["img-container"]}>

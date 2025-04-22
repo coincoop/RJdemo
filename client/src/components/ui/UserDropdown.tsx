@@ -1,12 +1,10 @@
 'use client'
 
 import { jwtDecode, JwtPayload } from 'jwt-decode';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/styles/DropdownCart.module.css'
 import { Iconkey, icons, images } from '@/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { authSelector, removeAuth } from '@/redux/reducers/authReducer';
-import { useRouter } from 'next/navigation';
+
 
 interface CustomJwtPayload extends JwtPayload {
     role: string;

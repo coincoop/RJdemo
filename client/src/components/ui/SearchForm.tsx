@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Form from 'next/form'
 import "@/styles/SearchForm.css"
 import { useRouter } from 'next/navigation';
 const SearchForm = ({ query }: { query?: string }) => {
-    const [searchQuery, setSearchQuery] = useState(query || '');
+    const [searchQuery, setSearchQuery] = React.useState(query || '');
     const router = useRouter();
 
     const handleSubmit = (e: React.FormEvent) => {

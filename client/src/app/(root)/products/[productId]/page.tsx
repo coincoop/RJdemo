@@ -3,17 +3,17 @@
 import productsAPI from '@/apis/productApi';
 import { ImageKey, images } from '@/constants';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
-import BrandSidebar from '@/components/brand/BrandSidebar';
+import React from 'react'
+
 import ProductDisplay from '@/components/product/ProductDisplay';
 import NotFound from '@/components/common/NotFound';
 import Loading from '@/components/common/Loading';
 import style from '@/styles/PageProduct.module.css'
 
 const ProductDetailsPage = () => {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
     const { productId } = useParams();
-    const [product, setProduct] = useState<{
+    const [product, setProduct] = React.useState<{
         img: ImageKey;
         name: string;
         _id: string;
@@ -26,7 +26,7 @@ const ProductDetailsPage = () => {
         img_more: Array<ImageKey>;
     }>();
 
-    useEffect(() => {
+    React.useEffect(() => {
         getProductbyId()
     }, []);
 

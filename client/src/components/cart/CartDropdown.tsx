@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/styles/DropdownCart.module.css'
 import Link from 'next/link'
 import { images } from '@/constants'
@@ -52,11 +52,11 @@ const DropdownCart = ({ onClose }: {
 
     const socket = io(appInfo.BASE_URL);
     const user = useSelector(authSelector)
-    const [cart, setCart] = useState<CartItem[]>([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [cart, setCart] = React.useState<CartItem[]>([])
+    const [isLoading, setIsLoading] = React.useState(true)
     const router = useRouter()
 
-    useEffect(() => {
+    React.useEffect(() => {
         handleGetCart();
         socket.on('cartUpdated', (data) => {
             console.log('Cart updated:', data);

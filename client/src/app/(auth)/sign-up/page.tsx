@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { images } from '@/constants'
 import styles from '@/styles/Login.module.css'
@@ -14,16 +14,16 @@ import { addAuth } from '@/redux/reducers/authReducer'
 import Loading from '@/components/common/Loading'
 
 const Signup = () => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [codeVerification, setCodeVerification] = useState('')
-    const [verification, setVerification] = useState({
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [codeVerification, setCodeVerification] = React.useState('')
+    const [verification, setVerification] = React.useState({
         state: "default",
         error: "",
         code: "",
 
     })
-    const [errorMessage, setErrorMessage] = useState<any>()
-    const [form, setForm] = useState({
+    const [errorMessage, setErrorMessage] = React.useState<any>()
+    const [form, setForm] = React.useState({
         name: '',
         email: '',
         password: '',
@@ -37,9 +37,6 @@ const Signup = () => {
         setIsLoading(true)
 
         try {
-            // const res = await authenticationAPI.handleAuthentitation('/register', { email: form.email, name: form.name, password: form.password }, 'post')
-            // console.log(res);
-            // setIsLoading(false)
             const res = await authenticationAPI.handleAuthentitation('/verification', { email: form.email }, 'post')
             setVerification({
                 ...verification,
@@ -79,7 +76,7 @@ const Signup = () => {
         } else {
             setVerification({
                 ...verification,
-                error: "Nhập sai mã xác nhận",
+                error: "Wrong verification code",
             });
             setIsLoading(false)
         }
@@ -93,25 +90,25 @@ const Signup = () => {
         switch (key) {
             case 'email':
                 if (!form.email) {
-                    message = `Yêu cầu nhập email`
+                    message = `Email is required`
                 } else if (!Validate.email(form.email)) {
-                    message = `Email không hợp lệ`
+                    message = `Invalid email format`
                 } else {
                     message = ``
                 }
                 break
             case 'password':
                 if (!form.password) {
-                    message = `Yêu cầu nhập mật khẩu`
+                    message = `Password is required`
                 } else if (form.password.length < 6) {
-                    message = `Mật khẩu phải có ít nhất 6 ký tự`
+                    message = `Password must be at least 6 characters long`
                 } else {
                     message = ``
                 }
                 break
             case 'name':
                 if (!form.name) {
-                    message = `Yêu cầu nhập tên người dùng`
+                    message = `Name is required`
                 }
                 else {
                     message = ``
@@ -119,9 +116,9 @@ const Signup = () => {
                 break
             case 'confirmPassword':
                 if (!form.confirmPassword) {
-                    message = `Yêu cầu nhập lại mật khẩu`
+                    message = `Confirm password is required`
                 } else if (form.password !== form.confirmPassword) {
-                    message = `Mật khẩu không giống nhau`
+                    message = `Passwords do not match`
                 }
                 else {
                     message = ``
@@ -146,13 +143,13 @@ const Signup = () => {
                             action=""
 
                             onSubmit={(e) => {
-                                e.preventDefault(); // Ngăn hành vi mặc định của form
+                                e.preventDefault(); 
                                 const hasError = Object.values(errorMessage || {}).some((msg) => msg !== "");
                                 if (hasError) {
                                     console.log("Form có lỗi, không thể gửi.");
-                                    return; // Ngăn việc gọi handleRegister nếu có lỗi
+                                    return; 
                                 }
-                                handleRegister(); // Gọi hàm handleRegister
+                                handleRegister(); 
                             }}>
                             <div className={styles['input-container']}>
                                 <input

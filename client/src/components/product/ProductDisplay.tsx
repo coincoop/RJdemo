@@ -1,6 +1,6 @@
 
 import { ImageKey, images } from '@/constants';
-import React, { useState } from 'react';
+import React from 'react';
 import style from '@/styles/ProductDisplay.module.css'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -28,7 +28,7 @@ const ProductDisplay = ({ productList }: {
 
     const user = useSelector(authSelector)
     const allImages = [productList.img, ...productList.img_more];
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
 
     const addCartHandle = async () => {
         try {

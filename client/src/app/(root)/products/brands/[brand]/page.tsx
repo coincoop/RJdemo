@@ -3,7 +3,7 @@
 import productsAPI from '@/apis/productApi';
 import { ImageKey, images } from '@/constants';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import BrandSidebar from '@/components/brand/BrandSidebar';
 import ProductDisplay from '@/components/product/ProductDisplay';
 import NotFound from '@/components/common/NotFound';
@@ -13,11 +13,11 @@ import ProductList from '@/components/product/ProductList';
 
 
 const Brand = () => {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
     const marque = useParams<{brand : string}>();
-    const [products, setProducts] = useState<any>([]);
+    const [products, setProducts] = React.useState<any>([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         getProductByBrand()
         
     }, []);
@@ -33,7 +33,7 @@ const Brand = () => {
         }
     }
 
-    const capitalizeFirstLetter = (string: string | undefined) => {
+    const capitalizeFirstLetter = (string: string) => {
         if (!string) return '';
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
