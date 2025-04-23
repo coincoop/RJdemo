@@ -12,88 +12,9 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Icon from '../ui/Icon';
 import { format, sub } from 'date-fns';
-import { ImageKey } from '@/constants';
-
-interface CartData {
-    _id: string;
-    id_user: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-interface HeadCell {
-    disablePadding: boolean;
-    id: keyof CartData;
-    label: string;
-    numeric: boolean;
-}
-
-interface ProductData {
-    _id: string;
-    name: string;
-    price: number;
-    description: string;
-    img: ImageKey;
-    item_no: string;
-    scale: string;
-    marque: string;
-    status: string;
-}
-
-interface CartItemData {
-    _id: string;
-    id_cart: string;
-    id_product: ProductData;
-    price: number;
-    quantity: number;
-    createdAt: Date;
-    updatedAt: Date;
-}
 
 
-
-interface SubTableCell {
-    id: keyof CartItemData | keyof ProductData;
-    label: string;
-    numeric: boolean;
-    disablePadding: boolean;
-}
-
-interface MergedCartData extends CartData {
-    items: CartItemData[];
-}
-
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-    price: number,
-) {
-    return {
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-        price,
-        history: [
-            {
-                date: '2020-01-05',
-                customerId: '11091700',
-                amount: 3,
-            },
-            {
-                date: '2020-01-02',
-                customerId: 'Anonymous',
-                amount: 1,
-            },
-        ],
-    };
-}
-
-function Row(props: {subKey: string, subHeadCells: readonly SubTableCell[], subTableTitle: string, row: MergedCartData, nameData: (keyof CartData)[], nameDataItem: (keyof CartItemData | keyof ProductData)[] }) {
+function Row(props: {subKey: string, subHeadCells: readonly any[], subTableTitle: string, row: any, nameData: any[], nameDataItem: any[] }) {
     const {subKey, subHeadCells, row, nameData, nameDataItem, subTableTitle } = props;
     const [open, setOpen] = React.useState(false);
 
@@ -153,7 +74,7 @@ function Row(props: {subKey: string, subHeadCells: readonly SubTableCell[], subT
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.items.map((item) => (
+                                    {row.items.map((item: any) => (
                                         <TableRow key={item._id}>
                                             {
                                                 nameDataItem.map((itemData) => (
@@ -162,8 +83,8 @@ function Row(props: {subKey: string, subHeadCells: readonly SubTableCell[], subT
                                                             itemData === 'createdAt' || itemData === 'updatedAt'
                                                                 ? formatDate(item[itemData])
                                                                 : itemData === subKey 
-                                                                    ? String(item.id_product[itemData as keyof ProductData] ?? '') 
-                                                                    : String(item[itemData as keyof CartItemData] ?? '') 
+                                                                    ? String(item.id_product[itemData as keyof any] ?? '') 
+                                                                    : String(item[itemData as keyof any] ?? '') 
                                                         }
                                                     </TableCell>
                                                 ))
@@ -185,12 +106,12 @@ function Row(props: {subKey: string, subHeadCells: readonly SubTableCell[], subT
 }
 
 export default function CollapsibleTable({subKey, headCells, tableTitle, subTableTitle, subHeadCells, nameData, nameDataItem, data }: {
-    headCells: readonly HeadCell[];
+    headCells: readonly any[];
     tableTitle: string;
-    subHeadCells: readonly SubTableCell[];
-    nameData: (keyof CartData)[];
-    nameDataItem: (keyof CartItemData | keyof ProductData)[];
-    data: MergedCartData[];
+    subHeadCells: readonly any[];
+    nameData: any[];
+    nameDataItem: any[];
+    data: any[];
     subTableTitle: string;
     subKey: string;
 }) {
