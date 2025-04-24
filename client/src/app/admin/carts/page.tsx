@@ -1,5 +1,6 @@
 'use client'
 
+
 import adminAPI from '@/apis/adminApi';
 import Loading from '@/components/common/Loading';
 import { ImageKey } from '@/constants';
@@ -53,14 +54,14 @@ interface MergedCartData extends CartData {
     items: CartItemData[];
 }
 
-const cartHeadCells: readonly HeadCell[] = [
+const cartHeadCells: readonly ColumnConfig<CartData>[] = [
     { id: '_id', label: 'Cart ID', numeric: false, disablePadding: true },
     { id: 'id_user', label: 'User ID', numeric: false, disablePadding: false },
     { id: 'createdAt', label: 'Created At', numeric: false, disablePadding: false },
     { id: 'updatedAt', label: 'Updated At', numeric: false, disablePadding: false },
 ];
 
-const cartItemHeadCells: readonly SubTableCell[] = [
+const cartItemHeadCells: readonly subColumnConfig<CartItemData , ProductData>[] = [
     { id: 'name', label: 'Product Name', numeric: false,disablePadding: true }, 
     { id: 'quantity', label: 'Quantity', numeric: true,disablePadding: false },
     { id: 'price', label: 'Price (Unit)', numeric: true ,disablePadding: false},
@@ -128,7 +129,7 @@ const CartDashboard = () => {
 
     return (
         <div>
-            <EnhancedTable
+            <EnhancedTable<CartData, CartItemData, ProductData>
                 headCells={cartHeadCells}
                 tableTitle="Carts Management"
                 subTableTitle="Cart Items"

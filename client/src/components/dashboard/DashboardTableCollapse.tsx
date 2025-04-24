@@ -13,9 +13,64 @@ import Paper from '@mui/material/Paper';
 import Icon from '../ui/Icon';
 import { format, sub } from 'date-fns';
 
+// interface ColumnConfig<DataType> {
+//     id: keyof DataType;
+//     label: string;
+//     numeric: boolean;
+//     disablePadding: boolean;
+// }
 
-function Row(props: {subKey: string, subHeadCells: readonly any[], subTableTitle: string, row: any, nameData: any[], nameDataItem: any[] }) {
-    const {subKey, subHeadCells, row, nameData, nameDataItem, subTableTitle } = props;
+// interface subColumnConfig<DataType, SubDataType> {
+//     id: keyof DataType | keyof SubDataType;
+//     label: string;
+//     numeric: boolean;
+//     disablePadding: boolean;
+// }
+
+// subKey,
+//     headCells,
+//     tableTitle,
+//     subTableTitle,
+//     subHeadCells,
+//     nameData,
+//     nameDataItem,
+//     data
+
+// interface DashboardTableCollapseProps<T, U, C> {
+//     data: T[];
+//     subKey: string;
+//     headCells: readonly ColumnConfig<T>[];
+//     subHeadCells: readonly subColumnConfig<U, C>[];
+//     nameData: (keyof T)[];
+//     nameDataItem: (keyof U | keyof C)[];
+//     tableTitle: string;
+//     subTableTitle: string;
+// }
+
+// interface RowProps<T extends { [key: string]: any }, U extends { [key: string]: any }, C extends { [key: string]: any }> {
+//     rowData: T;
+//     nameData: (keyof T)[];
+//     nameDataItem: (keyof U | keyof C)[];
+//     subHeadCells: readonly subColumnConfig<U, C>[];
+//     subKey: string;
+//     subTableTitle?: string;
+// }
+
+function Row<T extends { [key: string]: any }, U extends { [key: string]: any }, C extends { [key: string]: any }>({
+    // subKey: string,
+    // subHeadCells: readonly any[],
+    // subTableTitle: string,
+    // row: any, nameData:
+    // any[],
+    // nameDataItem: any[]
+    rowData,
+    nameData,
+    nameDataItem,
+    subHeadCells,
+    subKey,
+    subTableTitle
+}: RowProps<T, U, C>) {
+    // const { subKey, subHeadCells, row, nameData, nameDataItem, subTableTitle } = props;
     const [open, setOpen] = React.useState(false);
 
     const formatDate = (dateInput: Date | string | undefined | null): string => {
@@ -41,11 +96,11 @@ function Row(props: {subKey: string, subHeadCells: readonly any[], subTableTitle
                     </IconButton>
                 </TableCell>
                 {
-                    nameData.map((key) => (
+                    nameData.map((key: any) => (
                         <TableCell key={key}>
                             {key === 'createdAt' || key === 'updatedAt'
-                                ? formatDate(row[key])
-                                : String(row[key]) /* Chuyển đổi các giá trị khác thành chuỗi */}
+                                ? formatDate(rowData[key])
+                                : String(rowData[key]) /* Chuyển đổi các giá trị khác thành chuỗi */}
                         </TableCell>
                     ))
                 }
@@ -61,7 +116,7 @@ function Row(props: {subKey: string, subHeadCells: readonly any[], subTableTitle
                                 <TableHead>
                                     <TableRow>
                                         {
-                                            subHeadCells.map((headCell) => (
+                                            subHeadCells.map((headCell: any) => (
                                                 <TableCell
                                                     key={headCell.id}
                                                     align={headCell.numeric ? 'right' : 'left'}
@@ -74,17 +129,17 @@ function Row(props: {subKey: string, subHeadCells: readonly any[], subTableTitle
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.items.map((item: any) => (
+                                    {rowData.items.map((item: any) => (
                                         <TableRow key={item._id}>
                                             {
-                                                nameDataItem.map((itemData) => (
+                                                nameDataItem.map((itemData: any) => (
                                                     <TableCell key={itemData}>
                                                         {
                                                             itemData === 'createdAt' || itemData === 'updatedAt'
                                                                 ? formatDate(item[itemData])
-                                                                : itemData === subKey 
-                                                                    ? String(item.id_product[itemData as keyof any] ?? '') 
-                                                                    : String(item[itemData as keyof any] ?? '') 
+                                                                : itemData === subKey
+                                                                    ? String(item.id_product[itemData as keyof any] ?? '')
+                                                                    : String(item[itemData as keyof any] ?? '')
                                                         }
                                                     </TableCell>
                                                 ))
@@ -105,16 +160,26 @@ function Row(props: {subKey: string, subHeadCells: readonly any[], subTableTitle
     );
 }
 
-export default function CollapsibleTable({subKey, headCells, tableTitle, subTableTitle, subHeadCells, nameData, nameDataItem, data }: {
-    headCells: readonly any[];
-    tableTitle: string;
-    subHeadCells: readonly any[];
-    nameData: any[];
-    nameDataItem: any[];
-    data: any[];
-    subTableTitle: string;
-    subKey: string;
-}) {
+export default function CollapsibleTable<T extends { [key: string]: any }, U extends { [key: string]: any }, C extends { [key: string]: any }>({
+    subKey,//là 1 key mà trong đó nó sẽ thuộc về 1 mảng khác hoặc mảng con, lúc này nó giúp mảng nhận ra và bắt đầu địa chỉ có nó để gọi trực tiếp nó
+    headCells,
+    tableTitle,
+    subTableTitle,
+    subHeadCells,
+    nameData,
+    nameDataItem,
+    data
+}:
+    // headCells: readonly any[];
+    // tableTitle: string;
+    // subHeadCells: readonly any[];
+    // nameData: any[];
+    // nameDataItem: any[];
+    // data: any[];
+    // subTableTitle: string;
+    // subKey: string;
+    DashboardTableCollapseProps<T, U, C>
+) {
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -123,7 +188,7 @@ export default function CollapsibleTable({subKey, headCells, tableTitle, subTabl
 
                         <TableCell>{tableTitle}</TableCell>
                         {
-                            headCells.map((headCell) => (
+                            headCells.map((headCell: any) => (
                                 <TableCell
                                     key={headCell.id}
                                     align={headCell.numeric ? 'right' : 'left'}
@@ -136,8 +201,15 @@ export default function CollapsibleTable({subKey, headCells, tableTitle, subTabl
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <Row key={row._id} subKey={subKey} subHeadCells={subHeadCells} subTableTitle={subTableTitle} nameData={nameData} nameDataItem={nameDataItem} row={row} />
+                    {data.map((row: any) => (
+                        <Row
+                            key={row._id} 
+                            subKey={subKey} 
+                            subHeadCells={subHeadCells as readonly ColumnConfig<{ [key: string]: any; }>[]} 
+                            subTableTitle={subTableTitle} 
+                            nameData={nameData} 
+                            nameDataItem={nameDataItem as (keyof U)[]} 
+                            rowData={row} />
                     ))}
                 </TableBody>
             </Table>

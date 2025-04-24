@@ -76,3 +76,37 @@ declare interface ButtonProps{
   name: string,
   onClick: () => void
 }
+
+declare interface ColumnConfig<DataType> {
+  id: keyof DataType;
+  label: string;
+  numeric: boolean;
+  disablePadding: boolean;
+}
+
+declare interface subColumnConfig<DataItem , SubDataItem> {
+  id: keyof DataItem | keyof SubDataItem;
+  label: string;
+  numeric: boolean;
+  disablePadding: boolean;
+}
+
+declare interface DashboardTableCollapseProps<T, U, C> {
+    data: T[];
+    subKey: string;
+    headCells: readonly ColumnConfig<T>[];
+    subHeadCells: readonly subColumnConfig<U, C>[];
+    nameData: (keyof T)[];
+    nameDataItem: (keyof U | keyof C)[];
+    tableTitle: string;
+    subTableTitle: string;
+}
+
+declare interface RowProps<T extends { [key: string]: any }, U extends { [key: string]: any }, C extends { [key: string]: any }> {
+    rowData: T;
+    nameData: (keyof T)[];
+    nameDataItem: (keyof U | keyof C)[];
+    subHeadCells: readonly subColumnConfig<U, C>[];
+    subKey: string;
+    subTableTitle?: string;
+}
