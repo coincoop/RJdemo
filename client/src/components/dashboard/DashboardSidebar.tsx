@@ -3,7 +3,7 @@
 import React from 'react'
 import style from '@/styles/DashBoardSidebar.module.css'
 import { icons } from '@/constants'
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Loading from '../common/Loading';
 
 const DashboardSidebar = () => {
@@ -12,8 +12,23 @@ const DashboardSidebar = () => {
   const [activeButton, setActiveButton] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
-
+  React.useEffect(() => {
+    if (pathname === '/admin') {
+      setActiveButton('Home');
+    } else if (pathname.startsWith('/admin/customers')) {
+      setActiveButton('Customers');
+    } else if (pathname.startsWith('/admin/products')) {
+      setActiveButton('Products');
+    } else if (pathname.startsWith('/admin/carts')) {
+      setActiveButton('Carts');
+    } else if (pathname.startsWith('/admin/marques')) {
+      setActiveButton('Marques');
+    } else {
+      setActiveButton('');
+    }
+  }, [pathname]);
 
 
   const toggleSidebar = () => {
