@@ -1,0 +1,19 @@
+.container{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+   justify-content: center;
+    align-items: center;
+}
+
+.items-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 60%;
+}
+
+.item{
+    width: 200px;
+}
