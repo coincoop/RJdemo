@@ -34,9 +34,16 @@ S2: Ctrl + V this into your configsDb -->
 
 ```
 
+If having trouble with server: check in constants/appInfo.ts, change BASE_URL: <Your IP> 
+
 **Setting your .env**
 
 SECRET_KEY: your secret key
+EMAIL: your email (send verification email to user)
+
+PASS_EMAIL: your app password, **https://support.google.com/mail/answer/185833?hl=en**
+
+
 
 EMAIL: your email (send verification email to user)
 
