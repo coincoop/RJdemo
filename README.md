@@ -34,7 +34,7 @@ S2: Ctrl + V this into your configsDb -->
 
 ```
 
-If having trouble with server: check in constants/appInfo.ts, change BASE_URL: <Your IP> 
+If having trouble with server: check in constants/appInfo.ts, change BASE_URL: 'Your IP' 
 
 **Setting your .env**
 
