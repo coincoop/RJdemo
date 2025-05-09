@@ -92,7 +92,7 @@ const DashboardSidebar = () => {
             className={`${style['btn']} ${activeButton === 'Marques' ? style['active-btn'] : ''}`}
             onClick={() => handleNavigation('Marques')}
           >
-            <img className={style['img']} src={(icons.cart).src} alt="" />
+            <img className={style['img']} src={(icons.brand).src} alt="" />
             <p className={style['name']}>Marques</p>
           </button>
         </div>

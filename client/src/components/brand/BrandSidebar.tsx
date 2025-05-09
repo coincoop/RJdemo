@@ -59,7 +59,6 @@ const BrandSidebar = () => {
                                 }
                                     onClick={(e) => {
                                         console.log('Clicked LINK:', item.name)
-                                        e.stopPropagation();
                                     }}>
                                     {item.name}
                                 </Link>

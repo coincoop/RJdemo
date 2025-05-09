@@ -25,7 +25,7 @@ const DashBoardFormCreate = () => {
                     <TextField type="text" label="Product Name" variant="outlined" />
                 </div>
                 <div className={styles['item']}>
-                    <TextField type="text" label="Product Name" variant="outlined" />
+                    <TextField type="text" label="Product Name" variant="outlined"  />
                 </div>
                 <div className={styles['item']}>
                     <TextField type="text" label="Product Name" variant="outlined" />

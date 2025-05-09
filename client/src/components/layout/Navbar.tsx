@@ -231,12 +231,15 @@ export function DashBoardNavbar() {
                 return 'Products';
             case '/admin/carts':
                 return 'Carts';
-            case 'admin/marques':
+            case '/admin/marques':
                 return 'Brands';
             default:
                 return 'Dashboard';
         }
     };
+
+    console.log('pathname', pathname);
+    
 
     const closeAll = () => {
         setUserOpen(false)
