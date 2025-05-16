@@ -1,0 +1,191 @@
+.entry-area {
+    position: relative;
+    height: 50px;
+    line-height: 40px;
+    width: 220px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.input-field {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-size: 1.1em;
+    padding: 0 30px;
+    line-height: 80px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1000;
+}
+
+.label-line {
+    position: absolute;
+    font-size: 1em;
+    color: var(--border);
+    padding: 0 15px;
+    margin: 0 15px;
+    background-color: #f2f2f2;
+    transition: 0.1s ease;
+}
+
+.input-field:focus,
+.input-field:valid {
+    color: var(--focusBorder);
+    border: 2px solid var(--focusBorder);
+}
+
+.input-field:focus+.label-line,
+.input-field:valid+.label-line {
+    color: var(--focusBorder);
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    transform: translate(-15px, -27px) scale(0.88);
+    z-index: 1111;
+}
+
+.entry-area-file {
+    position: relative;
+    display: flex;
+    height: 420px;
+    line-height: 80px;
+    width: 420px;
+    align-self: center;
+    border: 1px solid var(--border);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px dashed var(--border);
+}
+
+.input-field-file {
+    position: static;
+    height: 40px;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 1em;
+    z-index: 1000;
+}
+
+.preview-img {
+    display: block;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 8px;
+}
+
+.button-file {
+    width: 150px;
+    font-size: 0.95em;
+    color: #555;
+    text-align: center;
+    word-break: break-all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 8;
+    flex-wrap: wrap;
+}
+
+.btn-del {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-del {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.input-field[type="number"]::-webkit-inner-spin-button,
+.input-field[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.entry-textarea {
+    position: relative;
+    height: 100px;
+    line-height: 40px;
+    width: 420px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.textarea-field {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-size: 1.1em;
+    padding: 0 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+     resize: none;         /* Không cho resize */
+    overflow: hidden; 
+    transition: 0.1s ease;
+    z-index: 1000;
+}
+
+.label-line-text {
+    position: absolute;
+    font-size: 1em;
+    color: var(--border);
+    padding: 0 15px;
+    margin: 0 15px;
+    background-color: #f2f2f2;
+    transition: 0.1s ease;
+}
+
+.textarea-field:focus,
+.textarea-field:valid {
+    color: var(--focusBorder);
+    border: 2px solid var(--focusBorder);
+}
+
+.entry-textarea:has(.textarea-field:focus) .label-line-text,
+.entry-textarea:has(.textarea-field:valid) .label-line-text {
+    color: var(--focusBorder);
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    transform: translate(-15px, -55px) scale(0.88);
+    z-index: 1111;
+}
+
+

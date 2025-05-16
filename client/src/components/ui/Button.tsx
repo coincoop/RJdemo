@@ -9,4 +9,7 @@ const Button = ({ name, onClick }: ButtonProps) => {
     )
 }
 
+
+
 export default Button
+
