@@ -3,10 +3,12 @@ import style from '@/styles/ui/InputField.module.css'
 import { icons } from '@/constants';
 
 const InputField = ({
-    type, name
+    type, name, onChange, label
 }: {
     type: string
+    label?: string
     name?: string
+    onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void
 }) => {
     const MAX_IMAGES = 4;
     const isImgType = type === 'img';
@@ -22,6 +24,7 @@ const InputField = ({
             setImgUrls(urls);
             setFileNames(names);
         }
+        if (onChange) onChange(e);
     };
 
     const handleImgClick = () => {
@@ -46,6 +49,7 @@ const InputField = ({
                     accept="image/*"
                     multiple={isImgMoreType}
                     onChange={handleFileChange}
+                    name={name?.toLowerCase()} 
                 />
                 {imgUrls.length > 0 ? (
                     <div className={style['img-container']}>
@@ -89,12 +93,14 @@ const InputField = ({
             <div className={style['entry-textarea']}>
                 <textarea
                     className={style['textarea-field']}
-                    name={name}
                     rows={6}
+                    name={name?.toLowerCase()} 
                     required
+                    onChange={onChange as React.ChangeEventHandler<HTMLTextAreaElement>}
+
                 />
                 <div className={style['label-line-text']}>
-                    <p>{name}</p>
+                    <p>{label}</p>
                 </div>
             </div>
         )
@@ -106,10 +112,12 @@ const InputField = ({
                 <input
                     className={style['input-field']}
                     type={type}
+                    name={name?.toLowerCase()}
                     required
+                    onChange={onChange}
                 />
                 <div className={style['label-line']}>
-                    <p>{name}</p>
+                    <p>{label}</p>
                 </div>
             </div>
         )

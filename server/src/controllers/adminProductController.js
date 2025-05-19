@@ -43,7 +43,7 @@ const createProduct = asyncHandle(async (req, res) => {
     });
 
     if (newProduct) {
-        res.status(201).json({ // 201 Created
+        res.status(200).json({ // 201 Created
             mess: 'Tạo sản phẩm thành công',
             product: newProduct
         });
