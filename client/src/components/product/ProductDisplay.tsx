@@ -74,7 +74,8 @@ const ProductDisplay = ({ productList }: {
                                     <div key={index}>
                                         <img
                                             alt={`${productList.name} - Image ${index + 1}`}
-                                            src={images[imgKey].src}
+                                            src={imgKey}
+                                            loading="lazy"
                                         />
                                     </div>
                                 ))}
@@ -99,7 +100,7 @@ const ProductDisplay = ({ productList }: {
                             </div>
                         </div>
                         <div className={style['btn']}>
-                            <Button name='Buy now' onClick={() => {addCartHandle()}} />
+                            <Button name='Buy now' onClick={() => { addCartHandle() }} />
                         </div>
                         <div className={style['description-container']}>
                             <h2 className={style['description-header']}>

@@ -15,6 +15,7 @@
     "@imagekit/react": "^5.0.1",
     "@mui/material": "^7.0.2",
     "@mui/material-nextjs": "^7.0.0",
+    "@plaiceholder/next": "^3.0.0",
     "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",

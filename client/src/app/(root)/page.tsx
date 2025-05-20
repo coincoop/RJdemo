@@ -18,6 +18,7 @@ export  default async function Home({searchParams}: {searchParams:Promise< {quer
             <ImageSlider imgUrls={img_slider}/>
             <Space height="2em"/>
             <ProductCarousel title="Trending Products" />
+            
         </section>
     )
 }

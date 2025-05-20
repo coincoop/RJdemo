@@ -7,6 +7,7 @@ import style from '@/styles/CreateProduct.module.css'
 import Form from 'next/form'
 import { pinata } from "@/utils/config";
 import adminsAPI from '@/apis/adminApi'
+import Loading from '@/components/common/Loading'
 
 const CreateProduct = () => {
   const [uploading, setUploading] = React.useState(false)
@@ -73,15 +74,20 @@ const CreateProduct = () => {
         img_more: imgMoreUrls,
       }, 'post')
       console.log(res);
-
+      alert(res.data.mess)
     } catch (error) {
       console.log(error);
     }
     setUploading(false)
   }
 
+
   return (
     <div className={style['container']}>
+      {
+        uploading && <Loading />
+      }
+
       <div style={{ height: '30px' }} />
       <div className={style['form-title']}>
         <h1>Create Product</h1>

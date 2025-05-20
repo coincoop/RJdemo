@@ -14,6 +14,7 @@ import { authSelector } from '@/redux/reducers/authReducer';
 import cartsAPI from '@/apis/cartApi';
 import Loading from '../common/Loading';
 import Button from '../ui/Button';
+import { getPlaiceholder } from "plaiceholder";
 
 type Product = {
     _id: string;
@@ -40,7 +41,7 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
         }
         try {
             setIsLoading(true)
-            const res =await cartsAPI.handleCart(
+            const res = await cartsAPI.handleCart(
                 '/create-cart',
                 {
                     id_user: user.id,
@@ -52,7 +53,7 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
                 'post',
             )
             console.log(res);
-            
+
             setIsLoading(false)
         } catch (error) {
             console.log(error);
@@ -86,7 +87,13 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
                                     <div key={product._id} className="carousel-prod">
 
                                         <Link href={`/products/${product._id}`}>
-                                            <Image src={images[product.img]} alt={product.name} className="carousel-prod-image" />
+                                            <Image
+                                                width={300}
+                                                height={300}
+                                                src={product.img}
+                                                alt={product.name}
+                                                className="carousel-prod-image"
+                                            />
                                         </Link>
                                         <Space height='1em' />
                                         <h3 className="carousel-prod-name">{product.name}</h3>
@@ -94,7 +101,7 @@ const ProdcutCarousel = ({ title }: CarouselProductProps) => {
                                         <p className=" carousel-prod-price">{product.price} vnđ</p>
                                         <Space height='1em' />
                                         <div className="carousel-prod-btn">
-                                           <Button name='Buy' onClick={() => addCartHandle(product._id)}/>
+                                            <Button name='Buy' onClick={() => addCartHandle(product._id)} />
                                         </div>
                                         <Space height='1em' />
                                     </div>

@@ -26,7 +26,7 @@ const ProductCard = ({ listCar }: {
   return (
     <div className={style['container']} >
       <div className={style["img-container"]}>
-        <Image src={images[listCar.img]} alt={listCar.name} className={style['image']} />
+        <Image src={listCar.img} width={300} height={300} alt={listCar.name} className={style['image']} />
         <div className={style['icon-container']}>
           <Link href={`/products/${listCar._id}`} >
             <Image className={style['icon']} src={icons.link} alt="Link Icon" />
