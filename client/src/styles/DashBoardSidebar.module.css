@@ -61,6 +61,8 @@
     width: 100%;
     height: 50px;
     padding: 7px 8px;
+    flex-direction: column;
+    gap: 10px
 }
 
 
@@ -116,6 +118,59 @@
 }
 
 .active-btn .name,
-.active-btn .img{
+.active-btn .img {
     opacity: 100%;
+}
+
+.dropdown {
+    width: 90%;
+    margin: 0 auto;
+
+
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.items-container .dropdown {
+    /* Khi dropdown mở, thêm class 'open' */
+}
+
+.dropdown.open {
+    max-height: 200px;
+    /* hoặc lớn hơn nếu nhiều item */
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dropdown button {
+    background: #232323;
+
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.dropdown button:last-child {
+    border-bottom: none;
+}
+
+.dropdown button:hover {
+    background: #181818;
+}
+
+.items-container.open {
+    height: 200px;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-dropdown.active-btn {
+    background: #181818;
 }
