@@ -12,6 +12,7 @@ const connectDB = require('./src/configs/connectDb');
 const { errorMiddleHandle } = require('./middlewares/errorMiddleware');
 const adminRouter = require('./src/routers/adminRouter');
 const marqueRouter = require('./src/routers/marqueRouter');
+const invoiceRouter = require('./src/routers/invoiceRouter');
 
 const app = express();
 const PORT = 3001;
@@ -39,6 +40,7 @@ app.use('/product', productRouter);
 app.use('/cart', cartRouter);
 app.use('/admin',adminRouter)
 app.use('/marque',marqueRouter)
+app.use('/invoice',invoiceRouter)
 
 // Middleware xử lý lỗi
 app.use(errorMiddleHandle);
