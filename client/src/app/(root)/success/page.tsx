@@ -6,9 +6,26 @@ import style from '@/styles/Success.module.css'
 import { icons } from '@/constants'
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
+import Loading from '@/components/common/Loading'
 
 const OrderSuccess = () => {
   const router = useRouter()
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  React.useEffect(() => {
+    // Kiểm tra xem có phải từ trang checkout không
+    setIsLoading(true)
+    const isCheckoutSuccess = localStorage.getItem('checkoutSuccess')
+    if (!isCheckoutSuccess) {
+      // Nếu không phải từ checkout, chuyển về trang chủ
+      router.push('/')
+    }
+    setIsLoading(false)
+    // Xóa flag sau khi kiểm tra
+    localStorage.removeItem('checkoutSuccess')
+  }, [])
+
+  if (!isLoading) return <Loading />
 
   return (
     <div className={style['container']}>
