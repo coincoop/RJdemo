@@ -3,7 +3,7 @@
 import React from 'react'
 import style from '@/styles/DropdownCart.module.css'
 import Link from 'next/link'
-import { images } from '@/constants'
+import Image from 'next/image'
 import { authSelector } from '@/redux/reducers/authReducer'
 import { useSelector } from 'react-redux'
 import cartsAPI from '@/apis/cartApi'
@@ -20,35 +20,35 @@ const DropdownCart = ({ onClose }: {
 }
 ) => {
 
-  interface Product {
-    _id: string;
-    name: string;
-    price: number;
-    description: string;
-    img: ImageKey;
-    img_more: string[];
-    item_no: string;
-    scale: string;
-    marque: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-  }
+    interface Product {
+        _id: string;
+        name: string;
+        price: number;
+        description: string;
+        img: string;
+        img_more: string[];
+        item_no: string;
+        scale: string;
+        marque: string;
+        status: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+    }
 
-  interface Cart {
-    _id: string;
-    id_user: string;
-    products: CartItem[];
-  }
+    interface Cart {
+        _id: string;
+        id_user: string;
+        products: CartItem[];
+    }
 
-  interface CartItem {
-    _id: string;
-    id_cart: string;
-    id_product: Product;
-    quantity: number;
-    price: number;
-  }
+    interface CartItem {
+        _id: string;
+        id_cart: string;
+        id_product: Product;
+        quantity: number;
+        price: number;
+    }
 
     const socket = io(appInfo.BASE_URL);
     const user = useSelector(authSelector)
@@ -74,11 +74,11 @@ const DropdownCart = ({ onClose }: {
             const res = await cartsAPI.handleCart('/get-cart-by-id_user', {
                 id_user: user.id,
             },
-                'post', 
+                'post',
             )
             setCart(res.data.items)
             console.log(res.data.items);
-            
+
         } catch (error) {
             console.log(error);
 
@@ -89,7 +89,7 @@ const DropdownCart = ({ onClose }: {
 
     return (
         <div className={style['container']}>
-        <div style={{height: '1rem'}}/>
+            <div style={{ height: '1rem' }} />
             {
                 isLoading ? (
 
@@ -102,10 +102,13 @@ const DropdownCart = ({ onClose }: {
                     cart.map((product) => (
 
                         <div key={product.id_product._id} className={style['items-container']}>
-                            <img
+                            <Image
+                                width={300}
+                                height={300}
+                                src={product.id_product.img}
+                                alt={product.id_product.name}
                                 className={style['img']}
-                                src={images[product.id_product.img].src}
-                                alt={product.id_product.name} />
+                            />
                             <div className={style['infos-container']}>
                                 <p className={style['name']}>{product.id_product.name}</p>
                                 <p className={style['price']}>{product.price} vnđ</p>

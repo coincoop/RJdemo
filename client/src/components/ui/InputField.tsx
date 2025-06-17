@@ -3,12 +3,14 @@ import style from '@/styles/ui/InputField.module.css'
 import { icons } from '@/constants';
 
 const InputField = ({
-    type, name, onChange, label
+    type, name, onChange, label, value, width
 }: {
+    width?: string
+    value?: string
     type: string
     label?: string
     name?: string
-    onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void
+    onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => void
 }) => {
     const MAX_IMAGES = 4;
     const isImgType = type === 'img';
@@ -90,7 +92,7 @@ const InputField = ({
     }
     if (type === 'textarea') {
         return (
-            <div className={style['entry-textarea']}>
+            <div  className={style['entry-textarea']}>
                 <textarea
                     className={style['textarea-field']}
                     rows={6}
@@ -108,12 +110,13 @@ const InputField = ({
 
     else {
         return (
-            <div className={style['entry-area']}>
+            <div style={{width: `${width}`}} className={style['entry-area']}>
                 <input
                     className={style['input-field']}
                     type={type}
                     name={name?.toLowerCase()}
                     required
+                    value={value}
                     onChange={onChange}
                 />
                 <div className={style['label-line']}>

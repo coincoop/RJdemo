@@ -1,4 +1,6 @@
+const { CartItemModel } = require("../models/cartModel");
 const { InvoiceModel, InvoiceItemModel } = require("../models/invoiceModel");
+const { CartModel } = require("../models/cartModel");
 const ProductModel = require("../models/productModel");
 
 // Tạo hóa đơn mới
@@ -36,23 +38,24 @@ const createInvoice = async (req, res) => {
             status: 'pending'
         });
 
+        const cart = await CartModel.findOne({ id_user: id_user });
+
         // Tạo các invoice items
         for (const item of products) {
             const product = await ProductModel.findById(item.id_product);
-            const itemTotal = product.price * item.quantity;
             
             await InvoiceItemModel.create({
                 id_invoice: newInvoice._id,
                 id_product: product._id,
                 quantity: item.quantity,
             });
+            await CartItemModel.deleteOne({ id_product: product._id, id_cart: cart._id });
         }
 
         // Lấy lại hóa đơn với items đã populate
         const populatedInvoice = await InvoiceModel.findById(newInvoice._id);
         const invoiceItems = await InvoiceItemModel.find({ id_invoice: newInvoice._id })
             .populate('id_product');
-        
         const result = {
             ...populatedInvoice.toObject(),
             items: invoiceItems

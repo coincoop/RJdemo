@@ -3,6 +3,32 @@
     margin: 0 auto;
 }
 
+/* Css CartList */
+.btn-po{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 8px;
+}
+
+.btn-po button{
+    width: 30%;
+    height: 50px;
+    background: black;
+    color: white;
+    font-size: 18px;
+    border: none;
+    transition: all 300ms ease ;
+    cursor: pointer;
+}
+
+.btn-po button:hover{
+    border: 1px solid black;
+    background: white;
+    color: black;
+}
+
 @media(max-width: 1024px){
     .container{
         max-width: 80%;

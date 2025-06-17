@@ -110,3 +110,33 @@ declare interface RowProps<T extends { [key: string]: any }, U extends { [key: s
     subKey: string;
     subTableTitle?: string;
 }
+
+declare interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  img: string;
+  img_more: string[];
+  item_no: string;
+  scale: string;
+  marque: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+declare interface Cart {
+  _id: string;
+  id_user: string;
+  products: CartItem[];
+}
+
+declare interface CartItem {
+  _id: string;
+  id_cart: string;
+  id_product: Product;
+  quantity: number;
+  price: number;
+}

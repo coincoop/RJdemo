@@ -8,50 +8,15 @@ import { authSelector } from '@/redux/reducers/authReducer'
 import cartsAPI from '@/apis/cartApi'
 import Loading from '../common/Loading'
 import { useRouter } from 'next/navigation'
-import Button from '../ui/Button'
+import Image from 'next/image'
 
 
-const CartList = () => {
-  interface Product {
-    _id: string;
-    name: string;
-    price: number;
-    description: string;
-    img: ImageKey;
-    img_more: string[];
-    item_no: string;
-    scale: string;
-    marque: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-  }
+const CartList = ({ cart, cartItems, totalPrice, setCart, setCartItems, setTotalPrice }: { cart?: Cart, cartItems: CartItem[], totalPrice: number, setCart?: (cart: Cart) => void, setCartItems: (cartItems: CartItem[]) => void, setTotalPrice: (totalPrice: number) => void }) => {
 
-  interface Cart {
-    _id: string;
-    id_user: string;
-    products: CartItem[];
-  }
-
-  interface CartItem {
-    _id: string;
-    id_cart: string;
-    id_product: Product;
-    quantity: number;
-    price: number;
-  }
   const user = useSelector(authSelector)
-  const [cart, setCart] = React.useState<Cart>()
-  const [cartItems, setCartItems] = React.useState<CartItem[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
-  const [totalPrice, setTotalPrice] = React.useState(0)
   const [selectedProducts, setSelectedProducts] = React.useState<string[]>([]);
   const router = useRouter()
-
-  React.useEffect(() => {
-    handleGetCart()
-  }, [])
 
   const handleSelectProduct = (productId: string, isSelected: boolean) => {
     if (isSelected) {
@@ -104,27 +69,6 @@ const CartList = () => {
 
     } finally {
       setIsLoading(false)
-    }
-  }
-
-  const handleGetCart = async () => {
-    try {
-      setIsLoading(true)
-      const res = await cartsAPI.handleCart('/get-cart-by-id_user', {
-        id_user: user.id
-      },
-        'post'
-      )
-      const total = res.data.items.reduce((sum: number, product: CartItem): number => {
-        return sum + (product.price * product.quantity);
-      }, 0);
-      setCart(res.data.cart)
-      setCartItems(res.data.items)
-      setTotalPrice(total)
-      setIsLoading(false)
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -193,7 +137,7 @@ const CartList = () => {
           <div className={style['container']}>
             <div style={{ height: '1rem' }} />
             <div className={style['header-container']}>
-              <p>Cart</p>
+              {/* <p>Cart</p> */}
               {selectedProducts.length > 0 && (
                 <div className={style['btn-del-selected-container']}>
                   <button onClick={handleDeleteSelectedProducts} className={style['btn-del-selected']}>
@@ -214,7 +158,7 @@ const CartList = () => {
                         className={style['checkbox']}
                       />
                       <div className={style['img-container']}>
-                        <img className={style['img']} src={(images[product.id_product.img]).src} alt={product.id_product.name} />
+                        <Image width={300} height={300} className={style['img']} src={String(product.id_product.img)} alt={product.id_product.name} />
                       </div>
                       <div className={style['info-container']}>
                         <div className={style['name']}>{product.id_product.name}</div>
@@ -263,16 +207,25 @@ const CartList = () => {
             {cartItems && cartItems.length > 0 ? (
               <>
                 <div className={style['total-price']}>Total Price:  <p>{totalPrice.toLocaleString()} vnđ</p></div>
-                <div className={style['btn-po']}>
-                  <Button name='Place order' onClick={() => console.log('lo')
-                  } />
-                </div>
+                {/* <div className={style['btn-po']}>
+                  <Button
+                    name='Place order'
+                    onClick={() => {
+                      const checkoutData = {
+                        items: cartItems,
+                        totalPrice
+                      };
+                      localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+                      router.push('/checkout');
+                    }}
+                  />
+                </div> */}
               </>
-
             ) : (
-              <div className={style['btn-po']}>
-                <button onClick={() => router.push('/products')} className={style['']}>Tiếp tục mua sắm</button>
-              </div>
+              <></>
+              // <div className={style['btn-po']}>
+              //   <button onClick={() => router.push('/products')} className={style['']}>Tiếp tục mua sắm</button>
+              // </div>
             )}
           </div>
         ) : (

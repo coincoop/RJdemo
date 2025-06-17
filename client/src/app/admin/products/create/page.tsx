@@ -24,7 +24,7 @@ const CreateProduct = () => {
   const [files, setFiles] = React.useState<File[]>([])
   const [url, setUrl] = React.useState("");
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     // Only handle file input changes
     if (e.target instanceof HTMLInputElement) {
       const inputName = e.target.getAttribute('name');
@@ -36,7 +36,7 @@ const CreateProduct = () => {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
@@ -113,17 +113,17 @@ const CreateProduct = () => {
             <InputField type='img_more' name="img_more" onChange={handleFileChange} />
           </div>
           <div className={style['form-text']}>
-            <InputField type='text' name='name' label='Name' onChange={handleChange} />
+            <InputField type='text' name='name' width='250px' label='Name' onChange={handleChange} />
             <div style={{ height: '15px' }} />
-            <InputField type='number' label='Price' name='price' onChange={handleChange} />
+            <InputField type='number' label='Price' width='250px' name='price' onChange={handleChange} />
             <div style={{ height: '15px' }} />
-            <InputField type='text' label='Item Number' name='item_no' onChange={handleChange} />
+            <InputField type='text' label='Item Number' width='250px' name='item_no' onChange={handleChange} />
             <div style={{ height: '15px' }} />
-            <InputField type='text' name='scale' label='Scale' onChange={handleChange} />
+            <InputField type='text' name='scale' width='250px' label='Scale' onChange={handleChange} />
             <div style={{ height: '15px' }} />
-            <InputField type='text' name='marque' label='Marque' onChange={handleChange} />
+            <InputField type='text' name='marque' width='250px' label='Marque' onChange={handleChange} />
             <div style={{ height: '15px' }} />
-            <InputField type='text' label='Status' name='status' onChange={handleChange} />
+            <InputField type='text' label='Status' width='250px' name='status' onChange={handleChange} />
           </div>
         </div>
         <div style={{ height: '30px' }} />
@@ -134,7 +134,7 @@ const CreateProduct = () => {
           <button className={style['btn-submit']} type="submit" disabled={uploading}>
             {uploading ? "Uploading..." : "Create"}
           </button>
-        </div>
+        </div>c
 
       </Form>
 
