@@ -80,7 +80,7 @@ const CheckoutPage = () => {
         // Chỉ xóa dữ liệu checkout ở localStorage
         localStorage.removeItem('checkoutData')
         // Chuyển đến trang xác nhận đơn hàng
-        router.push('/order-success')
+        router.push('/success')
       }
       setIsLoading(false)
     } catch (error) {

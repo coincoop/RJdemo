@@ -75,6 +75,7 @@ declare interface CartUseState {
 declare interface ButtonProps{
   name: string,
   onClick: () => void
+  className?: string
 }
 
 declare interface ColumnConfig<DataType> {

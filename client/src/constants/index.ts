@@ -52,6 +52,7 @@ import chevrolet from '@/assets/icons/chevrolet.jpg'
 import down_arrow from '@/assets/icons/down-arrow.png'
 import up_arrow from '@/assets/icons/up-arrow.png'
 import brand from '@/assets/icons/brand.png'
+import check_shadow from '@/assets/icons/check-shadow.png'
 
 export const images ={
     img_silder_1,
@@ -111,6 +112,7 @@ export const icons={
     down_arrow,
     up_arrow,
     brand,
+    check_shadow,
 }
 
 
