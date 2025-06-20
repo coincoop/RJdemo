@@ -1,11 +1,10 @@
 'use client'
-
+/* eslint no-use-before-define: 0 */
 import React from 'react'
 import style from '@/styles/BrandSidebar.module.css'
 import Link from 'next/link';
 import BrandSelector from './BrandSelector';
 import marquesAPI from '@/apis/marqueApi';
-import Loading from '../common/Loading';
 
 const BrandSidebar = () => {
     const [isModalOpen, setIsModalOpen] = React.useState(false);

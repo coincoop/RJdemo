@@ -1,11 +1,13 @@
+/* eslint no-use-before-define: 0 */
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 interface AuthState{
-    id: String,
-    email:String,
-    accessToken: String,
-    name: String,
+    id: string,
+    email:string,
+    accessToken: string,
+    name: string,
 }
 
 const initialState:AuthState = {

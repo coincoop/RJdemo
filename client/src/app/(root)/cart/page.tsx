@@ -12,7 +12,7 @@ import Button from '@/components/ui/Button'
 
 const Cart = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const [cart, setCart] = useState<Cart[]>([])
+    const [cart, setCart] = useState<Cart>()
     const [cartItems, setCartItems] = useState<CartItem[]>([])
     const [totalPrice, setTotalPrice] = useState(0)
     const user = useSelector(authSelector)

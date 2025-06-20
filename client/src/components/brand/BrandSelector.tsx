@@ -1,5 +1,5 @@
 'use client'
-
+/* eslint no-use-before-define: 0 */
 import React from 'react'
 import style from '@/styles/BrandSelector.module.css'
 import Link from 'next/link';

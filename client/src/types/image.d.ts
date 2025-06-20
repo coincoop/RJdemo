@@ -1,3 +1,5 @@
+/* eslint no-use-before-define: 0 */
+
 declare module "*.png" {
     const value: any;
     export default value;

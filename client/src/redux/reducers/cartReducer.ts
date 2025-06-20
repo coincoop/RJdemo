@@ -1,5 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { stat } from 'fs'
+/* eslint no-use-before-define: 0 */
+
+import {createSlice} from '@reduxjs/toolkit'
+
 interface CartState{
     _id: string
 }

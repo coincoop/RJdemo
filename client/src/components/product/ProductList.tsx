@@ -1,10 +1,10 @@
 'use client'
-
+/* eslint no-use-before-define: 0 */
 import React from 'react'
 import ProductCard from './ProductCard'
 import style from '@/styles/ProductList.module.css'
 import { useSearchParams } from 'next/navigation'
-import Loading from '../common/Loading'
+
 
 
 const ProductList = ({ products, title }: {

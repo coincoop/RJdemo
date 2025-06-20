@@ -1,3 +1,5 @@
+/* eslint no-use-before-define: 0 */
+
 import { appInfo } from "@/constants/appInfos"
 import axiosCilent from "@/apis/axiosCilent"
 

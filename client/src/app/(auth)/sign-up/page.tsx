@@ -1,5 +1,5 @@
 'use client'
-
+/* eslint no-use-before-define: 0 */
 import React from 'react'
 import Image from 'next/image'
 import { images } from '@/constants'

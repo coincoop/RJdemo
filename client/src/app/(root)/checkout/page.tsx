@@ -1,9 +1,8 @@
 'use client'
-
+/* eslint no-use-before-define: 0 */
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import style from '@/styles/Checkout.module.css'
-import Button from '@/components/ui/Button'
 import Form from 'next/form'
 import checkoutsAPI from '@/apis/checkoutApi'
 import CartList from '@/components/cart/CartList'

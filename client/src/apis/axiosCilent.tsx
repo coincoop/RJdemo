@@ -1,3 +1,5 @@
+/* eslint no-use-before-define: 0 */
+
 import axios from 'axios'
 import queryString from 'query-string'
 

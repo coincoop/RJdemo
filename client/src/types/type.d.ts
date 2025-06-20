@@ -1,4 +1,4 @@
-
+/* eslint no-use-before-define: 0 */
 
 declare interface SpaceProps {
   height: string;
@@ -140,4 +140,11 @@ declare interface CartItem {
   id_product: Product;
   quantity: number;
   price: number;
+}
+
+interface AuthData {
+  email: string;
+  accessToken: string;
+  name: string;
+  id: string;
 }
