@@ -45,6 +45,10 @@ app.use('/invoice',invoiceRouter)
 // Middleware xử lý lỗi
 app.use(errorMiddleHandle);
 
+app.get("/api/hello", (req, res) => {
+    res.json({ message: "Hello from server!" });
+  });
+
 // Lắng nghe kết nối từ client qua Socket.IO
 io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);
