@@ -22,7 +22,6 @@ DerivedData
 *.xcuserstate
 ios/.xcode.env.local
 .env
-src/configs
 
 # Android/IntelliJ
 #
