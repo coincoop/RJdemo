@@ -17,13 +17,11 @@ const invoiceRouter = require('./src/routers/invoiceRouter');
 const app = express();
 const PORT = 3001;
 
-// Tạo HTTP server
 const server = http.createServer(app);
 
-// Tạo Socket.IO server
 const io = new Server(server, {
     cors: {
-        origin: '*', // Cho phép mọi nguồn gốc (hoặc cấu hình cụ thể)
+        origin: '*', 
     },
 });
 
