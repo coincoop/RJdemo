@@ -11,10 +11,11 @@ import { Validate } from '@/utils/validate'
 import { addAuth, authSelector } from '@/redux/reducers/authReducer'
 import authenticationAPI from '@/apis/authApi'
 import { useRouter } from 'next/navigation';
+import Loading from '@/components/common/Loading'
 
 
 const Signin = () => {
-    
+    const [isLoading, setIsLoading] = React.useState(false)
     const auth = useSelector(authSelector)
     const router = useRouter()
     const dispatch = useDispatch()
@@ -30,6 +31,7 @@ const Signin = () => {
 
     }, [form.email, form.password])
     const handleLogin = async () => {
+        setIsLoading(true)
 
         const emailValidation = Validate.email(form.email)
         if (emailValidation) {
@@ -49,8 +51,10 @@ const Signin = () => {
                     name: res.data.name,
                     id: res.data.id
                 }))
+                setIsLoading(false)
                 router.push('/');
-            } catch (error : any) {
+            } catch (error: any) {
+                setIsLoading(false)
                 console.log(error);
                 if (error?.status === 401) {
                     setErrorMessage('Password or email are incorret')
@@ -64,7 +68,11 @@ const Signin = () => {
     }
 
     return (
+
         <section className={styles["container"]}>
+
+            {isLoading && <Loading />}
+
             <div className={styles['left-container']}>
                 <Image src={images.login_img} alt="login_img" />
             </div>
