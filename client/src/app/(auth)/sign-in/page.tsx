@@ -29,7 +29,6 @@ const Signin = () => {
         }
 
     }, [form.email, form.password])
-    //xử lí đăng nhập
     const handleLogin = async () => {
 
         const emailValidation = Validate.email(form.email)
@@ -53,7 +52,7 @@ const Signin = () => {
                 router.push('/');
             } catch (error : any) {
                 console.log(error);
-                if (error?.status === 403) {
+                if (error?.status === 401) {
                     setErrorMessage('Password or email are incorret')
                 }
 
